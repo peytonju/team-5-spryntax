@@ -32,10 +32,7 @@ https://trello.com/w/userworkspace76434661
 
 **Use Cases (Functional Requirements):**
 
-**Key:**
-
-Minimum Viable Product Goals
-
+Minimum Viable Product Goals:
 - Monkeytype-style of program that allows users to type characters needed to create a specific file, the file contains some useful-to-know algorithm  
 - Citations and extra resources provided for each assignment for further elaboration on each assignment  
 - Explanation of the code that the user types (with comments)  
@@ -45,11 +42,11 @@ Minimum Viable Product Goals
   - Words per minute (\# of chars divided by 5\)  
 - OSU server hosts the site and contains all code within it
 
-Stretch Goals
-
+Stretch Goals:
 - “Profile” for a particular user that other users can view  
   - Support for multiple programming languages  
   - Support for users to compile/interpret code on the site
+
 
 **Non-functional Requirements:** 
 
