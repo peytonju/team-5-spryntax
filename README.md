@@ -5,17 +5,17 @@
 #### Kali Pulanco
 Project Lead and UX \+ UI Lead/Implementation  
 #### Shrey Bosamia  
-Full stack overall – specifically the Back-end and Database lead. Working with the Front-end team for javascript functionality on non-static user interactions.  
+Full stack overall - specifically the Back-end and Database lead. Working with the Front-end team for javascript functionality on non-static user interactions.  
 #### Seojin Lee  
-Will assist Leads
+Backend - database functionality
 #### Prathmesh Nitin Gite  
-Will assist Leads
+Frontend - javascript functionality
 #### Justice Peyton  
-Full stack – will work on frontend Javascript and backend functionalities and generally help in a variety of areas
+Full stack - will work on frontend Javascript and backend functionalities and generally help in a variety of areas
 #### John Harrison Polasek  
-Login page developer, home page login  
+Frontend - login page developer, home page login  
 #### Aidan Lusk
-Backend, assisting  
+Backend - assisting  
 
 ### Team Communication 
 #### Trello
