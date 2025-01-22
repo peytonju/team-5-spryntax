@@ -1,0 +1,79 @@
+// Used DBML to define our database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+//Table related to the user data to be tracked
+Table user {
+  user_id integer [primary key]
+  username varchar
+  password varchar
+  email varchar
+  profile_pic blob
+  stat_date timestamp    
+  created_at timestamp
+}
+
+//Table related to the algorithm data to be put into the front-end for the user to choose
+Table algorithm {
+  algorithm_id integer [primary key]
+  code_snip text [note: 'The algorithm that the user needs to type']
+  time_complexity varchar
+  difficulty varchar 
+  explanation_markdown text [note: 'The markdown contains the explanation of the algaorithm']
+  program_language varchar 
+  tags json [note: 'Allows categorization (e.g., "sorting," "recursion")']
+}
+
+//Table related to the leaderboard data to be tracked
+Table leaderboard {
+  leaderboard_id integer [primary key]
+  user_id integer 
+  rank integer
+  wpm float
+  date_achived timestamp
+  program_language varchar
+}
+
+// Table related to the session data to be tracked 
+Table session {
+  session_id integer [primary key]
+  user_id integer
+  start_time timestamp 
+  end_time timestamp
+  total_time interval
+  wpm float
+  raw_wpm float
+  accuracy float
+  correct_characters integer
+  incorrect_characters integer
+  consistency float [note: 'Based on the variance of raw wpm. Closer to 100% is better. Calculated using the coefficient of variation of raw wpm and mapped onto a scale from 0 to 100']
+}
+
+// Table related to the favorites data to be tracked
+Table favorites {
+  user_id integer [primary key]
+  algorithm_id integer [primary key]
+  added_at timestamp
+}
+
+// Table related to user history/completed algorithms to be tracked
+Table completed_algorithm {
+  user_id integer [primary key]
+  algorithm_id integer [primary key]
+  completed_at timestamp
+}
+
+// This creates the relationship connection between tables
+Ref: completed_algorithm.user_id > user.user_id //many to one
+
+Ref: completed_algorithm.algorithm_id > algorithm.algorithm_id //many to one
+
+Ref: user.user_id < session.user_id //one to many
+
+Ref: user.user_id - leaderboard.user_id  //one to one
+
+Ref: favorites.user_id > user.user_id //many to one
+
+Ref: favorites.algorithm_id > algorithm.algorithm_id //many to one
+
+
+
