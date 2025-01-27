@@ -1,0 +1,32 @@
+:root{
+    font-family: "Inconsolata", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: #333;
+}
+#main_back{
+    position: relative;
+}
+
+#main_front{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: transparent;
+    border: none;
+    resize: none;
+    overflow: hidden;
+    color: #fff;
+    width: 100%;
+    font-family: "Inconsolata", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: large;
+}
+
+#main_body{
+    padding:1px;
+    background-color: #000;
+    color: #999;
+    font-size: large;
+}
