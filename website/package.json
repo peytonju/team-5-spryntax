@@ -8,7 +8,8 @@
     "stop": "node ./node_modules/pm2/bin/pm2 stop spryntax.js",
     "restart": "npm stop && npm start",
     "kill": "node ./node_modules/pm2/bin/pm2 kill",
-    "desc": "# start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# stop: Stops the Node server for spryntax.js\n# restart: Restarts the Node server for spryntax.js\n# kill: Stops PM2 (including the Node server for spryntax.js)"
+    "status": "node ./node_modules/pm2/bin/pm2 status",
+    "desc": "# start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# stop: Stops the Node server for spryntax.js\n# restart: Restarts the Node server for spryntax.js\n# kill: Stops PM2 (including the Node server for spryntax.js\n# status: Gets the status of current PM2 applications"
   },
   "author": "",
   "license": "ISC",
