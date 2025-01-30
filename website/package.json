@@ -4,8 +4,11 @@
   "description": "",
   "main": "spryntax.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm install && node ./node_modules/pm2/bin/pm2 start spryntax.js"
+    "start": "npm install && node ./node_modules/pm2/bin/pm2 start spryntax.js",
+    "stop": "node ./node_modules/pm2/bin/pm2 stop spryntax.js",
+    "restart": "npm stop && npm start",
+    "kill": "node ./node_modules/pm2/bin/pm2 kill",
+    "desc": "# start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# stop: Stops the Node server for spryntax.js\n# restart: Restarts the Node server for spryntax.js\n# kill: Stops PM2 (including the Node server for spryntax.js)"
   },
   "author": "",
   "license": "ISC",
