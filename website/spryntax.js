@@ -1,3 +1,5 @@
+console.log("asdf");
+
 const PORT = 8080;
 const express = require('express');
 const exphbs  = require('express-handlebars');
@@ -8,20 +10,25 @@ app.engine('handlebars', exphbs.engine({
     defaultLayout: "index"
 }));
 app.set('view engine', 'handlebars');
+
+/* place static files in /website/public */
 app.use(express.static('public'));
 
 
 /* queries to "/" just render the main page */
-app.get('/', (req, res) => {
-    res.status(200).render('mainPage');
+app.get('/', (request, response) => {
+    console.log("user connected to /");
+    response.status(200).render("pages/mainPage");
 });
 
-app.get('/code', (req,res) => {
-    res.status(200).render("codePage")
+/* "/code" redirects to the code page */
+app.get('/code', (request, response) => {
+    response.status(200).render("pages/codePage")
 })
 
 
-/* hopefully not a concern for hosting on OSU's servers */
+/* makes the express server listen on the specified port */
 app.listen(PORT, () => {
+    /* after successfully listening, just print out a status message */
     console.log(`Server started on localhost:${PORT}`);
 });

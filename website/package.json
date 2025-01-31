@@ -5,11 +5,12 @@
   "main": "spryntax.js",
   "scripts": {
     "start": "npm install && node ./node_modules/pm2/bin/pm2 start spryntax.js",
-    "stop": "node ./node_modules/pm2/bin/pm2 stop spryntax.js",
+    "stop": "node ./node_modules/pm2/bin/pm2 stop spryntax",
     "restart": "npm stop && npm start",
     "kill": "node ./node_modules/pm2/bin/pm2 kill",
     "status": "node ./node_modules/pm2/bin/pm2 status",
-    "desc": "# start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# stop: Stops the Node server for spryntax.js\n# restart: Restarts the Node server for spryntax.js\n# kill: Stops PM2 (including the Node server for spryntax.js\n# status: Gets the status of current PM2 applications"
+    "printout": "node ./node_modules/pm2/bin/pm2 logs --out spryntax",
+    "desc": "\n# start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# stop: Stops the Node server for spryntax.js\n# restart: Restarts the Node server for spryntax.js\n# kill: Stops PM2 (including the Node server for spryntax.js\n# status: Gets the status of current PM2 applications"
   },
   "author": "",
   "license": "ISC",
