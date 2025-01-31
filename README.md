@@ -65,12 +65,14 @@ Minimum Viable Product Goals:
 - Statistics for users  
   - Time that a user took on a specific assignment  
   - Words per minute (\# of chars divided by 5\)  
-- OSU server hosts the site and contains all code within it
+- Save user data in a databa as long as they are logged in
 
 Stretch Goals:
 - “Profile” for a particular user that other users can view  
   - Support for multiple programming languages  
   - Support for users to compile/interpret code on the site
+- Allow users to favorite a level 
+  
 
 
 **Non-functional Requirements:** 
