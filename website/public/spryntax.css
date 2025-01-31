@@ -39,3 +39,16 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+.span{
+    margin: 0px;
+    padding: 0px;
+}
+
+.span_correct{
+    background-color: #0f0;
+}
+
+.span_incorrect{
+    background-color: #f90;
+}
