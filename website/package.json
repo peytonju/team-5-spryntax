@@ -4,14 +4,14 @@
   "description": "",
   "main": "spryntax.js",
   "scripts": {
-    "start": "npm install && node ./node_modules/pm2/bin/pm2 start spryntax.js",
-    "stop": "node ./node_modules/pm2/bin/pm2 stop spryntax",
-    "restart": "npm stop && npm start",
-    "kill": "node ./node_modules/pm2/bin/pm2 kill",
-    "status": "node ./node_modules/pm2/bin/pm2 status",
-    "printout": "node ./node_modules/pm2/bin/pm2 logs --out spryntax",
-    "simple_start": "npm install && node spryntax.js",
-    "desc": "\n# start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# stop: Stops the Node server for spryntax.js\n# restart: Restarts the Node server for spryntax.js\n# kill: Stops PM2 (including the Node server for spryntax.js\n# status: Gets the status of current PM2 applications\n# printout: Shows PM2 printouts from spryntax.\n# simple_start: Starts the Express server without PM2."
+    "start": "npm install && node spryntax.js",
+    "pm2-start": "npm install && node ./node_modules/pm2/bin/pm2 start spryntax.js",
+    "pm2-stop": "node ./node_modules/pm2/bin/pm2 stop spryntax",
+    "pm2-restart": "npm run pm2-stop && npm run pm2-start",
+    "pm2-kill": "node ./node_modules/pm2/bin/pm2 kill",
+    "pm2-status": "node ./node_modules/pm2/bin/pm2 status",
+    "pm2-printout": "node ./node_modules/pm2/bin/pm2 logs --out spryntax",
+    "desc": "\n# start: Starts the Express server without PM2.\n# pm2-start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# pm2-stop: Stops the Node server for spryntax.js\n# pm2-restart: Restarts the Node server for spryntax.js\n# pm2-kill: Stops PM2 (including the Node server for spryntax.js\n# pm2-status: Gets the status of current PM2 applications\n# pm2-printout: Shows PM2 printouts from spryntax."
   },
   "author": "",
   "license": "ISC",
