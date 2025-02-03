@@ -10,7 +10,8 @@
     "kill": "node ./node_modules/pm2/bin/pm2 kill",
     "status": "node ./node_modules/pm2/bin/pm2 status",
     "printout": "node ./node_modules/pm2/bin/pm2 logs --out spryntax",
-    "desc": "\n# start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# stop: Stops the Node server for spryntax.js\n# restart: Restarts the Node server for spryntax.js\n# kill: Stops PM2 (including the Node server for spryntax.js\n# status: Gets the status of current PM2 applications"
+    "simple_start": "npm install && node spryntax.js",
+    "desc": "\n# start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# stop: Stops the Node server for spryntax.js\n# restart: Restarts the Node server for spryntax.js\n# kill: Stops PM2 (including the Node server for spryntax.js\n# status: Gets the status of current PM2 applications\n# printout: Shows PM2 printouts from spryntax.\n# simple_start: Starts the Express server without PM2."
   },
   "author": "",
   "license": "ISC",
