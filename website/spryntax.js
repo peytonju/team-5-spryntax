@@ -1,57 +1,51 @@
 const PORT = 8080;
 const express = require('express');
-const exphbs  = require('express-handlebars');
 const app = express();
+app.engine("html", require("ejs").renderFile);
 
-
-app.engine('handlebars', exphbs.engine({
-    defaultLayout: "index"
-}));
-app.set('view engine', 'handlebars');
-
-/* place static files in /website/public */
+/* place static files in /website/resources */
 app.use(express.static('public'));
 
 
 app.get("/", (request, response) => {
-    response.status(200).render("pages/main");
+    response.status(200).render("index.html");
 });
 
 app.get("/leaderboards", (request, response) => {
-    response.status(200).render("pages/leaderboard_global");
+    response.status(200).render("leaderboard.html");
 });
 
 app.get("/login", (request, response) => {
-    response.status(200).render("pages/login");
+    response.status(200).render("login.html");
 });
 
 app.get("/signup", (request, response) => {
-    response.status(200).render("pages/signup");
+    response.status(200).render("signup.html");
 });
 
 app.get("/settings", (request, response) => {
-    response.status(200).render("pages/settings");
+    response.status(200).render("settings.html");
 });
 
 
 /*****************************************LEVELS******************************************************/
 app.get("/level_select", (request, response) => {
-    response.status(200).render("pages/level_select");
+    response.status(200).render("level_select.html");
 })
 
 app.get('/level_select/:level_name', (request, response) => {
     const level_name = request.params["level_name"].toLowerCase();
-    response.status(200).render("pages/level_desc");
+    response.status(200).render("level_desc.html");
 })
 
 app.get('/level_select/:level_name/play', (request, response) => {
     const level_name = request.params["level_name"].toLowerCase();
-    response.status(200).render("pages/level_play");
+    response.status(200).render("level_play.html");
 })
 
 app.get('/level_select/:level_name/end', (request, response) => {
     const level_name = request.params["level_name"].toLowerCase();
-    response.status(200).render("pages/level_end");
+    response.status(200).render("level_end.html");
 })
 /****************************************************************************************************/
 
