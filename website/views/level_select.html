@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Browse Algorithms</title>
+    <link rel="stylesheet" href="spryntax.css">
+    <script src="spryntax_main.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Browse Algorithm</h1>
+        <nav>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+    
+    <!-- Help Button and Help Text -->
+    <button class="help-button" onclick="toggleHelp()">Help</button>
+    <div id="help-text" class="help-text hidden">
+        Use the search options below to find algorithms by name, difficulty, data structure use case or approach/technique
+    </div>
+
+    <!-- Search Options -->
+    <div class="search-options">
+        <input type="text" id="search-name" placeholder="Search by name" oninput="filterQuizzes()"> 
+        <select id="search-difficulty" onchange="filterQuizzes()">
+            <option value="all">Any Difficulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+        <select id="search-data_structure" onchange="filterQuizzes()">
+            <option value="all">All Categories</option>
+            <option value="array">Array</option>
+            <option value="link_list">Link List</option>
+            <option value="tree">Tree</option>
+        </select>
+
+         <select id="search-approach" onchange="filterQuizzes()">
+            <option value="all">All Categories</option>
+            <option value="brute_force">Brute Force</option>
+            <option value="divide-conquer">Divide and Conquer</option>
+            <option value="greedy">Greedy</option>
+        </select>       
+
+        <button onclick="filterQuizzes()">Search</button>
+    </div>
+
+    <!-- Quizzes List -->
+    <div class="algorithm-list" id="algorithm-list">
+        <!-- Quizzes will be dynamically populated by spryntax.js -->
+    </div>    
+</body>
+</html>
