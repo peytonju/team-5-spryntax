@@ -213,7 +213,7 @@ Backend Developer
 - Will help as needed with backend implementation
 
 ### IV. Test plan & bugs:
-- **Unit Testing:** We will use white box testing to ensure each method unit works together. 
+- **Unit Testing:** We will use white box testing to ensure each unit works. When testing on the website we can just use local host to ensure our implementations work correctly. When adding into the database we can local host the website and then use the live database to ensure the required information is correctly pushed or pulled. This will be sufficent because it allows for us to check if each addition works. 
 
 - **System (integration) Testing:** When the database is linked with the front end we will use Fuzz testing to ensure that most user inputs do not cause any major problems. This will be sufficient for user inputs because we can find a fuzzer that inputs values that if not handled correctly could result in a crash. Additionally we need to test that all links work and that web pages load correctly.
 
