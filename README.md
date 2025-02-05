@@ -98,7 +98,7 @@ The main software we will be using is NodeJS for connection to the website, APIs
 **Favorites service: /services/favorites-service** (Yet to be added) | Creates, stores, and retrieves user-favorited algorithms  
 	
 
-#### **Coding Guideline:**
+## **Coding Guideline:**
 
 ##### Overview
 
