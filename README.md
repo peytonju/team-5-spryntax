@@ -71,10 +71,32 @@ Stretch Goals:
 **Technical approach:** The project is web-based and will be using NodeJS for processing user inputs and sending that information to a .NET framework.
 
 ## Software Architecture
+We are using Model-View-Controller and microservices architecture. The Model will hold the database interactions. The view has the client-side code (UI/Frontend). The controller handles the API requests. There will be microservices for keeping track of the user stats (e.g. wpm, accuracy ..etc) the leaderboard, and the favorites. 
+
+2 alternatives are:
+A fully monolith backend instead of microservices
+Pros: Easier to develop since there are fewer moving parts and simpler debugging since there won't be any inter-service communication
+Cons: Scalability issues (if we get a lot of users) and performance bottle neck, since each feature depends on the same server
+NOSQL for schema-less storage. 
+Pros: Faster inserts for typing stats since MongoDB handles unstructured data and easier schema changes
+Cons: Querying leaderboards would be slower and not as reliable as MySQL for user authentication
+
+The main software we will be using is NodeJS for connection to the website, APIs and database, and MySQL for creating the database.
 
 
 ## Software Design
+**Frontend: /views** | Handles UI logic (Typing process, pages, etc…)  
+	          **public/spyrntax.js** | Handles Dynamically loading information from the database into pages (Load algorithms, filtering algorithms, etc..)
 
+**Backend: /bin** | This will hold the server startup script  
+	       **/server.js** | Main express server  
+**Database: /app/models folder** | Fetches/stores data in MySQL database  
+		      **/config** | Database.js is in this file, which connects to the database
+
+**Typing stats service: /services/typing-stat-service** (Yet to be added) | Tracks real-time typing accuracy and WMP  
+**Leaderboard service: /services/leaderboard-service** (Yet to be added)  | Stores and retrieves ranking data  
+**Favorites service: /services/favorites-service** (Yet to be added) | Creates, stores, and retrieves user-favorited algorithms  
+	
 
 ## Coding Guideline
 
