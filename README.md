@@ -213,5 +213,10 @@ Backend Developer
 - Will help as needed with backend implementation
 
 ### IV. Test plan & bugs:
+- **Unit Testing:** We will use white box testing to ensure each method unit works together. 
+
+- **System (integration) Testing:** When the database is linked with the front end we will use Fuzz testing to ensure that most user inputs do not cause any major problems. This will be sufficient for user inputs because we can find a fuzzer that inputs values that if not handled correctly could result in a crash. Additionally we need to test that all links work and that web pages load correctly.
+
+- **Usability Testing:** We can try out the typing function of the website to test the usability. We can try to type random inputs to check that the website will correctly get the users inputs and function like a monkey-type like website. We can also test out every button and links in the website to test that everything on the website works correctly and smoothly. Usability on different platforms could be tested, like mobile and computer browsers.
 
 ### V. Documentation plan:
