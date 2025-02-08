@@ -1,5 +1,7 @@
 # spryntax
 
+# Project Proposal
+
 ## Team Information
 ### Team Members
 #### Kali Pulanco
@@ -36,6 +38,8 @@ Canvas will be used in case Discord or Outlook are both unavailable. The team ma
 
 **Effects:** Will help novice programmers learn how to code while adding a little bit of competition. It will also aid programmers in learning other languages. 
 
+# Project Requirements Elicitation
+
 **Use Cases (Functional Requirements):**
 Minimum Viable Product Goals:
 - Monkeytype-style of program that allows users to type characters needed to create a specific file, the file contains some useful-to-know algorithm  
@@ -69,6 +73,8 @@ Stretch Goals:
 - The scope of the project must match the resources (number of team members) assigned.
 
 **Technical approach:** The project is web-based and will be using NodeJS for processing user inputs and sending that information to a .NET framework.
+
+# Project Architecture and Design
 
 ## Software Architecture
 We are using Model-View-Controller and microservices architecture. The Model will hold the database interactions. The view has the client-side code (UI/Frontend). The controller handles the API requests. There will be microservices for keeping track of the user stats (e.g. wpm, accuracy ..etc) the leaderboard, and the favorites. 
