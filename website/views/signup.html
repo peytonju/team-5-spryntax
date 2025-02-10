@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="stylesheet" href="bootstrap.css"> 
         <!--<link rel="stylesheet" href="spryntax.css"> -->
         <!--<script src="spryntax_main.js"></script> -->
     </head>
     <body class="text-center"> 
-            <form>
-                <div class="row justify-content-md-center">
-                    <div class="form-group">
-                            <label for="InputEmail">Email address</label>
-                            <input type="Email" class="form-control" id="InputEmail" aria-describedby="Email" placeholder="Enter email">
-                    </div>
+        <div class="container"> 
+            <div class="card">
+                <div class="card-body">
+                    <form action="signup.php" method="post">
+                    
+                        <div class="row justify-content-md-center">
+                            <div class="col">
+                                <p>Sign up</p>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                        <label for="inputEmail">Email address</label>
+                                        <input type="Email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="Email" placeholder="Enter email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-md-center">
+                            <div class="col">
+                                <p>placeholder</p>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="inputUsername">Username</label>
+                                    <input type="Username" class="form-control" id="inputUsername" name="inputUsername" aria-describedby="Username" placeholder="Enter username">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-md-center">
+                            <div class="col">
+                                <p>placeholder</p>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <input type="submit" class="btn btn-primary mt-2" value="signup" name="">
+                        
+                    </form>
                 </div>
-                <div class="row justify-content-md-center">
-                    <div class="form-group">
-                        <label for="InputUsername">Username</label>
-                        <input type="Username" class="form-control" id="InputUsername" aria-describedby="Username" placeholder="Enter username">
-                    </div>
-                </div>
-                <div class="row justify-content-md-center">
-                    <div class="form-group">
-                        <label for="inputPassword">Password</label>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                    </div>
-                </div>
-                <div class="row justify-content-md-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-            
+            </div>
         </div>
     </body>
 </html>
