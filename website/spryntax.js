@@ -4,11 +4,14 @@ const app = express();
 app.engine("html", require("ejs").renderFile);
 const bodyParser = require('body-parser');
 const path = require('path');
+const mysql = require("mysql")
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 /* place static files in /website/resources */
 app.use(express.static('public'));
+app.use(express.json());
+
 
 
 app.get("/", (request, response) => {
@@ -52,11 +55,38 @@ app.get('/level_select/:level_name/end', (request, response) => {
     response.status(200).render("level_end.html");
 })
 /*****************************************Database******************************************************/
+// const con=mysql.createConnection({
+//     host:'***',
+//     user:'***',
+//     password:'***',
+//     database:'***',
+//     port: 3307
+// })
+
+// con.connect((err)=>{
+//     if(err){
+//         console.log(err)
+//     }else{
+//         console.log("connected")
+//     }
+// })
+
 app.post('/signup.php', (req, res) => {
     const username = req.body.inputUsername; // Extract the username from the form data
     const email = req.body.inputEmail; // Extract the email from the form data
     const password = req.body.inputPassword; // Extract the password from the form data
 
+    const query = 'INSERT INTO user (username, password, email, profile_pic) VALUES (?, ?, ?, ?)';
+    
+    con.query(query, [username, password, email, null], (err, result) => {
+        if(err){
+            console.log(err)
+        }else{
+            console.log("POSTED")
+        }
+    }
+    
+    )
     res.send(`Username: ${username}, Email: ${email}, Password: ${password}`);
 });
 /****************************************************************************************************/

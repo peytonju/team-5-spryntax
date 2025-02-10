@@ -129,6 +129,7 @@
     "module-details-from-path": "^1.0.3",
     "ms": "^2.0.0",
     "mute-stream": "^0.0.8",
+    "mysql": "^2.18.1",
     "needle": "^2.4.0",
     "negotiator": "^0.6.3",
     "neo-async": "^2.6.2",
