@@ -88,6 +88,7 @@ Pros: Faster inserts for typing stats since MongoDB handles unstructured data an
 Cons: Querying leaderboards would be slower and not as reliable as MySQL for user authentication
 
 The main software we will be using is NodeJS for connection to the website, APIs and database, and MySQL for creating the database.
+(The database schema is in the database folder)
 
 
 ## Software Design
