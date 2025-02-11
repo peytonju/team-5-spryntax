@@ -1,4 +1,4 @@
-# Team5 spryntax Algorithm List
+# Team5 spryntax Python Algorithm List
 
 | Algorithm Name | Difficulty | Data Structure | Approach/Technique |
 | -------------  | ---------- | ---------------| ------------------ |
