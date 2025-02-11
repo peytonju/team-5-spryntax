@@ -1,5 +1,7 @@
 # spryntax
 
+# Project Proposal
+
 ## Team Information
 ### Team Members
 #### Kali Pulanco
@@ -36,6 +38,8 @@ Canvas will be used in case Discord or Outlook are both unavailable. The team ma
 
 **Effects:** Will help novice programmers learn how to code while adding a little bit of competition. It will also aid programmers in learning other languages. 
 
+# Project Requirements Elicitation
+
 **Use Cases (Functional Requirements):**
 Minimum Viable Product Goals:
 - Monkeytype-style of program that allows users to type characters needed to create a specific file, the file contains some useful-to-know algorithm  
@@ -70,6 +74,8 @@ Stretch Goals:
 
 **Technical approach:** The project is web-based and will be using NodeJS for processing user inputs and sending that information to a .NET framework.
 
+# Project Architecture and Design
+
 ## Software Architecture
 We are using Model-View-Controller and microservices architecture. The Model will hold the database interactions. The view has the client-side code (UI/Frontend). The controller handles the API requests. There will be microservices for keeping track of the user stats (e.g. wpm, accuracy ..etc) the leaderboard, and the favorites. 
 
@@ -82,6 +88,7 @@ Pros: Faster inserts for typing stats since MongoDB handles unstructured data an
 Cons: Querying leaderboards would be slower and not as reliable as MySQL for user authentication
 
 The main software we will be using is NodeJS for connection to the website, APIs and database, and MySQL for creating the database.
+(The database schema is in the database folder)
 
 
 ## Software Design
@@ -213,7 +220,7 @@ Backend Developer
 - Will help as needed with backend implementation
 
 ### IV. Test plan & bugs:
-- **Unit Testing:** We will use white box testing to ensure each unit works. When testing on the website we can just use local host to ensure our implementations work correctly. When adding into the database we can local host the website and then use the live database to ensure the required information is correctly pushed or pulled. This will be sufficent because it allows for us to check if each addition works. 
+- **Unit Testing:** We will use white box testing to ensure each unit works. When testing on the website we can just use local host to ensure our implementations work correctly. When adding into the database we can local host the website and then use the live database to ensure the required information is correctly pushed or pulled. This will be sufficient because it allows for us to check if each addition works. 
 
 - **System (integration) Testing:** When the database is linked with the front end we will use Fuzz testing to ensure that most user inputs do not cause any major problems. This will be sufficient for user inputs because we can find a fuzzer that inputs values that if not handled correctly could result in a crash. Additionally we need to test that all links work and that web pages load correctly. In the same aspect of unit testing we can local host the entire website on our machine to ensure each addition works together. When a module is changed or added in relation to the database we will also have to ensure that it still works with the website. The environment we will use to host it is visual studio code and we are running it using node.js. 
 

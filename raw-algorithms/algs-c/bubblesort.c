@@ -24,11 +24,11 @@ int * create_int_list(const int size) {
 
 void swap(int * int_list, const int index_other, const int index_chosen) {
 	/* in order to swap the values, we have to store one of the values elsewhere temporarily! */
-	int temporary = int_list[index_other];
+	//int temporary = int_list[index_other];
 	/* then we can move the chosen index's value to the other index! */
-	int_list[index_other] = int_list[index_chosen];
+	//int_list[index_other] = int_list[index_chosen];
 	/* ... and then move the old value of the other index into the chosen index! */
-	int_list[index_chosen] = temporary;
+	//int_list[index_chosen] = temporary;
 }
 
 void bubblesort(int * int_list, const int size) {
@@ -37,18 +37,18 @@ void bubblesort(int * int_list, const int size) {
 	 * When we "choose" an index, we can look at other indexes and ask the question: is the other index's 
 	 * value less than the chosen index's value? If it is less, we can just swap them both!
 	 */
-	for (int index_chosen = 0; index_chosen < size; index_chosen++) {
-		for (int index_other = index_chosen + 1; index_other < size; index_other++) {
+	//for (int index_chosen = 0; index_chosen < size; index_chosen++) {
+		//for (int index_other = index_chosen + 1; index_other < size; index_other++) {
 			/* 
 			 * if the other index's value is less than the chosen index's value,
 			 * swap the values in the indexes!
 			 */
-			if (int_list[index_other] < int_list[index_chosen]) {
-				swap(int_list, index_other, index_chosen);
-			}
+			//if (int_list[index_other] < int_list[index_chosen]) {
+				//swap(int_list, index_other, index_chosen);
+			//}
 			/* ...and afterwards, continue on! keep going until you've checked every index! */
-		}
-	}
+		//}
+	//}
 }
 
 int main() {
