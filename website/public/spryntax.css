@@ -50,7 +50,7 @@
 }
 .space{width: 0.5em;}
 .tab{width: 4em;}
-.break{font-size: xx-small;}
+.lbreak{font-size: xx-small;}
 .span_correct{background-color: #0cc; color:#0cc;}
 .span_incorrect{background-color: #f90; color:#f90;}
 #wincheck{

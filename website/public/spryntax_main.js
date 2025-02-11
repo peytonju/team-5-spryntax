@@ -1,7 +1,16 @@
 let displaycode = '#include\u0020<iostream>↵using namespace std;↵↵int main(){↵→cout << "this is more annoying than it looks";↵→return 0;↵}'
 
+let progress = {
+    "starttime": null,
+    "errors": 0,
+    "lbreaks": 0
+};
+
 function validate(){
-    let i = 0, j = 0, k = 0, l = 0;
+    if (progress.starttime == null){
+        progress.starttime = Date.now();
+    }
+    let i = 0, j = 0, l = 0;
     let typed = [];
     for (char of $("#main_front").val()){
         let innerchar = $("#main_"+i);
@@ -13,9 +22,10 @@ function validate(){
         } else {
             if ((innerchar.hasClass("space")&&char == " ")||
             (innerchar.hasClass("tab")&&char == "\t")||
-            (innerchar.hasClass("break")&&char=="\n")){
+            (innerchar.hasClass("lbreak")&&char=="\n")){
                 if (innerchar.hasClass("span_incorrect")){
                     innerchar.removeClass("span_incorrect");
+                    progress.errors++;
                 }
                 innerchar.addClass("span_correct");
             } else {
@@ -29,9 +39,6 @@ function validate(){
         if(char == "\n"){ 
             j++;
         }
-        if(innerchar.hasClass("break")){
-            k++;
-        }
         i++;
     }
     i = 0;
@@ -44,6 +51,7 @@ function validate(){
             }
             if (span.hasClass("span_incorrect")){
                 span.removeClass("span_incorrect");
+                progress.errors++;
             }
         } else {
             if (span.hasClass("span_correct")){
@@ -51,9 +59,31 @@ function validate(){
             }
         }
     })
+    if (j > progress.lbreaks){
+        let trimmed = "";
+        console.log(j,progress.lbreaks);
+        let k = progress.lbreaks;
+        for (index in $("#main_front").val()){
+            if ($("#main_front").val()[index] == "\n"){
+                k--;
+            }
+            trimmed += $("#main_front").val()[index];
+            if (k == 0){
+                break;
+            }
+        }
+        $("#main_front").val(trimmed);
+        validate();
+        return;
+    }
     if (i==l){
         $("#main_front").attr("disabled", true);
         $("#wincheck").attr("hidden", false);
+        let displaywin = $("#wincheck").html() + "<br>"; 
+        let diff = (Date.now() - progress.starttime);
+        displaywin += Math.floor(diff/1000/60/60) + ":" + String(Math.floor(diff/1000/60)).padStart(2, '0') + ":" + (diff/1000) + "<br>";
+        displaywin += (progress.errors) + " errors<br>" + l + " characters";
+        $("#wincheck").html(displaywin);
     }
 }
 
@@ -65,7 +95,8 @@ $(document).ready(function(){
     let spannedcode = "";
     for (char in displaycode){
         if (displaycode[char] == '↵'){
-            spannedcode += '<span class="span noselect break" hidden id="main_' + char +'"></span><br class="noselect">';
+            spannedcode += '<span class="span noselect lbreak" hidden id="main_' + char +'"></span><br class="noselect">';
+            progress.lbreaks++;
         } else if (displaycode[char] == '→') {
             spannedcode += '<span class="span noselect tab" id="main_' + char +'">'+'&emsp;</span>';
         } else if (displaycode[char] == '\u0020') {
