@@ -4,9 +4,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="spryntax.css">
-    <script src="jquery-3.7.1.min.js"></script>
-    <script src="spryntax_main.js"></script>
+    <link rel="stylesheet" href="../public/spryntax.css">
+    <script src="../public/jquery-3.7.1.min.js"></script>
+    <script src="../public/spryntax_main.js"></script>
 </head>
 
 <div class="topnav">
@@ -17,7 +17,7 @@
 </div>
 
 <div id="main_back">
-    <p id="main_body">
+    <div id="main_body">
         #include &lt;iostream><br>
         using namespace std;<br>
         <br>
@@ -25,15 +25,7 @@
         &emsp;cout &lt;&lt; "this is more annoying than it looks";<br>
         &emsp;return 0;<br>
         }<br>
-    </p>
-    <textarea id="main_front"></textarea>
+    </div>
+    <textarea id="main_front" spellcheck="false"></textarea>
+    <h1 id="wincheck" hidden>YOU WIN!</h1>
 </div>
-
-<footer>
-    <p>to do:</p>
-    <li>Automate the query to replace &lt; in htmlbody</li>
-    <li>Allow for tab as an input</li>
-    <li>Convert every character as a &lt;span> for independent letter coloring (yikes)</li>
-    <li>Prevent character overflow in input (try spamming enter)</li>
-    <li>Use the &crarr; for enter newline indication</li>
-</footer>
