@@ -1,4 +1,4 @@
-# spryntax
+# CS 362 Project, Team 5 - Spryntax
 
 # Project Proposal
 
@@ -24,19 +24,17 @@ Outlook will be minimally used by the team but may be utilized to formally reach
 Canvas will be used in case Discord or Outlook are both unavailable. The team may also reach to team members directly through Canvas announcements in case we are unable to reach them. 
 
 
-### Relevant Artifacts
-...
-
 ## Project Description
 **Abstract:** Coding requires a subset of characters not commonly used in normal typing. To name a few (\<, \>, :, ;, { }, \[ \], \-, \+, \=, //, \_ ) and programming languages have different syntaxes as well, therefore even more variety of characters you wouldn’t normally use. Traditional typing practice websites are useful for general typing but what about coding? Well, what if you were shown algorithms– in multiple programming languages that you can select– and had to type it out? Not only will you practice typing code, but you’ll learn more about the fundamentals of the particular programming language you selected, and also the functionality/structure of the algorithm via the algorithm itself and comments throughout the code. Additionally, there will be an educational guide explaining the algorithm in detail at the bottom of the typing section, so you can learn and grow your programming skills no matter what.
 
 **Goal:** The primary goal of spryntax is to introduce beginner programmers to the way modern programming languages are typed and to important concepts used in computer science, as well inspiring competition in typing speed amongst programmers.
 
-**Current practice:** Current practices include coding languages at a surface level of understanding and with varying degrees of realism and syntax.
+**Current practice:** GeeksforGeeks: Informative but lacks interactive typing practice. MonkeyType: Great for speed but not designed for coding. LeetCode: Good for coding practice but ignores typing speed.
+
 
 **Novelty:** Existing practices have these algorithms but this project will go beyond that and showcase what the program does. Secondly, existing practices limit the coding time and this implementation will take a stopwatch approach to allow the user to code the full algorithm.
 
-**Effects:** Will help novice programmers learn how to code while adding a little bit of competition. It will also aid programmers in learning other languages. 
+**Effects:** Will help novice programmers learn how to code while adding a little bit of competition. It will also aid programmers in learning other languages. Additionally we plan to fill this gap and provide a new experience for users. It will benefit users by improving their typing speed while coding, their accurate coding, knowledge of algorithms, and more. One example algorithm, is a merge sort.
 
 # Project Requirements Elicitation
 
