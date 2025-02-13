@@ -1,4 +1,4 @@
-let displaycode = DATA_LEVEL["lines"];
+let displaycode = (typeof DATA_LEVEL) !== "undefined" ? DATA_LEVEL["lines"] : "#include\u0020<iostream>↵using namespace std;↵↵int main(){↵→cout << \"this is more annoying than it looks\";↵→return 0;↵}";
 
 let progress = {
     "starttime": null,
