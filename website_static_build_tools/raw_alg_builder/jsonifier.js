@@ -16,6 +16,19 @@ const LANGUAGES = {
     }
 };
 
+
+function code_line_formatter(line) {
+    let new_line = line;
+    
+    /* carriage return */
+    new_line = new_line.replaceAll("\r", "↵");
+    /* tab */
+    new_line = new_line.replaceAll("\t", "→");
+
+    return new_line;
+}
+
+
 function is_comment_line(line, comment_styles) {
     const CLEAN_LINE = line.replaceAll(" ", "").replaceAll("\t", "");
     if (CLEAN_LINE.indexOf(comment_styles["line"]) == 0) {
@@ -41,7 +54,7 @@ function main() {
         all_jsons[CATEGORY] = {};
         for (const LANGUAGE in LANGUAGES) {
             all_jsons[CATEGORY][LANGUAGE] = {};
-            all_jsons[CATEGORY][LANGUAGE]["lines"] = [];
+            all_jsons[CATEGORY][LANGUAGE]["lines"] = "";
             all_jsons[CATEGORY][LANGUAGE]["comments"] = {}; 
 
             const COMMENT_STYLES = LANGUAGES[LANGUAGE];
@@ -64,8 +77,8 @@ function main() {
                     }
                 } else {
                     /* this line is just a piece of code. append it. */
-                    all_jsons[CATEGORY][LANGUAGE]["lines"].push(line);
-                    /* flush the comment buffer */                
+                    all_jsons[CATEGORY][LANGUAGE]["lines"] = all_jsons[CATEGORY][LANGUAGE]["lines"].concat(code_line_formatter(line));
+                    /* flush the comment buffer */
                     if (comment_buffer != "") {
                         all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line] = comment_buffer;
                         comment_buffer = "";
@@ -76,6 +89,7 @@ function main() {
         }
     }
 
+    console.log(all_jsons["bubblesort"]["c"]);
     /* dump the JSON onto a file */
     fs.writeFileSync(DIR_WRITE, JSON.stringify(all_jsons), "utf8");
 }
