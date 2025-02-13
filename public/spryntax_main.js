@@ -1,4 +1,4 @@
-let displaycode = '#include\u0020<iostream>↵using namespace std;↵↵int main(){↵→cout << "this is more annoying than it looks";↵→return 0;↵}'
+let displaycode = DATA_LEVEL["lines"];
 
 let progress = {
     "starttime": null,

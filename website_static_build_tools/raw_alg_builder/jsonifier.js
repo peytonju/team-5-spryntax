@@ -17,7 +17,7 @@ const LANGUAGES = {
 };
 
 
-function code_line_formatter(line) {
+function line_formatter(line) {
     let new_line = line;
     
     /* carriage return */
@@ -77,7 +77,8 @@ function main() {
                     }
                 } else {
                     /* this line is just a piece of code. append it. */
-                    all_jsons[CATEGORY][LANGUAGE]["lines"] = all_jsons[CATEGORY][LANGUAGE]["lines"].concat(code_line_formatter(line));
+                    all_jsons[CATEGORY][LANGUAGE]["lines"] = all_jsons[CATEGORY][LANGUAGE]["lines"].concat(line_formatter(line));
+
                     /* flush the comment buffer */
                     if (comment_buffer != "") {
                         all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line] = comment_buffer;
@@ -89,7 +90,6 @@ function main() {
         }
     }
 
-    console.log(all_jsons["bubblesort"]["c"]);
     /* dump the JSON onto a file */
     fs.writeFileSync(DIR_WRITE, JSON.stringify(all_jsons), "utf8");
 }

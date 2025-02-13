@@ -9,7 +9,6 @@
 int * create_int_list(const int size) {
 	/* if the size the programmer passes is greater than 0, */
 	if (size > 0) {
-
 		/* 
 		 * "sizeof(int)" returns the number of bytes an integer takes!
 		 * We can multiply this value by the programmer's specified size 

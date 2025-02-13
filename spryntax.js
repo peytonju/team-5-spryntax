@@ -1,26 +1,29 @@
 const PORT = 8080;
+
+const PATH = require('path');
+const PATH_VIEWS = PATH.join(__dirname, "website", "views");
+const PATH_PUBLIC = PATH.join(__dirname, "public");
+const PATH_LEVELS_JSON = PATH.join(PATH_PUBLIC, "levels.json");
+
+const algorithmController = require('./app/controllers/algorithmController');
+const bodyParser = require('body-parser');
+const mysql = require("mysql")
+const fs = require("fs");
+
 const express = require('express');
 const app = express();
 app.set('view engine', 'ejs');
-const algorithmController = require('./app/controllers/algorithmController');
 app.use(express.static('public'));
-const bodyParser = require('body-parser');
-const path = require('path');
-const mysql = require("mysql")
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
-const viewsPath = path.join(__dirname, 'website', 'views'); 
-app.set('views', viewsPath);
-
-console.log("Views path:", viewsPath);
-/* place static files in /website/resources */
+app.set('views', PATH_VIEWS);
 app.use(express.static('public'));
 app.use(express.json());
 
 
-
 app.get("/", (request, response) => {
-    response.sendFile(path.join(__dirname, 'website', 'views', 'index.html'));
+    response.sendFile(PATH.join(__dirname, 'website', 'views', 'index.html'));
 });
 
 app.get("/leaderboards", (request, response) => {
@@ -43,19 +46,30 @@ app.get("/settings", (request, response) => {
 /*****************************************LEVELS******************************************************/
 app.get('/level_select', algorithmController.level_select);
 
-app.get('/level_select/:level_name', (request, response) => {
-    const level_name = request.params["level_name"].toLowerCase();
+app.get('/level_select/:name_level', (request, response) => {
+    const NAME_LEVEL = request.params["name_level"].toLowerCase();
     response.status(200).render("level_desc.html");
 })
 
-app.get('/level_select/:level_name/play', (request, response) => {
-    const level_name = request.params["level_name"].toLowerCase();
-    response.status(200).render("level_play.html");
+app.get('/level_select/:name_level/:name_language/play', (request, response) => {
+    const NAME_LEVEL = request.params["name_level"].toLowerCase();
+    const NAME_LANGUAGE = request.params["name_language"].toLowerCase();
+    const DATA_JSON = JSON.parse(fs.readFileSync(PATH_LEVELS_JSON).toString());
+    const DATA_LEVEL = DATA_JSON[NAME_LEVEL][NAME_LANGUAGE];
+
+    response.status(200).render("level_play.ejs", {
+        level_data: DATA_LEVEL
+    });
 })
 
-app.get('/level_select/:level_name/end', (request, response) => {
-    const level_name = request.params["level_name"].toLowerCase();
-    response.status(200).render("level_end.html");
+app.get('/level_select/:name_level/:name_language/end', (request, response) => {
+    const NAME_LEVEL = request.params["name_level"].toLowerCase();
+    const NAME_LANGUAGE = request.params["name_language"].toLowerCase();
+
+    response.status(200).render("level_end.ejs", {
+        level_name: NAME_LEVEL,
+        level_language: NAME_LANGUAGE
+    });
 })
 /*****************************************Database******************************************************/
 // const con=mysql.createConnection({
