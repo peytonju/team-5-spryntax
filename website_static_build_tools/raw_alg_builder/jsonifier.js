@@ -1,17 +1,18 @@
 const fs = require("fs");
 
 const DIR_WRITE = "levels.json";
-const DIR_ALGS = ["algs-c", "algs-py"];
 const DIR_PREFIX = "algs-";
 const CATEGORIES = ["bubblesort", "mergesort", "slink", "dlink", "queue", "insertionsort", "stack"];
 const LANGUAGES = {
     "c": {
         "line": "//",
-        "mline": ["/*", "*/"]
+        "mline": ["/*", "*/"],
+        "aline": "*"
     },
     "py": {
         "line": "#",
-        "mline": ["'''", "''''"]
+        "mline": ["'''", "''''"],
+        "aline": "#"
     }
 };
 
@@ -50,25 +51,29 @@ function main() {
             let cur_line = 0;
             let is_block_comment = 0;
             for (line of ALL_LINES) {
-                let is_comment = is_comment_line(line, COMMENT_STYLES);
+                const IS_COMMENT = is_comment_line(line, COMMENT_STYLES);
 
                 if (is_block_comment != 0) {
                     all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2 - is_block_comment] = 
                         all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2 - is_block_comment].concat(line);
 
-                    if (is_comment == 3) {
+                    if (IS_COMMENT == 3) {
                         /* move everything to this last line */
                         all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2] = all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2 - is_block_comment];
+                        /* delete the old data */
                         delete all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2 - is_block_comment];
                         is_block_comment = 0;
                     } else {
                         /* now 1 more away on the next iteration */
                         is_block_comment++;
                     }
-                } else if (is_comment != 0) {
-                    /* is_comment == 1 automatically caught here */
-                    all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2] = line;
-                    if (is_comment == 2) {
+                } else if (IS_COMMENT != 0) {
+                    /* IS_COMMENT == 1 automatically caught here */
+                    if (IS_COMMENT == 1) {
+                        all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2] = line, COMMENT_STYLES;
+                    }
+                    else if (IS_COMMENT == 2) {
+                        all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2] = line;
                         /* now 1 away on the next iteration */
                         is_block_comment = 1;
                     }
