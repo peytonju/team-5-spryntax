@@ -1,4 +1,4 @@
-require('dotenv').config();  // Load environment variables
+require('dotenv').config({ path: './.env' });  // Load environment variables
 const mysql = require('mysql');
 // Create a connection pool to manage multiple connections efficiently 
 const db = mysql.createPool({
