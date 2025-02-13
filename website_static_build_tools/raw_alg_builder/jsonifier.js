@@ -41,47 +41,37 @@ function main() {
         all_jsons[CATEGORY] = {};
         for (const LANGUAGE in LANGUAGES) {
             all_jsons[CATEGORY][LANGUAGE] = {};
-            all_jsons[CATEGORY][LANGUAGE]["lines"] = {};
+            all_jsons[CATEGORY][LANGUAGE]["lines"] = [];
             all_jsons[CATEGORY][LANGUAGE]["comments"] = {}; 
 
             const COMMENT_STYLES = LANGUAGES[LANGUAGE];
             const FILE_CONTENT = (fs.readFileSync(DIR_PREFIX + LANGUAGE + "/" + CATEGORY + "." + LANGUAGE)).toString();
             const ALL_LINES = FILE_CONTENT.split("\n");
 
+            let comment_buffer = "";
+            let block_comment_present = false;
             let cur_line = 0;
-            let is_block_comment = 0;
             for (line of ALL_LINES) {
                 const IS_COMMENT = is_comment_line(line, COMMENT_STYLES);
+                if (block_comment_present || IS_COMMENT != 0) {
+                    /* append this comment to the buffer. */
+                    comment_buffer = comment_buffer.concat(line);
 
-                if (is_block_comment != 0) {
-                    all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2 - is_block_comment] = 
-                        all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2 - is_block_comment].concat(line);
-
-                    if (IS_COMMENT == 3) {
-                        /* move everything to this last line */
-                        all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2] = all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2 - is_block_comment];
-                        /* delete the old data */
-                        delete all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2 - is_block_comment];
-                        is_block_comment = 0;
-                    } else {
-                        /* now 1 more away on the next iteration */
-                        is_block_comment++;
-                    }
-                } else if (IS_COMMENT != 0) {
-                    /* IS_COMMENT == 1 automatically caught here */
-                    if (IS_COMMENT == 1) {
-                        all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2] = line, COMMENT_STYLES;
-                    }
-                    else if (IS_COMMENT == 2) {
-                        all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line + 2] = line;
-                        /* now 1 away on the next iteration */
-                        is_block_comment = 1;
+                    if (IS_COMMENT == 2) {
+                        block_comment_present = true;
+                    } else if (IS_COMMENT == 3) {
+                        block_comment_present = false;
                     }
                 } else {
                     /* this line is just a piece of code. append it. */
-                    all_jsons[CATEGORY][LANGUAGE]["lines"][cur_line + 1] = line;
+                    all_jsons[CATEGORY][LANGUAGE]["lines"].push(line);
+                    /* flush the comment buffer */                
+                    if (comment_buffer != "") {
+                        all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line] = comment_buffer;
+                        comment_buffer = "";
+                    }
+                    cur_line++;
                 }
-                cur_line++;
             }
         }
     }
