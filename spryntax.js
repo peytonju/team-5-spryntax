@@ -2,7 +2,7 @@ const PORT = 8080;
 
 const PATH = require('path');
 const PATH_VIEWS = PATH.join(__dirname, "website", "views");
-const PATH_PUBLIC = PATH.join(__dirname, "public");
+const PATH_PUBLIC = PATH.join(__dirname, "website", "public");
 const PATH_LEVELS_JSON = PATH.join(PATH_PUBLIC, "levels.json");
 
 const algorithmController = require('./app/controllers/algorithmController');
@@ -13,33 +13,31 @@ const fs = require("fs");
 const express = require('express');
 const app = express();
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
-
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views', PATH_VIEWS);
-app.use(express.static('public'));
+app.use(express.static(PATH_PUBLIC));
 app.use(express.json());
 
 
 app.get("/", (request, response) => {
-    response.sendFile(PATH.join(__dirname, 'website', 'views', 'index.html'));
+    response.status(200).sendFile(PATH.join(PATH_VIEWS, 'index.html'));
 });
 
 app.get("/leaderboards", (request, response) => {
-    response.status(200).render("leaderboard.html");
+    response.status(200).sendFile(PATH.join(PATH_VIEWS, "leaderboard.html"));
 });
 
 app.get("/login", (request, response) => {
-    response.status(200).render("login.html");
+    response.status(200).sendFile(PATH.join(PATH_VIEWS, "login.html"));
 });
 
 app.get("/signup", (request, response) => {
-    response.status(200).render("signup.html");
+    response.status(200).sendFile(PATH.join(PATH_VIEWS, "signup.html"));
 });
 
 app.get("/settings", (request, response) => {
-    response.status(200).render("settings.html");
+    response.status(200).sendFile(PATH.join(PATH_VIEWS, "settings.html"));
 });
 
 
