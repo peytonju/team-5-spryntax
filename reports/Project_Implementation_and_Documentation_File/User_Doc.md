@@ -34,3 +34,16 @@ The website will have a report bug button on each screen for the user to use if 
 
 #### Known bugs
 Known bugs will be tracked in our database, whether via user report or by a team member, and the website will let the user know of these bugs if the known bug affects the usability of the website. Any bugs that are in the database will be addressed by a team member as quickly as possible especially if that bug affects the usability of the website. Trivial bugs will be dealt with in a quick manner as trivial bugs should be a quick fix.
+
+#### Building a release
+
+For creating a new release for our program, either for internal use or external use, exists the following guidelines:
+
+- Create a new branch for your work. This ensures the main code stays intact while other developers push and pull.  
+- Create your changes and provide sensible tests to ensure functionality.   
+- Ensure you follow the proper coding guidelines outlined in the programs README. Proper comments for accessibility is required.  
+- After creating your changes:  
+  - Confirm all previous tests maintain their correct output and functionality. This is to ensure a bug does not get lost in multiple pushes.  
+  - Test new tests created by your branch.  
+- Next, commit changes to the github. Provide a push message that properly describes the changes, as well as a more detailed explanation is the provided description area with the functionality, and how to test it.  
+- Finally, communicate with the team. Ensuring we all are on the same page about progress and functionality ensures a smoother project and less mishaps. 
