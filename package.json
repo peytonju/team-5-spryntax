@@ -217,7 +217,7 @@
   },
   "scripts": {
     "start": "npm run static-levels && npm install && node spryntax.js",
-    "static-levels": "cd website_static_build_tools/raw_alg_builder/ && node jsonifier.js && move levels.json ../../public && cd ../..",
+    "static-levels": "cd website_static_build_tools/raw_alg_builder/ && node jsonifier.js && move levels.json ../../website/public && cd ../..",
     "pm2-start": "npm install && node ./node_modules/pm2/bin/pm2 start spryntax.js",
     "pm2-stop": "node ./node_modules/pm2/bin/pm2 stop spryntax",
     "pm2-restart": "npm run pm2-stop && npm run pm2-start",
