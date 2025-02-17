@@ -47,12 +47,15 @@
 
     <!-- Algorithm List -->
     <h1>Algorithms</h1>
-    <ul>
+    <div class="card">
+    <ul class="container">
         <% algorithms.forEach(algorithm => { %>
           <li> Algorithm: <%= algorithm.algorithm_name %></li>
           <li> Difficulty: <%= algorithm.difficulty %></li>
-          <li>Data Structure: <%= algorithm.data_structure</li>
+          <li>Data Structure: <%= algorithm.data_structure %></li>
+          <li>Approach: <%= algorithm.approach %></li>
         <% }); %>
     </ul>
+    </div>
 </body>
 </html>
