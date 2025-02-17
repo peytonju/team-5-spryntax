@@ -21,35 +21,37 @@
 
     <!-- Search Options -->
     <div class="search-options">
-        <input type="text" id="search-name" placeholder="Search by name" oninput="filterQuizzes()"> 
-        <select id="search-difficulty" onchange="filterQuizzes()">
+        <input type="text" id="search-name" placeholder="Search by name"> 
+        <select id="search-difficulty">
             <option value="all">Any Difficulty</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
-        <select id="search-data_structure" onchange="filterQuizzes()">
+        <select id="search-data_structure">
             <option value="all">All Categories</option>
             <option value="array">Array</option>
             <option value="link_list">Link List</option>
             <option value="tree">Tree</option>
         </select>
 
-         <select id="search-approach" onchange="filterQuizzes()">
+         <select id="search-approach">
             <option value="all">All Categories</option>
             <option value="brute_force">Brute Force</option>
             <option value="divide-conquer">Divide and Conquer</option>
             <option value="greedy">Greedy</option>
         </select>       
 
-        <button onclick="filterQuizzes()">Search</button>
+        <button>Search</button>
     </div>
 
     <!-- Algorithm List -->
     <h1>Algorithms</h1>
     <ul>
         <% algorithms.forEach(algorithm => { %>
-          <li><%= algorithm.algorithm_name %> - <%= algorithm.difficulty %></li>
+          <li> Algorithm: <%= algorithm.algorithm_name %></li>
+          <li> Difficulty: <%= algorithm.difficulty %></li>
+          <li>Data Structure: <%= algorithm.data_structure</li>
         <% }); %>
     </ul>
 </body>

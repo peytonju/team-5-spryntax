@@ -56,3 +56,17 @@
 #wincheck{
     color: #0ff;
 }
+
+ul {
+    -webkit-column-count: 4;
+       -moz-column-count: 4;
+            column-count: 4;
+         list-style-type: none;
+}
+  
+li {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 20px;
+}
