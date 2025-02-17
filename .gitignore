@@ -1,5 +1,0 @@
-/website_static_build_tools/raw_alg_builder/levels.json
-/website/public/levels.json
-/node_modules
-
-!/node_modules/.gitkeep
