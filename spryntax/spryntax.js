@@ -24,7 +24,7 @@ app.get("/", (request, response) => {
     response.status(200).sendFile(PATH.join(PATH_VIEWS, 'index.html'));
 });
 
-app.get("/leaderboards", (request, response) => {
+app.get("/leaderboard", (request, response) => {
     response.status(200).sendFile(PATH.join(PATH_VIEWS, "leaderboard.html"));
 });
 
@@ -38,6 +38,10 @@ app.get("/signup", (request, response) => {
 
 app.get("/settings", (request, response) => {
     response.status(200).sendFile(PATH.join(PATH_VIEWS, "settings.html"));
+});
+
+app.get("/report", (request, response) => {
+    response.status(200).sendFile(PATH.join(PATH_VIEWS, "report.html"));
 });
 
 
