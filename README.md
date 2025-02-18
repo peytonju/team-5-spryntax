@@ -34,7 +34,7 @@ Canvas will be used in case Discord or Outlook are both unavailable. The team ma
 
 **Novelty:** Existing practices have these algorithms but this project will go beyond that and showcase what the program does. Secondly, existing practices limit the coding time and this implementation will take a stopwatch approach to allow the user to code the full algorithm.
 
-**Effects:** Will help novice programmers learn how to code while adding a little bit of competition. It will also aid programmers in learning other languages. Additionally we plan to fill this gap and provide a new experience for users. It will benefit users by improving their typing speed while coding, their accurate coding, knowledge of algorithms, and more. One example algorithm, is a merge sort.
+**Effects:** Novice programmers will learn how to code through repetition and exposure to complex algorithms in multiple languages, while adding a little bit of friendly competition to boost motivation. For example, for the merge sort algorithm in C, the novice programmer will type out as they go along, learning proper grammar and styling. Once completed, a description will give them another understand of the purpose of the algorithm, as well as other information such as runtime. This will ensure the novice learns through repetition and exposure. Competition as well will motivate novices to give practice and commit to memory necessary grammar to be able to implement their programs faster.
 
 # Project Requirements Elicitation
 
