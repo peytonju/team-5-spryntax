@@ -27,12 +27,11 @@ Canvas will be used in case Discord or Outlook are both unavailable. The team ma
 ## Project Description
 **Abstract:** Coding requires a subset of characters not commonly used in normal typing. To name a few (\<, \>, :, ;, { }, \[ \], \-, \+, \=, //, \_ ) and programming languages have different syntaxes as well, therefore even more variety of characters you wouldn’t normally use. Traditional typing practice websites are useful for general typing but what about coding? Well, what if you were shown algorithms– in multiple programming languages that you can select– and had to type it out? Not only will you practice typing code, but you’ll learn more about the fundamentals of the particular programming language you selected, and also the functionality/structure of the algorithm via the algorithm itself and comments throughout the code. Additionally, there will be an educational guide explaining the algorithm in detail at the bottom of the typing section, so you can learn and grow your programming skills no matter what.
 
-**Goal:** The primary goal of spryntax is to introduce beginner programmers to the way modern programming languages are typed and to important concepts used in computer science, as well inspiring competition in typing speed amongst programmers.
+**Goal:** Spryntax is made with the goal of helping its users by allowing them to practice typing programming languages. We aim to improve the typing speed, familiarity with common programming symbols, and promote a good standard of how to type code to our users. The users can then use this experience within their own projects and professionally.
 
-**Current practice:** GeeksforGeeks: Informative but lacks interactive typing practice. MonkeyType: Great for speed but not designed for coding. LeetCode: Good for coding practice but ignores typing speed.
+**Current practice:** There are several places online that you can utilize to gain familiarity with algorithms and even provide opportunities for you to type the code yourself. For example, Leetcode and Geeks for Geeks provides its users with explanations and code execution experience. However, neither of these provide any statistics to the user regarding their typing speed and correctness– they have no way to gauge whether or not they’re improving their ability to type in languages. Monkey Type, on the other hand, does indeed provide users statistics about how fast and how correctly they type– but it only provides its users words.
 
-
-**Novelty:** Existing practices have these algorithms but this project will go beyond that and showcase what the program does. Secondly, existing practices limit the coding time and this implementation will take a stopwatch approach to allow the user to code the full algorithm.
+**Novelty:** As mentioned above, current practices don’t provide users with statistics on how well they type the proper syntax for programming languages. Spryntax meshes places like Leetcode and Geeks for Geeks along with Monkey Type– a place where users are able to type algorithms, learn about them, while also being able to view how they’re improving their typing ability. Spryntax also spices this up a bit by allowing users to compete with each other on leaderboards, which we hope will inspire users to learn to type even faster!
 
 **Effects:** Novice programmers will learn how to code through repetition and exposure to complex algorithms in multiple languages, while adding a little bit of friendly competition to boost motivation. For example, for the merge sort algorithm in C, the novice programmer will type out as they go along, learning proper grammar and styling. Once completed, a description will give them another understand of the purpose of the algorithm, as well as other information such as runtime. This will ensure the novice learns through repetition and exposure. Competition as well will motivate novices to give practice and commit to memory necessary grammar to be able to implement their programs faster.
 
@@ -75,6 +74,22 @@ Minimum Viable Product Goals:
 	- The favorites data will be saved to the database
   * Extensions: The favorites data is saved to the database and linked to the user
   * Exceptions: The user does not have an account, or stable internet connection so the favorite information is not correctly loaded into the database. Or the database crashes.
+
+* Code Comments  
+  * Actor: A user wanting to view a comment for some line of code   
+  * Trigger: User clicks a “(?)” symbol next to a line of code on the Level type site  
+  * Preconditions: A line has been fully typed with no errors  
+  * Postconditions: A modal appears and can be closed via an “x” at the top right  
+  * Steps:  
+    * User starts a Level  
+    * User goes to that Level’s typing screen  
+    * User types a full line containing no errors  
+      * The site will automatically have a “(?)” appear at the end of this line  
+    * User clicks the “(?)” symbol  
+    * Modal appears with the sought after comment   
+      * Modal can be closed via an “x” at its top right  
+  * Extensions: None (local javascript will be ran with no communication with the SQL or Express servers)  
+  * Exceptions: None (level data, including comments, are stored with local javascript)
 
 Stretch Goals:
 - “Profile” for a particular user that other users can view  
