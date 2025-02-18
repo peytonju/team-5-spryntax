@@ -43,7 +43,14 @@ Minimum Viable Product Goals:
 - Monkeytype-style of program that allows users to type characters needed to create a specific file, the file contains some useful-to-know algorithm  
 - Citations and extra resources provided for each assignment for further elaboration on each assignment  
 - Explanation of the code that the user types (with comments)  
-- Leaderboard for fastest times  
+* Leaderboard for fastest times  
+  * Actor: Users viewing the highest wpm for each algorithm separated 2 sections, one section for python and another for c.  
+  * Trigger: The user types at the 10-top highest wpm speed for an algorithm.  
+  * Preconditions: The user has an account.  
+  * Postconditions: The user will be added to the leaderboard, and all the other positions will be modified dynamically so only the top 10 are present.  
+  * Steps: The user types the algorithm, and their wpm will be compared to the leaderboard at the end of their session (once they finished typing all the characters. If their wpm is higher than one of those in the leaderboard, then the user will be put in front of those that have lower wpm and behind those that have higher wpm.  
+  * Extensions: The user\_id and wpm statistic of the user will be put into the leaderboard table in the database. The leaderboard page would dynamically change to reflect these changes.  
+  * Exceptions: If the user doesn’t type with a wpm rate which is greater than any of the wpm in the leaderboard. 
 - Statistics for users  
   - Time that a user took on a specific assignment  
   - Words per minute (\# of chars divided by 5\)  
