@@ -164,6 +164,24 @@ app.get('/', (req, res) => {                                //working on calling
     }
 });
 
+// for the report button not working yet
+app.post('/report', (req, res) => {
+    const name = req.body.name; 
+    const problem = req.body.problem;
+
+    const query = "INSERT INTO `bug_reports` (name, problem) VALUES (?, ?)";
+    
+    con.query(query, [name, problem], (err, result) => {
+        if(err){
+            console.log(err)
+        }else{
+            console.log("POSTED")
+            res.send(`name: ${name}, problem: ${problem}`);
+        }
+    });
+    //res.send(`name: ${name}, problem: ${problem}`);
+});
+
 
 /****************************************************************************************************/
 

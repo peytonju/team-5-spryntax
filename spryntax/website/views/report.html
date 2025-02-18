@@ -4,20 +4,23 @@
         <link rel="stylesheet" href="spryntax.css">
         <!--<script src="spryntax_main.js"></script> -->
     </head>
-    <h1>Bug Report Page</h1>
-    <div class="container">
-        <form>
-            <div class="form-group">
-                <label for="InputUsername">Username: </label>
-                <input type="Username" class="form-control" id="InputUsername" aria-describedby="Username" placeholder="Enter username">
-            </div>
-            <div class="form-group">
-                <p><label for="report">Please describe the bug that you wish to report:</label></p>
-                    <textarea id="description" name="textbox" rows="4" cols="50">Please write a short description about what the bug is and where it is located.</textarea>
+
+    <body class="text-center"> 
+        <h1>Bug Report Page</h1>
+        <div class="container">
+
+            <form action="/report" method="post">
+                <div class="form-group">
+                    <label for="inputname">Username: </label>
+                    <input type="text" class="form-control" id="name" name="name" aria-describedby="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <p><label for="inputproblem">Please describe the bug that you wish to report:</label></p>
+                    <textarea id="problem" name="problem" rows="4" cols="50">Please write a short description about what the bug is and where it is located.</textarea>
                     <br>
-                  </form>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </body>
 </html>
