@@ -46,16 +46,15 @@
     </div>
 
     <!-- Algorithm List -->
-    <h1>Algorithms</h1>
-    <div class="card">
-    <ul class="container">
+    <div class="card-container">
         <% algorithms.forEach(algorithm => { %>
-          <li> Algorithm: <%= algorithm.algorithm_name %></li>
-          <li> Difficulty: <%= algorithm.difficulty %></li>
-          <li>Data Structure: <%= algorithm.data_structure %></li>
-          <li>Approach: <%= algorithm.approach %></li>
+          <div class="custom-card">
+            <h3><%= algorithm.algorithm_name %></h3>
+            <p><strong>Difficulty:</strong> <%= algorithm.difficulty %></p>
+            <p><strong>Data Structure:</strong> <%= algorithm.data_structure %></p>
+            <p><strong>Approach:</strong> <%= algorithm.approach %></p>
+          </div>
         <% }); %>
-    </ul>
     </div>
 </body>
 </html>
