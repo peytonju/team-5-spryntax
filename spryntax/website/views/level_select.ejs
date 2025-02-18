@@ -49,7 +49,9 @@
     <div class="card-container">
         <% algorithms.forEach(algorithm => { %>
           <div class="custom-card">
-            <h3><%= algorithm.algorithm_name %></h3>
+            <div class="card-header">
+                <h3><%= algorithm.algorithm_name %></h3>
+            </div>
             <p><strong>Difficulty:</strong> <%= algorithm.difficulty %></p>
             <p><strong>Data Structure:</strong> <%= algorithm.data_structure %></p>
             <p><strong>Approach:</strong> <%= algorithm.approach %></p>

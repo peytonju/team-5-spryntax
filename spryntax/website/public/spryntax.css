@@ -76,6 +76,8 @@
     padding: 10px !important;
     transition: transform 0.2s ease-in-out !important;
     width: auto !important; /* Let the grid control the width */
+    overflow: hidden;
+    position: relative;
   }
   
   /* Hover effect for cards */
@@ -83,13 +85,25 @@
     transform: scale(1.05) !important; /* Slight zoom on hover */
   }
   
-  /* Card title styling */
-  .custom-card h3 {
-    margin-top: 0 !important;
-    margin-bottom: 20px !important;
-    text-align: center;
-    color: cyan
+  /* Header with cyan background */
+.card-header {
+    background-color: cyan !important;
+    padding: 10px;
+    margin: -16px -16px 10px; /* Extends the background to the card edges */
+    position: relative;
+    min-height: 30px; /* Adjust this height as needed */
+    display: flex;
+    align-items: center !important; /* Vertically center the <h3> */
   }
+  
+  .card-header h3 {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    text-align: center !important;
+    font-size: x-large;
+    color: rgb(0, 0, 0)
+  }
+
   
   /* Card paragraph styling */
   .custom-card p {
