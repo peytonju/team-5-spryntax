@@ -100,3 +100,16 @@ These commands will work for any device, but it is advised to reserve PM2 for a 
 #### Adding new tests
 
 Since we have a website, the only test to add would be for usability testing. We would send JSON files to the database in place of the user data that would be sent there. Since there are no users currently, it would be easier if we could send mock data via PostMan to test the leaderboard and such pages that require dynamically updated information from the users. 
+
+#### Building a release
+
+For creating a new release for our program, either for internal use or external use, exists the following guidelines:
+
+- Create a new branch for your work. This ensures the main code stays intact while other developers push and pull.  
+- Create your changes and provide sensible tests to ensure functionality.   
+- Ensure you follow the proper coding guidelines outlined in the programs README. Proper comments for accessibility is required.  
+- After creating your changes:  
+  - Confirm all previous tests maintain their correct output and functionality. This is to ensure a bug does not get lost in multiple pushes.  
+  - Test new tests created by your branch.  
+- Next, commit changes to the github. Provide a push message that properly describes the changes, as well as a more detailed explanation is the provided description area with the functionality, and how to test it.  
+- Finally, communicate with the team. Ensuring we all are on the same page about progress and functionality ensures a smoother project and less mishaps. 
