@@ -62,6 +62,19 @@ Minimum Viable Product Goals:
   * List of steps: Users must first sign up, or if they have an account log in. Once logged in the website must be linked to the database so their data can be stored.  
   * Extensions: Data is saved, stored, and successfully saved in the database.  
   * Exceptions: Users could be unable to create an account by not having adequate internet connection to access the website, or other factors.
+* Allow users to favorite a level
+  * Actor: User wants to favorite a typing level they like
+  * Trigger: User clicks on the favorite button either in the level itself or on the levels menu
+  * Preconditions: User has an account
+  * Postconditions: The user can click on the favorite button to favorite or to unfavorite. This information will be saved on the user’s page and on the    website database
+  * Steps: 
+	- User signs up or signs in to their account
+	- User goes to the levels menu
+	- User clicks on the favorites button on the level menu or they can click into the level to click the favorites button
+	- The user can go to their user page to see their favorites
+	- The favorites data will be saved to the database
+  * Extensions: The favorites data is saved to the database and linked to the user
+  * Exceptions: The user does not have an account, or stable internet connection so the favorite information is not correctly loaded into the database. Or the database crashes.
 
 Stretch Goals:
 - “Profile” for a particular user that other users can view  
