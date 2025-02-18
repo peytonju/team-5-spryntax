@@ -47,7 +47,14 @@ Minimum Viable Product Goals:
 - Statistics for users  
   - Time that a user took on a specific assignment  
   - Words per minute (\# of chars divided by 5\)  
-- Save user data in a databa as long as they are logged in
+* Save user data in a database as long as they are logged in  
+  * Actor: User trying to log in to save their data.  
+  * Trigger: User wants to save their data so they must log in so their data can be stored  
+  * Preconditions: User wants to learn about coding or improve their coding ability.   
+  * Postconditions: The user data being successfully saved with the user logged in.  
+  * List of steps: Users must first sign up, or if they have an account log in. Once logged in the website must be linked to the database so their data can be stored.  
+  * Extensions: Data is saved, stored, and successfully saved in the database.  
+  * Exceptions: Users could be unable to create an account by not having adequate internet connection to access the website, or other factors.
 
 Stretch Goals:
 - “Profile” for a particular user that other users can view  
