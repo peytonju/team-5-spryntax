@@ -46,10 +46,7 @@ Minimum Viable Product Goals:
   * Postconditions: They can look at their stats displayed to them after they are done typing.  
   * Steps: They gonna open a web browser and type in the Spryntax. Then they can create an account or can directly start typing and check their coding efficiency. After completing they can view their result which would be presented to them on their screen.    
   * Extensions: The user can look at their stats after completing a coding session.  
-  * Exceptions: If the user doesn’t have internet or the web browser is not supporting the website. Another exception would be if the site is crashing.
-
-- Citations and extra resources provided for each assignment for further elaboration on each assignment  
-- Explanation of the code that the user types (with comments)  
+  * Exceptions: If the user doesn’t have internet or the web browser is not supporting the website. Another exception would be if the site is crashing. 
 * Leaderboard for fastest times  
   * Actor: Users viewing the highest wpm for each algorithm separated 2 sections, one section for python and another for c.  
   * Trigger: The user types at the 10-top highest wpm speed for an algorithm.  
