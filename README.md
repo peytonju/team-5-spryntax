@@ -286,3 +286,14 @@ Documentation will be written as code documentation as well as user documentatio
 - For **user documentation**, there will be an on-side documentation done through tooltips to aid in every interactable interface on a given page. This will apply to textboxes and clickable elements to indicate what interaction should take place.
 
 On top of the in-code documentation, we will utilize a Google Document that will outline every file and its related classes, functions, and variables, and provide a CTRL+F-like library for people to easily jump around in to find definitions quickly and focus on coding.
+
+### VI. Testing and Continous Integrations:
+### Your test-automation infrastructure (e.g., JUnit, Mocha, Pytest, etc).
+
+We will be using Mocha for our test automation. Mocha is a JavaScript test framework that runs on Node.js. 
+
+### A brief justification for why you chose that test-automation infrastructure.
+We are using Mocha since we are using Node.js, which enables us to test very easily. Since we have a website with a lot of JavaScript functionality, especially for fetching the database, Mocha can help us greatly. For example, we can create functions that will send JSON files through the website to test if the database is correctly getting the data. This means we will be able to test CRUD functionality to see if the view is properly interacting with the model through our controllers (Since we are using an MVC software architecture). Mocha lets us test individual services, which works well with our project as we are using microservices as well.
+
+### Your CI service and how your project repository is linked to it.
+Linking the CI service to the project repository is easy, it’s all set up within the CircleCI website, where the owner of the project repository can connect it. Then CircleCI will be able to trigger automated scripts whenever changes are pushed to the repository. This is done from a config file being put in the root directory which implements the CircleCI pipeline, including jobs to be executed on each build.
