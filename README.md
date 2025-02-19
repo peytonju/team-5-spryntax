@@ -55,9 +55,18 @@ Minimum Viable Product Goals:
   * Steps: The user types the algorithm, and their wpm will be compared to the leaderboard at the end of their session (once they finished typing all the characters. If their wpm is higher than one of those in the leaderboard, then the user will be put in front of those that have lower wpm and behind those that have higher wpm.  
   * Extensions: The user\_id and wpm statistic of the user will be put into the leaderboard table in the database. The leaderboard page would dynamically change to reflect these changes.  
   * Exceptions: If the user doesn’t type with a wpm rate which is greater than any of the wpm in the leaderboard. 
-- Statistics for users  
-  - Time that a user took on a specific assignment  
-  - Words per minute (\# of chars divided by 5\)  
+* Statistics for users
+  * Actor: User viewing their progress on the website.
+  * Trigger: Accessing the profile page or the level select.
+  * Preconditions: The user has an account.
+  * Postconditions: None.
+  * Steps: 
+	- The user clicks on their profile.
+	- The user’s data is accessed and then parsed into a generalized statistic page summarising the user’s data.
+	- The user clicks on the level select.
+	- The user’s data is accessed and is displayed independent per level.
+  * Extensions: Time taken and other statistics related to the user’s interactions on a given algorithm.
+  * Exceptions: The user data fails to load.
 * Save user data in a database as long as they are logged in  
   * Actor: User trying to log in to save their data.  
   * Trigger: User wants to save their data so they must log in so their data can be stored  
