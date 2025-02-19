@@ -39,14 +39,14 @@ Canvas will be used in case Discord or Outlook are both unavailable. The team ma
 
 **Use Cases (Functional Requirements):**
 Minimum Viable Product Goals:
-- Monkeytype-style of program that allows users to type characters needed to create a specific file, the file contains some useful-to-know algorithm
-	*Actor: Beginner coders, students, or people that would like to increase their knowledge of coding would use the site.
-	*Trigger: It triggers when the user starts typing or practicing their code shown by the algorithm on their screen with a timer. 
-	*Preconditions: The user should be able to reach the website or the page and click on the typing box.
-	*Postconditions: They can look at their stats displayed to them after they are done typing.
-	*Steps: They gonna open a web browser and type in the Spryntax. Then they can create an account or can directly start typing and check their coding efficiency. After completing they can view their result which would be presented to them on their screen.  
-	*Extensions: The user can look at their stats after completing a coding session.
-	*Exceptions: If the user doesn’t have internet or the web browser is not supporting the website. Another exception would be if the site is crashing.
+* Monkeytype-style of program that allows users to type characters needed to create a specific file, the file contains some useful-to-know algorithm  
+  * Actor: Beginner coders, students, or people that would like to increase their knowledge of coding would use the site.  
+  * Trigger: It triggers when the user starts typing or practicing their code shown by the algorithm on their screen with a timer.   
+  * Preconditions: The user should be able to reach the website or the page and click on the typing box.  
+  * Postconditions: They can look at their stats displayed to them after they are done typing.  
+  * Steps: They gonna open a web browser and type in the Spryntax. Then they can create an account or can directly start typing and check their coding efficiency. After completing they can view their result which would be presented to them on their screen.    
+  * Extensions: The user can look at their stats after completing a coding session.  
+  * Exceptions: If the user doesn’t have internet or the web browser is not supporting the website. Another exception would be if the site is crashing.
 
 - Citations and extra resources provided for each assignment for further elaboration on each assignment  
 - Explanation of the code that the user types (with comments)  
