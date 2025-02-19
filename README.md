@@ -297,3 +297,24 @@ We are using Mocha since we are using Node.js, which enables us to test very eas
 
 ### Your CI service and how your project repository is linked to it.
 Linking the CI service to the project repository is easy, it’s all set up within the CircleCI website, where the owner of the project repository can connect it. Then CircleCI will be able to trigger automated scripts whenever changes are pushed to the repository. This is done from a config file being put in the root directory which implements the CircleCI pipeline, including jobs to be executed on each build.
+
+### A pros/cons matrix for at least three CI services that you considered.
+#### CircleCI
+| Pros  | Cons |
+| ------------- | ------------- |
+
+#### Travis
+| Pros  | Cons |
+| ------------- | ------------- |
+
+#### GitHub Actions
+| Pros  | Cons |
+| ------------- | ------------- |
+| Extensive documentation  | Did not clearly state support for Node.js  |
+| Free | Debugging can be difficult |
+| Native github integration | Over reliance on github services |
+| User friendly | Limits on certain usages/actions for the free tier |
+
+### Which tests will be executed in a CI build
+#### Use Cases:
+
