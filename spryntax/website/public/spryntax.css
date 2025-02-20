@@ -64,40 +64,40 @@
 /* Container for the cards */
 .card-container {
     display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important; /* 3 columns per row */
+    grid-template-columns: repeat(4, 1fr) !important; /* 4 columns per row */
     gap: 50px !important;
     padding: 50px !important;
-    max-width: 1200px !important; /* Adjust as needed */
-    margin: 0 auto !important; /* Center the grid */
+    max-width: 1200px !important; 
+    margin: 0 auto !important; 
   }
   
   /* Custom card styles */
   .custom-card {
-    background-color: #282828 !important;
+    background-color: #000000 !important;
     border: 1px solid #000000 !important;
     border-radius: 8px !important;
     box-shadow: 0 2px 10px cyan !important;
     padding: 10px !important;
     transition: transform 0.2s ease-in-out !important;
-    width: auto !important; /* Let the grid control the width */
+    width: auto !important; 
     overflow: hidden;
     position: relative;
   }
   
   /* Hover effect for cards */
   .custom-card:hover {
-    transform: scale(1.05) !important; /* Slight zoom on hover */
+    transform: scale(1.05) !important; 
   }
   
   /* Header with cyan background */
 .card-header {
     background-color: cyan !important;
     padding: 10px;
-    margin: -16px -16px 10px; /* Extends the background to the card edges */
+    margin: -16px -16px 10px; 
     position: relative;
-    min-height: 30px; /* Adjust this height as needed */
+    min-height: 30px; 
     display: flex;
-    align-items: center !important; /* Vertically center the <h3> */
+    align-items: center !important; 
   }
   
   .card-header h3 {
@@ -114,4 +114,47 @@
     margin: 10px 1 !important;
     
   }
-  
+
+  .gray-background {
+    background-color: #1a1a1a !important;
+    border: 0px solid #000000 !important;
+    border-radius: 30px !important;
+    margin: 25px;
+    position: relative;
+  }  
+
+  @property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .gray-background::after, .gray-background::before {
+    content:'';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), transparent 70%, cyan);
+    top:50%;
+    left:50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 3px;
+    border-radius: 30px;
+    animation: 3s spin linear infinite;
+  }
+
+  .gray-background::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+  }
+
+  @keyframes spin {
+    from{
+        --angle: 0deg;
+    }
+    to{
+        --angle: 360deg;
+    }
+    
+  }
