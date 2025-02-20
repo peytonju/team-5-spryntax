@@ -1,18 +1,23 @@
 const PORT = 8080;
 
+const fs = require("fs");
+const algorithmController = require('./app/controllers/algorithmController');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const mysql = require("mysql")
+
 const PATH = require('path');
 const PATH_VIEWS = PATH.join(__dirname, "website", "views");
 const PATH_PUBLIC = PATH.join(__dirname, "website", "public");
-const PATH_LEVELS_JSON = PATH.join(PATH_PUBLIC, "levels.json");
+const PATH_STATIC_BUILD = PATH.join(__dirname, "website_static_build_tools");
+const PATH_LEVEL_DATA = PATH.join(PATH_STATIC_BUILD, "raw_alg_builder", "levels.json");
+const PATH_LEVEL_TAGS = PATH.join(PATH_STATIC_BUILD, "alg_extras", "levels.json");
+
+const JSON_LEVEL_DATA = JSON.parse(fs.readFileSync(PATH_LEVEL_DATA).toString());
+const JSON_LEVEL_TAGS = JSON.parse(fs.readFileSync(PATH_LEVEL_TAGS).toString());
 
 
-const algorithmController = require('./app/controllers/algorithmController');
-const bodyParser = require('body-parser');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
-const mysql = require("mysql")
-const fs = require("fs");
-
 const express = require('express');
 const app = express();
 app.set('view engine', 'ejs');
@@ -60,11 +65,9 @@ app.get('/level_select/:name_level', (request, response) => {
 app.get('/level_select/:name_level/:name_language/play', (request, response) => {
     const NAME_LEVEL = request.params["name_level"].toLowerCase();
     const NAME_LANGUAGE = request.params["name_language"].toLowerCase();
-    const DATA_JSON = JSON.parse(fs.readFileSync(PATH_LEVELS_JSON).toString());
-    const DATA_LEVEL = DATA_JSON[NAME_LEVEL][NAME_LANGUAGE];
 
     response.status(200).render("level_play.ejs", {
-        level_data: DATA_LEVEL
+        level_data: JSON_LEVEL_DATA[NAME_LEVEL][NAME_LANGUAGE]
     });
 })
 
