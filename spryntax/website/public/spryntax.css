@@ -7,6 +7,9 @@
 }
 #main_back{
     position: relative;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #main_front{
@@ -18,7 +21,6 @@
     resize: none;
     overflow: hidden;
     color: #fff;
-    text-shadow: #333 0px 0px 3px;
     width: 100%;
     font-family: "Inconsolata", serif;
     font-optical-sizing: auto;
@@ -44,15 +46,17 @@
 
 .span{
     display: inline-block;
-    height: 1em;
+    height: 1.5em;
     background-color: #000;
     color: #999;
+    font-family: "Inconsolata", serif;
+    font-optical-sizing: auto;
 }
 .space{width: 0.5em;}
 .tab{width: 4em;}
 .lbreak{font-size: xx-small;}
-.span_correct{background-color: #0cc; color:#0cc;}
-.span_incorrect{background-color: #f90; color:#f90;}
+.span_correct{border-bottom: solid #0cc; color:#000;}
+.span_incorrect{border-bottom: solid #f90; color:#000}
 #wincheck{
     color: #0ff;
 }
