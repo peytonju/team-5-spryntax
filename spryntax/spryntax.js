@@ -120,7 +120,7 @@ app.post('/signup.php', async (req, res) => {
             console.log(err);
             res.status(500).send('Server error');
         } else if (result.length > 0) {
-            res.status(400).send('Username already exists');
+            res.redirect('/signup?error=Username%20already%20exists%20');
         } else {
             // If username does not exist, insert the new user
             const insertUserQuery = 'INSERT INTO user (username, password, email, profile_pic) VALUES (?, ?, ?, ?)';
@@ -142,7 +142,7 @@ app.post('/login.php', (req, res) => {
     const email = req.body.inputEmail; // Extract the email from the form data
     const password = req.body.inputPassword; // Extract the password from the form data
 
-    const query = 'SELECT username, password FROM user WHERE email = ?';
+    const query = 'SELECT username, user_id, password FROM user WHERE email = ?';  //queries the database
 
     // Ensure you are using a properly configured MySQL connection
     con.query(query, [email], async (err, results) => {
@@ -152,6 +152,7 @@ app.post('/login.php', (req, res) => {
         } else {
             if (results.length > 0) {
                 const username = results[0].username;
+                const user_id = results[0].user_id;
                 const hashedPassword = results[0].password;
 
                 // Compare the provided password with the stored hashed password
@@ -159,22 +160,24 @@ app.post('/login.php', (req, res) => {
 
                 if (isMatch) {
                     req.session.username = username; // Store the username in the session
+                    req.session.user_id = user_id; // Store the username in the session
+                    //res.send(`Username: ${username}, Email: ${email}, user_id: ${user_id}`);
                     res.redirect('/');              // Redirect to home
                 } else {
-                    res.status(401).json({ message: 'Invalid email or password' });
+                    res.redirect('/login?error=Invalid%20email%20or%20password');
                 }
             } else {
-                res.status(401).send('Invalid email or password');
+                res.redirect('/login?error=Invalid%20email%20or%20password');
             }
         }
     });
 });
 
-app.get('/', (req, res) => {                                //working on calling username to ensure it is stored
+app.get('/test', (req, res) => {                                //Can print username and id in ejs. May be able to save data that way
     if (req.session.username) {
-        res.render('/', { username: req.session.username });
+        res.render('test', { username: req.session.username, user_id: req.session.user_id });
     } else {
-        res.render('/', { username: 'none' });
+        res.render('test', { username: 'Not signed in', user_id: '' });
     }
 });
 
