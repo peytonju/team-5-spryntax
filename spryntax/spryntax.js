@@ -90,10 +90,10 @@ app.use(session({
 }));
 
 const con=mysql.createConnection({
-    host:'***',
-    user:'**',
-    password:'**',
-    database:'**',
+    host: '****',
+    user: '****',
+    password: '****',
+    database: '****',
     port: 3307
 })
 
@@ -168,18 +168,20 @@ app.get('/', (req, res) => {                                //working on calling
 });
 
 // for the report button not working yet
-app.post('/report', (req, res) => {
+app.post('/report.php', (req, res) => {
     const name = req.body.name; 
     const problem = req.body.problem;
 
-    const query = "INSERT INTO `bug_reports` (name, problem) VALUES (?, ?)";
+    const query = "INSERT INTO bug_reports (name, problem) VALUES (?, ?)";
     
     con.query(query, [name, problem], (err, result) => {
         if(err){
             console.log(err)
         }else{
-            console.log("POSTED")
-            res.send(`name: ${name}, problem: ${problem}`);
+            console.log("Added bug report to database")
+            //res.alert("Thank You")
+            res.redirect('/');
+            //res.send(`name: ${name}, problem: ${problem}`);
         }
     });
     //res.send(`name: ${name}, problem: ${problem}`);
