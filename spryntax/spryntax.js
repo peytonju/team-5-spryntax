@@ -90,10 +90,10 @@ app.use(session({
 }));
 
 const con=mysql.createConnection({
-    host: '****',
-    user: '****',
-    password: '****',
-    database: '****',
+    host:'**',
+    user:'**',
+    password:'**',
+    database:'**',
     port: 3307
 })
 
@@ -113,18 +113,29 @@ app.post('/signup.php', async (req, res) => {
     // Hash the password using the generated salt
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const query = 'INSERT INTO user (username, password, email, profile_pic) VALUES (?, ?, ?, ?)';
-    
-    con.query(query, [username, hashedPassword, email, null], (err, result) => {
-        if(err){
-            console.log(err)
-        }else{
-            console.log("POSTED")
+    // Query to check if username already exists
+    const checkUserQuery = 'SELECT * FROM user WHERE username = ?';
+    con.query(checkUserQuery, [username], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Server error');
+        } else if (result.length > 0) {
+            res.status(400).send('Username already exists');
+        } else {
+            // If username does not exist, insert the new user
+            const insertUserQuery = 'INSERT INTO user (username, password, email, profile_pic) VALUES (?, ?, ?, ?)';
+            con.query(insertUserQuery, [username, hashedPassword, email, null], (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send('Server error');
+                } else {
+                    //console.log("POSTED");
+                    //res.send(`Username: ${username}, Email: ${email}, Password: ${hashedPassword}`);
+                    res.redirect('/');
+                }
+            });
         }
-    }
-    
-    )
-    res.send(`Username: ${username}, Email: ${email}, Password: ${hashedPassword}`);
+    });
 });
 
 app.post('/login.php', (req, res) => {
