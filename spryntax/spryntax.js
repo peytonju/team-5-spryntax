@@ -181,26 +181,50 @@ app.get('/test', (req, res) => {                                //Can print user
     }
 });
 
-// for the report button not working yet
+// for the report button
 app.post('/report.php', (req, res) => {
     const name = req.body.name; 
     const problem = req.body.problem;
-
-    const query = "INSERT INTO bug_reports (name, problem) VALUES (?, ?)";
     
-    con.query(query, [name, problem], (err, result) => {
+    //add an error message if name or problem is missing
+
+    const last_id = "SELECT * FROM bug_reports ORDER BY id DESC LIMIT 1";   //gets the latest id number
+    
+    con.query(last_id, (err, result) => {
         if(err){
             console.log(err)
-        }else{
-            console.log("Added bug report to database")
-            //res.alert("Thank You")
-            res.redirect('/');
-            //res.send(`name: ${name}, problem: ${problem}`);
         }
+        else{
+            let new_id = 1;
+            if (result.length > 0) {
+                new_id = result[0].id + 1;  //add to one to latest num
+            }
+
+            const query = "INSERT INTO bug_reports (id, name, problem) VALUES (?, ?, ?)";   //insert
+
+            con.query(query, [new_id, name, problem], (err, result) => {
+                if(err){
+                    console.log(err)
+                }else{
+                    console.log("Added bug report to database")
+
+                    //add a message later
+                    //res.send("Thank You! Your bug report has been submitted.");
+                    res.redirect('/');
+                    //res.send(`name: ${name}, problem: ${problem}`);
+                }
+            });
+        }
+        
     });
     //res.send(`name: ${name}, problem: ${problem}`);
 });
 
+// for the leaderboard
+//app.post('/leaderboard', (req, res) => {
+
+   // let sql = "SELECT `leaderboard_id`, user_id, rank_place, wpm, date_achieved FROM leaderboard WHERE program_language == Python";
+//});
 
 /****************************************************************************************************/
 
