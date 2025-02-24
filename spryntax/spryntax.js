@@ -10,7 +10,7 @@ const PATH = require('path');
 const PATH_VIEWS = PATH.join(__dirname, "website", "views");
 const PATH_PUBLIC = PATH.join(__dirname, "website", "public");
 const PATH_STATIC_BUILD = PATH.join(__dirname, "website_static_build_tools");
-const PATH_LEVEL_DATA = PATH.join(PATH_STATIC_BUILD, "raw_alg_builder", "levels.json");
+const PATH_LEVEL_DATA = PATH.join(PATH_STATIC_BUILD, "alg_creator", "levels.json");
 const PATH_LEVEL_TAGS = PATH.join(PATH_STATIC_BUILD, "alg_extras", "levels.json");
 
 const JSON_LEVEL_DATA = JSON.parse(fs.readFileSync(PATH_LEVEL_DATA).toString());
@@ -66,19 +66,27 @@ app.get('/level_select/:name_level/:name_language/play', (request, response) => 
     const NAME_LEVEL = request.params["name_level"].toLowerCase();
     const NAME_LANGUAGE = request.params["name_language"].toLowerCase();
 
-    response.status(200).render("level_play.ejs", {
-        level_data: JSON_LEVEL_DATA[NAME_LEVEL][NAME_LANGUAGE]
-    });
+    if (NAME_LEVEL in JSON_LEVEL_DATA && NAME_LANGUAGE in JSON_LEVEL_DATA[NAME_LEVEL]) {
+        response.status(200).render("level_play.ejs", {
+            level_data: JSON_LEVEL_DATA[NAME_LEVEL][NAME_LANGUAGE]
+        });
+    } else {
+        response.status(404).sendFile(PATH.join(PATH_VIEWS, "level_not_found.html"));
+    }
 })
 
 app.get('/level_select/:name_level/:name_language/end', (request, response) => {
     const NAME_LEVEL = request.params["name_level"].toLowerCase();
     const NAME_LANGUAGE = request.params["name_language"].toLowerCase();
 
-    response.status(200).render("level_end.ejs", {
-        level_name: NAME_LEVEL,
-        level_language: NAME_LANGUAGE
-    });
+    if (NAME_LEVEL in JSON_LEVEL_DATA && NAME_LANGUAGE in JSON_LEVEL_DATA[NAME_LEVEL]) {
+        response.status(200).render("level_end.ejs", {
+            level_name: NAME_LEVEL,
+            level_language: NAME_LANGUAGE
+        });
+    } else {
+        response.status(404).sendFile(PATH.join(PATH_VIEWS, "level_not_found.html"));
+    }
 })
 /*****************************************Database******************************************************/
 

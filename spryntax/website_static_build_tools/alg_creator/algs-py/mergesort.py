@@ -12,9 +12,12 @@ def merge(arr, left, mid, right):
 	for j in range(n2):
 		R[j] = arr[mid + 1 + j]
 
-	i = 0  # Initial index of first subarray
-	j = 0  # Initial index of second subarray
-	k = left  # Initial index of merged subarray
+	# Initial index of first subarray
+	i = 0
+	# Initial index of second subarray 
+	j = 0
+	# Initial index of merged subarray
+	k = left
 
 	# Merge the temp arrays back
 	# into arr[left..right]
