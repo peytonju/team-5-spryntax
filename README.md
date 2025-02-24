@@ -334,3 +334,13 @@ We choose CircleCI for our CI hosting service. One of the big reasons was it all
 ### Which tests will be executed in a CI build
 #### Use Cases:
 
+4. Save user data in a database as long as they are logged in   
+   * Unit Test  
+     * Test if it successfully connects to the database and can store and get values  
+   * Validation Test  
+     * If an existing username is in the database a duplicate username should not be created  
+   * Integration Test  
+     * When run together is username and id stored in sessions  
+   * System Test  
+     * When logged in if the user somehow makes it back to the login or sign in page, it will automatically redirect you back to the home page
+
