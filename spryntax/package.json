@@ -218,15 +218,20 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "start": "npm run static-levels && npm install && node spryntax.js",
-    "static-levels": "cd website_static_build_tools/raw_alg_builder/ && node jsonifier.js && move levels.json ../../website/public && cd ../..",
+    "start": "npm run static-build && npm install && node spryntax.js",
+
+    "static-build": "npm run static-raw-levels && npm run static-tagged-levels",
+    "static-raw-levels": "cd website_static_build_tools/raw_alg_builder/ && node jsonifier.js && cd ../..",
+    "static-tagged-levels": "cd website_static_build_tools/alg_extras/ && node extras.js && cd ../..",
+
     "pm2-start": "npm install && node ./node_modules/pm2/bin/pm2 start spryntax.js",
     "pm2-stop": "node ./node_modules/pm2/bin/pm2 stop spryntax",
     "pm2-restart": "npm run pm2-stop && npm run pm2-start",
     "pm2-kill": "node ./node_modules/pm2/bin/pm2 kill",
     "pm2-status": "node ./node_modules/pm2/bin/pm2 status",
     "pm2-printout": "node ./node_modules/pm2/bin/pm2 logs --out spryntax",
-    "desc": "\n# start: Starts the Express server without PM2.\n# static-levels: Creates levels.json and places it into public. Requires you to be in the root directory\n# pm2-start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# pm2-stop: Stops the Node server for spryntax.js\n# pm2-restart: Restarts the Node server for spryntax.js\n# pm2-kill: Stops PM2 (including the Node server for spryntax.js\n# pm2-status: Gets the status of current PM2 applications\n# pm2-printout: Shows PM2 printouts from spryntax."
+
+    "desc": "\n# start: Starts the Express server without PM2.\n# static-build: Runs 'static-raw-levels' and 'static-tagged-levels'\n#static-raw-levels: Runs 'jsonifier.js'.\n# static-tagged-levels: Runs 'extras_appender.js'\n# pm2-start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# pm2-stop: Stops the Node server for spryntax.js\n# pm2-restart: Restarts the Node server for spryntax.js\n# pm2-kill: Stops PM2 (including the Node server for spryntax.js\n# pm2-status: Gets the status of current PM2 applications\n# pm2-printout: Shows PM2 printouts from spryntax."
   },
   "author": "",
   "license": "ISC"

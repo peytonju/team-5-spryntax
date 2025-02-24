@@ -1,18 +1,23 @@
 const PORT = 8080;
 
+const fs = require("fs");
+const algorithmController = require('./app/controllers/algorithmController');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const mysql = require("mysql")
+
 const PATH = require('path');
 const PATH_VIEWS = PATH.join(__dirname, "website", "views");
 const PATH_PUBLIC = PATH.join(__dirname, "website", "public");
-const PATH_LEVELS_JSON = PATH.join(PATH_PUBLIC, "levels.json");
+const PATH_STATIC_BUILD = PATH.join(__dirname, "website_static_build_tools");
+const PATH_LEVEL_DATA = PATH.join(PATH_STATIC_BUILD, "raw_alg_builder", "levels.json");
+const PATH_LEVEL_TAGS = PATH.join(PATH_STATIC_BUILD, "alg_extras", "levels.json");
+
+const JSON_LEVEL_DATA = JSON.parse(fs.readFileSync(PATH_LEVEL_DATA).toString());
+const JSON_LEVEL_TAGS = JSON.parse(fs.readFileSync(PATH_LEVEL_TAGS).toString());
 
 
-const algorithmController = require('./app/controllers/algorithmController');
-const bodyParser = require('body-parser');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
-const mysql = require("mysql")
-const fs = require("fs");
-
 const express = require('express');
 const app = express();
 app.set('view engine', 'ejs');
@@ -60,11 +65,9 @@ app.get('/level_select/:name_level', (request, response) => {
 app.get('/level_select/:name_level/:name_language/play', (request, response) => {
     const NAME_LEVEL = request.params["name_level"].toLowerCase();
     const NAME_LANGUAGE = request.params["name_language"].toLowerCase();
-    const DATA_JSON = JSON.parse(fs.readFileSync(PATH_LEVELS_JSON).toString());
-    const DATA_LEVEL = DATA_JSON[NAME_LEVEL][NAME_LANGUAGE];
 
     response.status(200).render("level_play.ejs", {
-        level_data: DATA_LEVEL
+        level_data: JSON_LEVEL_DATA[NAME_LEVEL][NAME_LANGUAGE]
     });
 })
 
@@ -87,7 +90,7 @@ app.use(session({
 }));
 
 const con=mysql.createConnection({
-    host:'***',
+    host:'**',
     user:'**',
     password:'**',
     database:'**',
@@ -110,25 +113,36 @@ app.post('/signup.php', async (req, res) => {
     // Hash the password using the generated salt
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const query = 'INSERT INTO user (username, password, email, profile_pic) VALUES (?, ?, ?, ?)';
-    
-    con.query(query, [username, hashedPassword, email, null], (err, result) => {
-        if(err){
-            console.log(err)
-        }else{
-            console.log("POSTED")
+    // Query to check if username already exists
+    const checkUserQuery = 'SELECT * FROM user WHERE username = ?';
+    con.query(checkUserQuery, [username], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Server error');
+        } else if (result.length > 0) {
+            res.redirect('/signup?error=Username%20already%20exists%20');
+        } else {
+            // If username does not exist, insert the new user
+            const insertUserQuery = 'INSERT INTO user (username, password, email, profile_pic) VALUES (?, ?, ?, ?)';
+            con.query(insertUserQuery, [username, hashedPassword, email, null], (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send('Server error');
+                } else {
+                    //console.log("POSTED");
+                    //res.send(`Username: ${username}, Email: ${email}, Password: ${hashedPassword}`);
+                    res.redirect('/');
+                }
+            });
         }
-    }
-    
-    )
-    res.send(`Username: ${username}, Email: ${email}, Password: ${hashedPassword}`);
+    });
 });
 
 app.post('/login.php', (req, res) => {
     const email = req.body.inputEmail; // Extract the email from the form data
     const password = req.body.inputPassword; // Extract the password from the form data
 
-    const query = 'SELECT username, password FROM user WHERE email = ?';
+    const query = 'SELECT username, user_id, password FROM user WHERE email = ?';  //queries the database
 
     // Ensure you are using a properly configured MySQL connection
     con.query(query, [email], async (err, results) => {
@@ -138,6 +152,7 @@ app.post('/login.php', (req, res) => {
         } else {
             if (results.length > 0) {
                 const username = results[0].username;
+                const user_id = results[0].user_id;
                 const hashedPassword = results[0].password;
 
                 // Compare the provided password with the stored hashed password
@@ -145,43 +160,71 @@ app.post('/login.php', (req, res) => {
 
                 if (isMatch) {
                     req.session.username = username; // Store the username in the session
+                    req.session.user_id = user_id; // Store the username in the session
+                    //res.send(`Username: ${username}, Email: ${email}, user_id: ${user_id}`);
                     res.redirect('/');              // Redirect to home
                 } else {
-                    res.status(401).json({ message: 'Invalid email or password' });
+                    res.redirect('/login?error=Invalid%20email%20or%20password');
                 }
             } else {
-                res.status(401).send('Invalid email or password');
+                res.redirect('/login?error=Invalid%20email%20or%20password');
             }
         }
     });
 });
 
-app.get('/', (req, res) => {                                //working on calling username to ensure it is stored
+app.get('/test', (req, res) => {                                //Can print username and id in ejs. May be able to save data that way
     if (req.session.username) {
-        res.render('/', { username: req.session.username });
+        res.render('test', { username: req.session.username, user_id: req.session.user_id });
     } else {
-        res.render('/', { username: 'none' });
+        res.render('test', { username: 'Not signed in', user_id: '' });
     }
 });
 
-// for the report button not working yet
-app.post('/report', (req, res) => {
+// for the report button
+app.post('/report.php', (req, res) => {
     const name = req.body.name; 
     const problem = req.body.problem;
-
-    const query = "INSERT INTO `bug_reports` (name, problem) VALUES (?, ?)";
     
-    con.query(query, [name, problem], (err, result) => {
+    //add an error message if name or problem is missing
+
+    const last_id = "SELECT * FROM bug_reports ORDER BY id DESC LIMIT 1";   //gets the latest id number
+    
+    con.query(last_id, (err, result) => {
         if(err){
             console.log(err)
-        }else{
-            console.log("POSTED")
-            res.send(`name: ${name}, problem: ${problem}`);
         }
+        else{
+            let new_id = 1;
+            if (result.length > 0) {
+                new_id = result[0].id + 1;  //add to one to latest num
+            }
+
+            const query = "INSERT INTO bug_reports (id, name, problem) VALUES (?, ?, ?)";   //insert
+
+            con.query(query, [new_id, name, problem], (err, result) => {
+                if(err){
+                    console.log(err)
+                }else{
+                    console.log("Added bug report to database")
+
+                    //add a message later
+                    //res.send("Thank You! Your bug report has been submitted.");
+                    res.redirect('/');
+                    //res.send(`name: ${name}, problem: ${problem}`);
+                }
+            });
+        }
+        
     });
     //res.send(`name: ${name}, problem: ${problem}`);
 });
 
+// for the leaderboard
+//app.post('/leaderboard', (req, res) => {
+
+   // let sql = "SELECT `leaderboard_id`, user_id, rank_place, wpm, date_achieved FROM leaderboard WHERE program_language == Python";
+//});
 
 /****************************************************************************************************/
 

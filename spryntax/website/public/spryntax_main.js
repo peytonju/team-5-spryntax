@@ -1,20 +1,22 @@
 let displaycode = (typeof DATA_LEVEL) !== "undefined" ? DATA_LEVEL["lines"] : "#include\u0020<iostream>↵using namespace std;↵↵int main(){↵→cout << \"this is more annoying than it looks\";↵→return 0;↵}";
 
+//Define a progress object
 let progress = {
     "starttime": null,
     "errors": 0,
-    "lbreaks": 0
+    "lbreaks": 0, //Count for linebreaks
+    "pasted": false
 };
 
 function validate(){
-    if (progress.starttime == null){
+    if (progress.starttime == null){ //Set the user's time
         progress.starttime = Date.now();
     }
     let i = 0, j = 0, l = 0;
     let typed = [];
-    for (char of $("#main_front").val()){
+    for (char of $("#main_front").val()){ //Go through the input values
         let innerchar = $("#main_"+i);
-        if (char == innerchar.text()){
+        if (char == innerchar.text()){ //Condition when the input at position matches the exact character
             if (innerchar.hasClass("span_incorrect")){
                 innerchar.removeClass("span_incorrect");
             }
@@ -42,10 +44,10 @@ function validate(){
         i++;
     }
     i = 0;
-    $(".span").each(function(index,element){
+    $(".span").each(function(index,element){ //Select all spans in the font
         let span = $("#main_"+index);
         l++;
-        if (!typed.includes("main_"+index)){
+        if (!typed.includes("main_"+index)){ //User pressed backspace
             if (span.hasClass("span_correct")){
                 span.removeClass("span_correct");
             }
@@ -54,17 +56,17 @@ function validate(){
                 progress.errors++;
             }
         } else {
-            if (span.hasClass("span_correct")){
+            if (span.hasClass("span_correct")){ //Count correct classes
                 i++;
             }
         }
     })
-    if (j > progress.lbreaks){
+    if (j > progress.lbreaks){ // If the number of lines in the input is more than the expected amount
         let trimmed = "";
         console.log(j,progress.lbreaks);
         let k = progress.lbreaks;
-        for (index in $("#main_front").val()){
-            if ($("#main_front").val()[index] == "\n"){
+        for (index in $("#main_front").val()){ //Access the user input
+            if ($("#main_front").val()[index] == "\n"){ //Removes everything after the extra enter
                 k--;
             }
             trimmed += $("#main_front").val()[index];
@@ -73,16 +75,21 @@ function validate(){
             }
         }
         $("#main_front").val(trimmed);
-        validate();
+        validate(); //Call the validation function again
         return;
     }
-    if (i==l){
+    if (i==l){ //If the number of correct characters matches the number of expected characters
         $("#main_front").attr("disabled", true);
         $("#wincheck").attr("hidden", false);
         let displaywin = $("#wincheck").html() + "<br>"; 
         let diff = (Date.now() - progress.starttime);
         displaywin += Math.floor(diff/1000/60/60) + ":" + String(Math.floor(diff/1000/60)).padStart(2, '0') + ":" + (diff/1000) + "<br>";
-        displaywin += (progress.errors) + " errors<br>" + l + " characters";
+        displaywin += (progress.errors) + " error";
+        if (progress.errors != 1){
+            displaywin += "s"; //Add S for plurality
+        }
+        displaywin += "<br>"+ l + " characters<br>";
+        displaywin += (Math.round(l/5)/(diff/1000/60)).toFixed(2) + " WPM, " + (l/(diff/1000)).toFixed(2) + " CPS";
         $("#wincheck").html(displaywin);
     }
 }

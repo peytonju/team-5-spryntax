@@ -47,5 +47,14 @@
                 </div>
             </div>
         </div>
+        <script>
+            // Function to display error message if present in URL parameters
+            (function() {
+                const params = new URLSearchParams(window.location.search);
+                if (params.has('error')) {
+                    alert(params.get('error'));  // Pop-up message with the error
+                }
+            })();
+        </script>
     </body>
 </html>
