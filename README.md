@@ -334,6 +334,17 @@ We choose CircleCI for our CI hosting service. One of the big reasons was it all
 ### Which tests will be executed in a CI build
 #### Use Cases:
 
+1. Monkeytype-style of program that allows users to type characters needed to create a specific file, the file contains some useful-to-know algorithm 
+   * Unit Test
+     * Manual testing within the “input string” validation function to show that the end state is reachable.
+   * Validation Test
+     * Manual testing in the automated process of showing code comments to the user.
+     * Manual testing of input processing the user input via AutoHotKey strokes to speed up typing tests.
+   * Integration Test
+     * Manual testing navigation between different levels to test that the code snippet and comments appear properly.
+   * System Test
+     * Manual testing different aspect ratios of the site, adjusting the font size to fit inline.
+
 4. Save user data in a database as long as they are logged in   
    * Unit Test  
      * Test if it successfully connects to the database and can store and get values  
