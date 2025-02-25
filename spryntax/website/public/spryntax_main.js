@@ -5,80 +5,90 @@ let progress = {
     "starttime": null,
     "errors": 0,
     "lbreaks": 0, //Count for linebreaks
-    "pasted": false
+    "pasted": false,
+    "lines": []
 };
 
 function validate(){
     if (progress.starttime == null){ //Set the user's time
         progress.starttime = Date.now();
     }
-    let i = 0, j = 0, l = 0;
-    let typed = [];
-    for (char of $("#main_front").val()){ //Go through the input values
-        let innerchar = $("#main_"+i);
-        if (char == innerchar.text()){ //Condition when the input at position matches the exact character
-            if (innerchar.hasClass("span_incorrect")){
-                innerchar.removeClass("span_incorrect");
-            }
-            innerchar.addClass("span_correct");
-        } else {
-            if ((innerchar.hasClass("space")&&char == " ")||
-            (innerchar.hasClass("tab")&&char == "\t")||
-            (innerchar.hasClass("lbreak")&&char=="\n")){
+    let typed = [], typedlines = [], storedline = [];
+    let total = 0, lb = 0, spans = 0, correct = 0;
+    for (let tchar of $("#main_front").val()){ //Get all typed characters by line
+        storedline.push(tchar);
+        typed.push("#main_"+total);
+        if(tchar == "\n"){ 
+            typedlines.push(storedline);
+            storedline = [];
+            lb++;
+        }
+        total++;
+    }
+    typedlines.push(storedline);
+    for (let currline = 0; currline < progress.lines.length; currline++){
+        for (let dchar_i in progress.lines[currline]){ // For each character in displayed line
+            let innerchar = $(progress.lines[currline][dchar_i]);
+            let tchar = typedlines[currline]
+            if (tchar != null){
+                tchar = tchar[dchar_i];
+            } else {
                 if (innerchar.hasClass("span_incorrect")){
                     innerchar.removeClass("span_incorrect");
                     progress.errors++;
                 }
-                innerchar.addClass("span_correct");
-            } else {
                 if (innerchar.hasClass("span_correct")){
                     innerchar.removeClass("span_correct");
                 }
-                innerchar.addClass("span_incorrect");
+                continue;
+            }
+            if (tchar != null){
+                if (tchar == innerchar.text()){
+                    if (innerchar.hasClass("span_incorrect")){
+                        innerchar.removeClass("span_incorrect");
+                        progress.errors++;
+                    }
+                    innerchar.addClass("span_correct");
+                } else {
+                    if ((innerchar.hasClass("space")&&tchar == " ")||
+                    (innerchar.hasClass("tab")&&tchar == "\t")||
+                    (innerchar.hasClass("lbreak")&&tchar=="\n")){
+                        if (innerchar.hasClass("span_incorrect")){
+                            innerchar.removeClass("span_incorrect");
+                            progress.errors++;
+                        }
+                        innerchar.addClass("span_correct");
+                    } else {
+                        if (innerchar.hasClass("span_correct")){
+                            innerchar.removeClass("span_correct");
+                        }
+                        innerchar.addClass("span_incorrect");
+                    }
+                }
             }
         }
-        typed.push("main_"+i);
-        if(char == "\n"){ 
-            j++;
-        }
-        i++;
     }
-    i = 0;
     $(".span").each(function(index,element){ //Select all spans in the font
         let span = $("#main_"+index);
-        l++;
-        if (!typed.includes("main_"+index)){ //User pressed backspace
-            if (span.hasClass("span_correct")){
-                span.removeClass("span_correct");
-            }
-            if (span.hasClass("span_incorrect")){
-                span.removeClass("span_incorrect");
-                progress.errors++;
-            }
-        } else {
-            if (span.hasClass("span_correct")){ //Count correct classes
-                i++;
-            }
+        spans++;
+        if (span.hasClass("span_correct")){ //Count correct classes
+            correct++;
         }
     })
-    if (j > progress.lbreaks){ // If the number of lines in the input is more than the expected amount
+    if (typedlines.length-1 > progress.lbreaks){ // If the number of lines in the input is more than the expected amount
         let trimmed = "";
-        console.log(j,progress.lbreaks);
-        let k = progress.lbreaks;
-        for (index in $("#main_front").val()){ //Access the user input
-            if ($("#main_front").val()[index] == "\n"){ //Removes everything after the extra enter
-                k--;
-            }
-            trimmed += $("#main_front").val()[index];
-            if (k == 0){
-                break;
+        for (fixedline in typedlines){
+            if (fixedline < progress.lbreaks){
+                for (fixedchar of typedlines[fixedline]){
+                    trimmed += fixedchar;
+                }
             }
         }
         $("#main_front").val(trimmed);
         validate(); //Call the validation function again
         return;
     }
-    if (i==l){ //If the number of correct characters matches the number of expected characters
+    if (total==spans && spans == correct){ //If the number of correct characters matches the number of expected characters
         $("#main_front").attr("disabled", true);
         $("#wincheck").attr("hidden", false);
         let displaywin = $("#wincheck").html() + "<br>"; 
@@ -88,8 +98,8 @@ function validate(){
         if (progress.errors != 1){
             displaywin += "s"; //Add S for plurality
         }
-        displaywin += "<br>"+ l + " characters<br>";
-        displaywin += (Math.round(l/5)/(diff/1000/60)).toFixed(2) + " WPM, " + (l/(diff/1000)).toFixed(2) + " CPS";
+        displaywin += "<br>"+ spans + " characters<br>";
+        displaywin += (Math.round(spans/5)/(diff/1000/60)).toFixed(2) + " WPM, " + (spans/(diff/1000)).toFixed(2) + " CPS";
         $("#wincheck").html(displaywin);
     }
 }
@@ -100,10 +110,15 @@ $(document).ready(function(){
     displaycode.replaceAll("\u0085","↵") //Line break
     displaycode.replaceAll("\u0009","→") //Tab
     let spannedcode = "";
+    let insertlines = [];
     for (char in displaycode){
+        insertlines.push("#main_"+char);
         if (displaycode[char] == '↵'){
-            spannedcode += '<span class="span noselect lbreak" hidden id="main_' + char +'"></span><br class="noselect">';
+            spannedcode += '<span class="span noselect lbreak" id="main_' + char +'"></span><br>';
+            progress.lines.push(insertlines);
             progress.lbreaks++;
+            insertlines = []
+            continue;
         } else if (displaycode[char] == '→') {
             spannedcode += '<span class="span noselect tab" id="main_' + char +'">'+'&emsp;</span>';
         } else if (displaycode[char] == '\u0020') {
@@ -112,6 +127,7 @@ $(document).ready(function(){
             spannedcode += '<span class="span noselect" id="main_' + char +'">' + displaycode[char] + '</span>';
         }
     }
+    progress.lines.push(insertlines);
     $("#main_body").html(spannedcode);
     $("#main_back").on("keydown", "#main_front", function(e){
         var keycode = e.keycode || e.which;

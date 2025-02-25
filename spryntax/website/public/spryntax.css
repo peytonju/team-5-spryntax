@@ -53,12 +53,18 @@
     font-optical-sizing: auto;
 }
 .space{width: 0.5em;}
-.tab{width: 4em;}
+.tab{width: 4em; border-bottom: solid #333;}
 .lbreak{font-size: xx-small;}
 .span_correct{border-bottom: solid #0cc; color:#000;}
-.span_incorrect{border-bottom: solid #f90; color:#000}
+.span_incorrect{border-bottom: solid #f90;}
+.span_toolong{border-bottom: solid #a20;}
 #wincheck{
     color: #0ff;
+}
+br {
+  display: block;
+  line-height: 1.5em !important;
+  content: " ";
 }
 
 /* Container for the cards */
