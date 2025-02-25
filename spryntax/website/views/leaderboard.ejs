@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="spryntax.css">
+    <script src="spryntax_main.js"></script>
+</head>
+<style>
+    table, th, td {
+        border:1px solid white;
+        margin: 0px auto;
+    }
+    button {
+        margin: 0px auto;
+        align-items: center;
+    }
+</style>
+
+<body>
+    <header>
+        <div class="top">
+            <nav> 
+                <a href="/">Home</a>
+                <a href="/level_select">Level Select</a>
+                <a href="/leaderboard">Leaderboard</a>
+                <a href="/report">Report</a>
+                <a href="/settings" class="split">Settings</a>
+                <a href="/signup" class="split">Sign up</a>
+                <a href="/login" class="split">Log in</a>
+            </nav>
+        </div>
+    </header>
+
+    <h2>Leaderboard</h2>
+    
+    <!-- have buttons for python and c++ -->
+    <button class="python-button" onclick="">Python </button>
+    <button class="c++-button" onclick="">C++</button>
+    <div class="leaderboard-table">
+        <table id="leaderboard-table" style="width:50%">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Score (WPM)</th>
+                    <th>Language</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% leaderboards.forEach(entry => { %>
+                    <tr>
+                        <td><%= entry.rank_place %></td>
+                        <td><%= entry.user_id %></td>
+                        <td><%= entry.wpm %></td>
+                        <td><%= entry.program_language %></td>
+                    </tr>
+                    
+                    <!--<td><%= entry.program_language %></td>-->
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+   
+</body>
+</html>

@@ -2,6 +2,7 @@ const PORT = 8080;
 
 const fs = require("fs");
 const algorithmController = require('./app/controllers/algorithmController');
+const leaderboardController = require('./app/controllers/leaderboardController');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const mysql = require("mysql")
@@ -37,9 +38,7 @@ app.get("/", (request, response) => {
     response.status(200).sendFile(PATH.join(PATH_VIEWS, 'index.html'));
 });
 
-app.get("/leaderboard", (request, response) => {
-    response.status(200).sendFile(PATH.join(PATH_VIEWS, "leaderboard.html"));
-});
+
 
 app.get("/login", (request, response) => {
     response.status(200).sendFile(PATH.join(PATH_VIEWS, "login.html"));
@@ -93,6 +92,12 @@ app.get('/level_select/:name_level/:name_language/end', (request, response) => {
         response.status(404).sendFile(PATH.join(PATH_VIEWS, "level_not_found.html"));
     }
 });
+
+/*****************************************LEADERBOARD******************************************************/
+app.get('/leaderboard', leaderboardController.table_select);
+
+
+
 /*****************************************Database******************************************************/
 
 app.use(session({
@@ -103,10 +108,10 @@ app.use(session({
 }));
 
 const con=mysql.createConnection({
-    host:'**',
-    user:'**',
-    password:'**',
-    database:'**',
+    host:'engr-db.engr.oregonstate.edu',
+    user:'cs362_polasekj',
+    password:'dwMoR2sY',
+    database:'cs362_polasekj',
     port: 3307
 });
 
@@ -224,21 +229,12 @@ app.post('/report.php', (req, res) => {
                     //add a message later
                     //res.send("Thank You! Your bug report has been submitted.");
                     res.redirect('/');
-                    //res.send(`name: ${name}, problem: ${problem}`);
                 }
             });
         }
         
     });
-    //res.send(`name: ${name}, problem: ${problem}`);
 });
-
-// for the leaderboard
-//app.post('/leaderboard', (req, res) => {
-
-   // let sql = "SELECT `leaderboard_id`, user_id, rank_place, wpm, date_achieved FROM leaderboard WHERE program_language == Python";
-//});
-
 /****************************************************************************************************/
 
 
