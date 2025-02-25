@@ -12,9 +12,13 @@ const PATH_PUBLIC = PATH.join(__dirname, "website", "public");
 const PATH_STATIC_BUILD = PATH.join(__dirname, "website_static_build_tools");
 const PATH_LEVEL_DATA = PATH.join(PATH_STATIC_BUILD, "alg_creator", "levels.json");
 const PATH_LEVEL_TAGS = PATH.join(PATH_STATIC_BUILD, "alg_extras", "levels.json");
+const PATH_LEVEL_TO_CLEAN = PATH.join(PATH_STATIC_BUILD, "alg_extras", "to_clean_names.json");
+const PATH_LEVEL_TO_NONCLEAN = PATH.join(PATH_STATIC_BUILD, "alg_extras", "to_nonclean_names.json")
 
 const JSON_LEVEL_DATA = JSON.parse(fs.readFileSync(PATH_LEVEL_DATA).toString());
 const JSON_LEVEL_TAGS = JSON.parse(fs.readFileSync(PATH_LEVEL_TAGS).toString());
+const LEVEL_NAME_TO_READABLE = JSON.parse(fs.readFileSync(PATH_LEVEL_TO_CLEAN).toString());
+const LEVEL_NAME_TO_NONREADABLE = JSON.parse(fs.readFileSync(PATH_LEVEL_TO_NONCLEAN).toString());
 
 
 const session = require('express-session');
@@ -55,14 +59,15 @@ app.get("/report", (request, response) => {
 
 
 /*****************************************LEVELS******************************************************/
-app.get('/level_select', algorithmController.level_select);
+app.get('/level_select', (request, response) => {
+    response.status(200).render("level_select.ejs", {
+        level_tags: JSON_LEVEL_TAGS,
+        readable_to_nonreadable: LEVEL_NAME_TO_NONREADABLE,
+        nonreadable_to_readable: LEVEL_NAME_TO_READABLE
+    });
+});
 
-app.get('/level_select/:name_level', (request, response) => {
-    const NAME_LEVEL = request.params["name_level"].toLowerCase();
-    response.status(200).render("level_desc.html");
-})
-
-app.get('/level_select/:name_level/:name_language/play', (request, response) => {
+app.get('/level_select/:name_level/:name_language', (request, response) => {
     const NAME_LEVEL = request.params["name_level"].toLowerCase();
     const NAME_LANGUAGE = request.params["name_language"].toLowerCase();
 
@@ -73,7 +78,7 @@ app.get('/level_select/:name_level/:name_language/play', (request, response) => 
     } else {
         response.status(404).sendFile(PATH.join(PATH_VIEWS, "level_not_found.html"));
     }
-})
+});
 
 app.get('/level_select/:name_level/:name_language/end', (request, response) => {
     const NAME_LEVEL = request.params["name_level"].toLowerCase();
@@ -87,7 +92,7 @@ app.get('/level_select/:name_level/:name_language/end', (request, response) => {
     } else {
         response.status(404).sendFile(PATH.join(PATH_VIEWS, "level_not_found.html"));
     }
-})
+});
 /*****************************************Database******************************************************/
 
 app.use(session({
@@ -103,7 +108,7 @@ const con=mysql.createConnection({
     password:'**',
     database:'**',
     port: 3307
-})
+});
 
 con.connect((err)=>{
     if(err){
@@ -111,7 +116,7 @@ con.connect((err)=>{
     }else{
         console.log("connected")
     }
-})
+});
 
 app.post('/signup.php', async (req, res) => {
     const username = req.body.inputUsername; // Extract the username from the form data
