@@ -21,6 +21,7 @@ const JSON_LEVEL_DATA = JSON.parse(fs.readFileSync(PATH_LEVEL_DATA).toString());
 const JSON_LEVEL_TAGS = JSON.parse(fs.readFileSync(PATH_LEVEL_TAGS).toString());
 const LEVEL_NAME_TO_READABLE = JSON.parse(fs.readFileSync(PATH_LEVEL_TO_CLEAN).toString());
 const LEVEL_NAME_TO_NONREADABLE = JSON.parse(fs.readFileSync(PATH_LEVEL_TO_NONCLEAN).toString());
+const db = require('./config/database');
 
 
 const session = require('express-session');
@@ -107,21 +108,6 @@ app.use(session({
     cookie: { secure: false } // Set to true if using HTTPS
 }));
 
-const con=mysql.createConnection({
-    host:'**',
-    user:'**',
-    password:'**',
-    database:'**',
-    port: 3307
-});
-
-con.connect((err)=>{
-    if(err){
-        console.log(err)
-    }else{
-        console.log("connected")
-    }
-});
 
 app.post('/signup.php', async (req, res) => {
     const username = req.body.inputUsername; // Extract the username from the form data
@@ -133,7 +119,7 @@ app.post('/signup.php', async (req, res) => {
 
     // Query to check if username already exists
     const checkUserQuery = 'SELECT * FROM user WHERE username = ?';
-    con.query(checkUserQuery, [username], (err, result) => {
+    db.query(checkUserQuery, [username], (err, result) => {
         if (err) {
             console.log(err);
             res.status(500).send('Server error');
@@ -142,7 +128,7 @@ app.post('/signup.php', async (req, res) => {
         } else {
             // If username does not exist, insert the new user
             const insertUserQuery = 'INSERT INTO user (username, password, email, profile_pic) VALUES (?, ?, ?, ?)';
-            con.query(insertUserQuery, [username, hashedPassword, email, null], (err, result) => {
+            db.query(insertUserQuery, [username, hashedPassword, email, null], (err, result) => {
                 if (err) {
                     console.log(err);
                     res.status(500).send('Server error');
@@ -163,7 +149,7 @@ app.post('/login.php', (req, res) => {
     const query = 'SELECT username, user_id, password FROM user WHERE email = ?';  //queries the database
 
     // Ensure you are using a properly configured MySQL connection
-    con.query(query, [email], async (err, results) => {
+    db.query(query, [email], async (err, results) => {
         if (err) {
             console.log(err);
             res.status(500).send('Error fetching user from database');
@@ -208,7 +194,7 @@ app.post('/report.php', (req, res) => {
 
     const last_id = "SELECT * FROM bug_reports ORDER BY id DESC LIMIT 1";   //gets the latest id number
     
-    con.query(last_id, (err, result) => {
+    db.query(last_id, (err, result) => {
         if(err){
             console.log(err)
         }
@@ -220,7 +206,7 @@ app.post('/report.php', (req, res) => {
 
             const query = "INSERT INTO bug_reports (id, name, problem) VALUES (?, ?, ?)";   //insert
 
-            con.query(query, [new_id, name, problem], (err, result) => {
+            db.query(query, [new_id, name, problem], (err, result) => {
                 if(err){
                     console.log(err)
                 }else{
