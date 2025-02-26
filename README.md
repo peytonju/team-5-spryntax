@@ -344,8 +344,34 @@ We choose CircleCI for our CI hosting service. One of the big reasons was it all
      * Manual testing navigation between different levels to test that the code snippet and comments appear properly.
    * System Test
      * Manual testing different aspect ratios of the site, adjusting the font size to fit inline.
+    
+4. Report a bug  
+   * Unit Test  
+     * Server-side input handler that checks whether the form data is valid and test it with good and bad inputs.  
+       * Properly formatted name and problem fields  
+       * Empty or missing fields  
+       * Special/invalid characters  
+   * Validation Test  
+     * Required fields  
+       * Submitting an empty Username or missing problem text fails validation  
+       * Submitting properly filled forms passes validation  
+     * Character Limits  
+       * Overly long input triggers an error  
+     * Sucrurity/Sanitization checks  
+       * Malicous inputs like script tags or SQL injection attempts do not crash the system  
+   * Integration Test  
+     * End-to-end form submission  
+       * Positng to /report endpoint returns a success status when valid data is sent  
+       * Confirm an  error status is returned when required fields are missing  
+     * Database check  
+       * Corfirm that after a successful POST to /report, the bug entry is correctly stored in the database  
+   * System Test  
+     *  Browser-based flow  
+       * When a user navigates to /report, sees a form, types in Username and bug description, then clicks Submit  
+       * The user sees a success message  
+       * The user sees that the fields are cleared
 
-4. Save user data in a database as long as they are logged in   
+5. Save user data in a database as long as they are logged in   
   * Unit Test  
     * Test if it successfully connects to the database, can store, and get values.  
   * Validation Test  
