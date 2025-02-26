@@ -1,7 +1,7 @@
 let displaycode =
   typeof DATA_LEVEL !== "undefined"
     ? DATA_LEVEL["lines"]
-    : '#include\u0020<iostream>↵using namespace std;↵↵int main(){↵→cout << "this is more annoying than it looks";↵→return 0;↵}';
+    : '#include\u0020<iostream>↵using namespace std;↵↵int main(){↵→cout << "Hello World!";↵→return 0;↵}';
 
 //Define a progress object
 let progress = {
