@@ -12,6 +12,6 @@ module.exports = defineConfig({
     supportFile: false,
 
     // Uncomment if you need extra time for certain operations:
-    // defaultCommandTimeout: 8000,
+    // defaultCommandTimeout: 8000
   },
 });
