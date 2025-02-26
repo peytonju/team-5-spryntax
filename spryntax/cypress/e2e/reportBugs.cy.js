@@ -10,7 +10,7 @@ describe('Report a Bug Feature Tests', () => {
     //
     it('Validation Test: Submitting empty fields should show an error', () => {
       // Visit the report bug page
-      cy.visit('http://localhost:8080/report');  
+      cy.visit('/report');  
       // Leave the "Username" or "Bug description" field empty
       cy.get('input#name').clear();
       cy.get('textarea#problem').clear();
@@ -27,7 +27,7 @@ describe('Report a Bug Feature Tests', () => {
     // This time, we'll fill the form properly and ensure the server responds with success.
     //
     it('Integration Test: Submitting valid data calls the /report endpoint and returns success', () => {
-      cy.visit('http://localhost:8080/report');
+      cy.visit('/report');
   
       // Fill out form
       cy.get('input#name').type('CypressUser');
@@ -52,7 +52,7 @@ describe('Report a Bug Feature Tests', () => {
     // after submission, we see a success message or a redirect.
     //
     it('System Test: Visually confirm the UI flow on /report page', () => {
-      cy.visit('http://localhost:8080/report');
+      cy.visit('/report');
   
       // 1) Check the form is visible
       cy.get('h1').should('contain', 'Report Bugs');
