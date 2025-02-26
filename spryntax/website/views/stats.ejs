@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Stats</title>
+    <link rel="stylesheet" href="spryntax.css">
+    <script src="spryntax_main.js"></script>
+</head>
+<style>
+    table, th, td {
+        border: 1px solid white;
+        margin: 0px auto;
+        width: 120px;
+        height: 50px;
+        text-align: center;
+    }
+    button { 
+        width: 100px;
+        height: 50px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <header>
+        <div class="top">
+            <nav> 
+                <a href="/">Home</a>
+                <a href="/level_select">Level Select</a>
+                <a href="/leaderboard">Leaderboard</a>
+                <a href="/stats">Stats</a>
+                <a href="/report">Report</a>
+                <a href="/settings" class="split">Settings</a>
+                <a href="/signup" class="split">Sign up</a>
+                <a href="/login" class="split">Log in</a>
+            </nav>
+        </div>
+    </header>
+
+    <h2>User Statistics</h2>
+
+    <!-- Filter buttons for Python and C++ stats -->
+    <div style="margin: 0 auto; width: 656px; text-align: center;">
+        <button class="python-button" onclick="filterStats('Python')">Python</button>
+        <button class="c++-button" onclick="filterStats('C++')">C++</button>
+    </div>
+
+    <h3 style="text-align: center">All Stats</h3>
+    <div class="stats-table">
+        <table id="stats-table" style="width:60%">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Games Played</th>
+                    <th>Average WPM</th>
+                    <th>Best WPM</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% stats.forEach(entry => { %>
+                    <tr class="stats-row" data-language="<%= entry.program_language %>">
+                        <td><%= entry.username %></td>
+                        <td><%= entry.games_played %></td>
+                        <td><%= entry.average_wpm %></td>
+                        <td><%= entry.best_wpm %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function filterStats(language) {
+            const rows = document.querySelectorAll(".stats-row");
+            const heading = document.querySelector("h3");
+
+            rows.forEach(row => {
+                row.style.display = (row.getAttribute("data-language") === language) ? "" : "none";
+            });
+
+            heading.textContent = `${language} Stats`;
+        }
+    </script>
+</body>
+</html>
