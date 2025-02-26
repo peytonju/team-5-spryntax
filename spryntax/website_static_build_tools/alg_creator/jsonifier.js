@@ -33,9 +33,9 @@ function remove_trailing_spaces(line) {
     /* while the 2nd-to-last last entry is an empty space, */
     while (new_line[new_line.length - 2] == ' ') {
         /* keep slicing it */
-        new_line = new_line.slice(0, new_line.length - 2) + new_line.slice(new_line.length - 1);
+        new_line = new_line.slice(0, new_line.length - 2) + new_line[new_line.length - 1];
     }
-    return new_line;
+    return new_line
 }
 
 
@@ -69,11 +69,13 @@ function line_formatter(line) {
         /* just add it */
         new_line = new_line.concat("↵");
     }
+
     /* remove trailing spaces */
-    new_line = remove_trailing_spaces(line);
+    new_line = remove_trailing_spaces(new_line);
 
     /* carriage return */
     new_line = new_line.replaceAll("\r", "↵");
+
     /* tab */
     new_line = new_line.replaceAll("\t", "→");
 
