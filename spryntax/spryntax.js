@@ -4,6 +4,7 @@ const fs = require("fs");
 const algorithmController = require('./app/controllers/algorithmController');
 const leaderboardController = require('./app/controllers/leaderboardController');
 const statsController = require('./app/controllers/statsController');
+const favoritesController = require('./app/controllers/favoritesController');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const mysql = require("mysql")
@@ -56,7 +57,11 @@ app.get("/report", (request, response) => {
     response.status(200).sendFile(PATH.join(PATH_VIEWS, "report.html"));
 });
 
+/*stats*/
 app.get('/stats', statsController.get_stat);
+
+/*favorites*/
+app.get('/favorites', favoritesController.get_favorite);
 
 
 /*****************************************LEVELS******************************************************/
