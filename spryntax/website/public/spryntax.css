@@ -1,3 +1,5 @@
+
+@import url('https://overpass-30e2.kxcdn.com/overpass.css');
 :root{
     font-family: "Inconsolata", serif;
     font-optical-sizing: auto;
@@ -206,3 +208,48 @@ br {
     background-color: #000000 !important;
     color: rgb(255, 255, 255) !important;
   }
+
+  .gradient-text {
+    font-family: 'Overpass', sans-serif;
+    position: relative;
+    font-size: 4rem;
+    font-weight:900;
+    font-style: italic;
+    text-align: center;
+    background: linear-gradient(90deg, #ff4545 0%, #00ff99 25%, #006aff 50%, #ff0095 75%, #ff4545 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    animation: gradientShift 5s linear infinite alternate;
+    -webkit-text-stroke: 1px white;
+  }
+  
+  .gradient-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff4545 0%, #00ff99 25%, #006aff 50%, #ff0095 75%, #ff4545 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: blur(8px);
+    z-index: -1;
+    animation: gradientShift 5s linear infinite alternate;
+  }
+  
+  /* Keyframes for the gradient animation */
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  
