@@ -3,6 +3,7 @@ const PORT = 8080;
 const fs = require("fs");
 const algorithmController = require('./app/controllers/algorithmController');
 const leaderboardController = require('./app/controllers/leaderboardController');
+const statsController = require('./app/controllers/statsController');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const mysql = require("mysql")
@@ -53,6 +54,8 @@ app.get("/settings", (request, response) => {
 app.get("/report", (request, response) => {
     response.status(200).sendFile(PATH.join(PATH_VIEWS, "report.html"));
 });
+
+app.get('/stats', statsController.get_stat);
 
 
 /*****************************************LEVELS******************************************************/
