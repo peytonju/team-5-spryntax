@@ -373,15 +373,19 @@ We choose CircleCI for our CI hosting service. One of the big reasons was it all
 
 5. Save user data in a database as long as they are logged in   
   * Unit Test  
-    * Test if it successfully connects to the database, can store, and get values.  
+    * Test if it successfully connects to the database and can store and get values  
   * Validation Test  
     * Ensure people are able to log in with valid email and password and are not able to log in with invalid email and password.  
-    * Additionally users should not be able to sign up for an account with a username that already exists.  
+    * Additionally users should not be able to sign up for an account with a username that already exists  
   * Integration Test  
     * When run together is username and id stored in sessions  
+      * Call sessions before login and check if empty  
+      * Login in   
+      * Call sessions and check if correct username and id is input  
   * System Test  
     * On both chrome and edge:  
       * Log in   
       * Navigate to algorithm  
-      * Type algorithm
+      * Type algorithm  
+      * Check if typed words return win or fail
 
