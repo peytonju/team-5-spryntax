@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="spryntax.css">
+        <!--<script src="spryntax_main.js"></script> -->
+    
+    </head>
+    <header>
+        <div class="top">
+            <nav> 
+                <a href="/">Home</a>
+                <a href="/level_select">Level Select</a>
+                <a href="/leaderboard">Leaderboard</a>
+                <a href="/report">Report</a>
+                <a href="/settings" class="split">Settings</a>
+                <a href="/signup" class="split">Sign up</a>
+                <a href="/login" class="split">Log in</a>
+            </nav>
+        </div>
+    </header>
+
+    <body class="text-center"> 
+
+        <h1>Bug Report Page</h1>
+        <div class="container">
+
+            <form action="/report.php" method="post" >
+                <div class="form-group">
+                    <label for="inputname">Username: </label>
+                    <input type="text" class="form-control" id="name" name="name" aria-describedby="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <p><label for="inputproblem">Please describe the bug that you wish to report:</label></p>
+                    <textarea id="problem" name="problem" rows="4" cols="50">Please write a short description about what the bug is and where it is located.</textarea>
+                    <br>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,8 @@
+website_static_build_tools/alg_creator/levels.json
+website_static_build_tools/alg_extras/levels.json
+website_static_build_tools/alg_extras/to_clean_names.json
+website_static_build_tools/alg_extras/to_nonclean_names.json
+
+node_modules/*
+
+!node_modules/.gitkeep

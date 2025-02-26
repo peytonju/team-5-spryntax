@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="bootstrap.css"> 
+        <!--<link rel="stylesheet" href="spryntax.css"> -->
+        <!--<script src="spryntax_main.js"></script> -->
+    </head>
+    <body class="text-center"> 
+        <div class="container"> 
+            <div class="card">
+                <div class="card-body">
+                    <form action="signup.php" method="post">
+                    
+                        <div class="row justify-content-md-center">
+                            <div class="col">
+                                <p>Sign up</p>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                        <label for="inputEmail">Email address</label>
+                                        <input type="Email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="Email" placeholder="Enter email" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-md-center">
+                            <div class="col">
+                                <p>placeholder</p>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="inputUsername">Username</label>
+                                    <input type="Username" class="form-control" id="inputUsername" name="inputUsername" aria-describedby="Username" placeholder="Enter username" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-md-center">
+                            <div class="col">
+                                <p>placeholder</p>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <input type="submit" class="btn btn-primary mt-2" value="signup" name="">
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Function to display error message if present in URL parameters
+            (function() {
+                const params = new URLSearchParams(window.location.search);
+                if (params.has('error')) {
+                    alert(params.get('error'));  // Pop-up message with the error
+                }
+            })();
+        </script>
+    </body>
+</html>

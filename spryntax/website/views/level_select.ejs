@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Browse Algorithms</title>
+    <link rel="stylesheet" href="spryntax.css">
+    <script src="spryntax_main.js"></script>
+</head>
+<body>
+    <header>
+        <div class="top">
+            <nav> 
+                <a href="/">Home</a>
+                <a href="/level_select">Level Select</a>
+                <a href="/leaderboard">Leaderboard</a>
+                <a href="/report">Report</a>
+                <a href="/settings" class="split">Settings</a>
+                <a href="/signup" class="split">Sign up</a>
+                <a href="/login" class="split">Log in</a>
+            </nav>
+        </div>
+    </header>
+    <h2>Level select</h2>
+
+    <!-- Algorithm List -->
+    <div class="gray-background">
+        <div class="card-container">
+            <% for (let level in level_tags) { %>
+                <div class="custom-card">
+                    <div class="card-header">
+                        <h3><%= nonreadable_to_readable[level] %></h3>
+                    </div>
+                    <p><strong>Difficulty:</strong> <%= level_tags[level]["difficulty"] %></p>
+                    <p><strong>Type:</strong> <%= level_tags[level]["type"] %></p>
+                    <p>
+                            <button type="submit" onclick="location.href = 'level_select/<%-level%>/c';">C</button>
+                            <button type="submit" onclick="location.href = 'level_select/<%-level%>/py';">Python</button>
+                    </p>
+                </div>
+            <% }; %>
+        </div>
+    </div>
+</body>
+</html>

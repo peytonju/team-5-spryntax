@@ -27,27 +27,83 @@ Canvas will be used in case Discord or Outlook are both unavailable. The team ma
 ## Project Description
 **Abstract:** Coding requires a subset of characters not commonly used in normal typing. To name a few (\<, \>, :, ;, { }, \[ \], \-, \+, \=, //, \_ ) and programming languages have different syntaxes as well, therefore even more variety of characters you wouldn’t normally use. Traditional typing practice websites are useful for general typing but what about coding? Well, what if you were shown algorithms– in multiple programming languages that you can select– and had to type it out? Not only will you practice typing code, but you’ll learn more about the fundamentals of the particular programming language you selected, and also the functionality/structure of the algorithm via the algorithm itself and comments throughout the code. Additionally, there will be an educational guide explaining the algorithm in detail at the bottom of the typing section, so you can learn and grow your programming skills no matter what.
 
-**Goal:** The primary goal of spryntax is to introduce beginner programmers to the way modern programming languages are typed and to important concepts used in computer science, as well inspiring competition in typing speed amongst programmers.
+**Goal:** Spryntax is made with the goal of helping its users by allowing them to practice typing programming languages. We aim to improve the typing speed, familiarity with common programming symbols, and promote a good standard of how to type code to our users. The users can then use this experience within their own projects and professionally.
 
-**Current practice:** GeeksforGeeks: Informative but lacks interactive typing practice. MonkeyType: Great for speed but not designed for coding. LeetCode: Good for coding practice but ignores typing speed.
+**Current practice:** There are several places online that you can utilize to gain familiarity with algorithms and even provide opportunities for you to type the code yourself. For example, Leetcode and Geeks for Geeks provides its users with explanations and code execution experience. However, neither of these provide any statistics to the user regarding their typing speed and correctness– they have no way to gauge whether or not they’re improving their ability to type in languages. Monkey Type, on the other hand, does indeed provide users statistics about how fast and how correctly they type– but it only provides its users words.
 
+**Novelty:** As mentioned above, current practices don’t provide users with statistics on how well they type the proper syntax for programming languages. Spryntax meshes places like Leetcode and Geeks for Geeks along with Monkey Type– a place where users are able to type algorithms, learn about them, while also being able to view how they’re improving their typing ability. Spryntax also spices this up a bit by allowing users to compete with each other on leaderboards, which we hope will inspire users to learn to type even faster!
 
-**Novelty:** Existing practices have these algorithms but this project will go beyond that and showcase what the program does. Secondly, existing practices limit the coding time and this implementation will take a stopwatch approach to allow the user to code the full algorithm.
-
-**Effects:** Will help novice programmers learn how to code while adding a little bit of competition. It will also aid programmers in learning other languages. Additionally we plan to fill this gap and provide a new experience for users. It will benefit users by improving their typing speed while coding, their accurate coding, knowledge of algorithms, and more. One example algorithm, is a merge sort.
+**Effects:** Novice programmers will learn how to code through repetition and exposure to complex algorithms in multiple languages, while adding a little bit of friendly competition to boost motivation. For example, for the merge sort algorithm in C, the novice programmer will type out as they go along, learning proper grammar and styling. Once completed, a description will give them another understand of the purpose of the algorithm, as well as other information such as runtime. This will ensure the novice learns through repetition and exposure. Competition as well will motivate novices to give practice and commit to memory necessary grammar to be able to implement their programs faster.
 
 # Project Requirements Elicitation
 
 **Use Cases (Functional Requirements):**
 Minimum Viable Product Goals:
-- Monkeytype-style of program that allows users to type characters needed to create a specific file, the file contains some useful-to-know algorithm  
-- Citations and extra resources provided for each assignment for further elaboration on each assignment  
-- Explanation of the code that the user types (with comments)  
-- Leaderboard for fastest times  
-- Statistics for users  
-  - Time that a user took on a specific assignment  
-  - Words per minute (\# of chars divided by 5\)  
-- Save user data in a databa as long as they are logged in
+* Monkeytype-style of program that allows users to type characters needed to create a specific file, the file contains some useful-to-know algorithm  
+  * Actor: Beginner coders, students, or people that would like to increase their knowledge of coding would use the site.  
+  * Trigger: It triggers when the user starts typing or practicing their code shown by the algorithm on their screen with a timer.   
+  * Preconditions: The user should be able to reach the website or the page and click on the typing box.  
+  * Postconditions: They can look at their stats displayed to them after they are done typing.  
+  * Steps: They gonna open a web browser and type in the Spryntax. Then they can create an account or can directly start typing and check their coding efficiency. After completing they can view their result which would be presented to them on their screen.    
+  * Extensions: The user can look at their stats after completing a coding session.  
+  * Exceptions: If the user doesn’t have internet or the web browser is not supporting the website. Another exception would be if the site is crashing. 
+* Leaderboard for fastest times  
+  * Actor: Users viewing the highest wpm for each algorithm separated 2 sections, one section for python and another for c.  
+  * Trigger: The user types at the 10-top highest wpm speed for an algorithm.  
+  * Preconditions: The user has an account.  
+  * Postconditions: The user will be added to the leaderboard, and all the other positions will be modified dynamically so only the top 10 are present.  
+  * Steps: The user types the algorithm, and their wpm will be compared to the leaderboard at the end of their session (once they finished typing all the characters. If their wpm is higher than one of those in the leaderboard, then the user will be put in front of those that have lower wpm and behind those that have higher wpm.  
+  * Extensions: The user\_id and wpm statistic of the user will be put into the leaderboard table in the database. The leaderboard page would dynamically change to reflect these changes.  
+  * Exceptions: If the user doesn’t type with a wpm rate which is greater than any of the wpm in the leaderboard. 
+* Statistics for users
+  * Actor: User viewing their progress on the website.
+  * Trigger: Accessing the profile page or the level select.
+  * Preconditions: The user has an account.
+  * Postconditions: None.
+  * Steps: 
+	- The user clicks on their profile.
+	- The user’s data is accessed and then parsed into a generalized statistic page summarising the user’s data.
+	- The user clicks on the level select.
+	- The user’s data is accessed and is displayed independent per level.
+  * Extensions: Time taken and other statistics related to the user’s interactions on a given algorithm.
+  * Exceptions: The user data fails to load.
+* Save user data in a database as long as they are logged in  
+  * Actor: User trying to log in to save their data.  
+  * Trigger: User wants to save their data so they must log in so their data can be stored  
+  * Preconditions: User wants to learn about coding or improve their coding ability.   
+  * Postconditions: The user data being successfully saved with the user logged in.  
+  * List of steps: Users must first sign up, or if they have an account log in. Once logged in the website must be linked to the database so their data can be stored.  
+  * Extensions: Data is saved, stored, and successfully saved in the database.  
+  * Exceptions: Users could be unable to create an account by not having adequate internet connection to access the website, or other factors.
+* Allow users to favorite a level
+  * Actor: User wants to favorite a typing level they like
+  * Trigger: User clicks on the favorite button either in the level itself or on the levels menu
+  * Preconditions: User has an account
+  * Postconditions: The user can click on the favorite button to favorite or to unfavorite. This information will be saved on the user’s page and on the    website database
+  * Steps: 
+	- User signs up or signs in to their account
+	- User goes to the levels menu
+	- User clicks on the favorites button on the level menu or they can click into the level to click the favorites button
+	- The user can go to their user page to see their favorites
+	- The favorites data will be saved to the database
+  * Extensions: The favorites data is saved to the database and linked to the user
+  * Exceptions: The user does not have an account, or stable internet connection so the favorite information is not correctly loaded into the database. Or the database crashes.
+
+* Code Comments  
+  * Actor: A user wanting to view a comment for some line of code   
+  * Trigger: User clicks a “(?)” symbol next to a line of code on the Level type site  
+  * Preconditions: A line has been fully typed with no errors  
+  * Postconditions: A modal appears and can be closed via an “x” at the top right  
+  * Steps:  
+    * User starts a Level  
+    * User goes to that Level’s typing screen  
+    * User types a full line containing no errors  
+      * The site will automatically have a “(?)” appear at the end of this line  
+    * User clicks the “(?)” symbol  
+    * Modal appears with the sought after comment   
+      * Modal can be closed via an “x” at its top right  
+  * Extensions: None (local javascript will be ran with no communication with the SQL or Express servers)  
+  * Exceptions: None (level data, including comments, are stored with local javascript)
 
 Stretch Goals:
 - “Profile” for a particular user that other users can view  
@@ -230,3 +286,76 @@ Documentation will be written as code documentation as well as user documentatio
 - For **user documentation**, there will be an on-side documentation done through tooltips to aid in every interactable interface on a given page. This will apply to textboxes and clickable elements to indicate what interaction should take place.
 
 On top of the in-code documentation, we will utilize a Google Document that will outline every file and its related classes, functions, and variables, and provide a CTRL+F-like library for people to easily jump around in to find definitions quickly and focus on coding.
+
+### VI. Testing and Continous Integrations:
+### Your test-automation infrastructure (e.g., JUnit, Mocha, Pytest, etc).
+
+We will be using Mocha for our test automation. Mocha is a JavaScript test framework that runs on Node.js. 
+
+### A brief justification for why you chose that test-automation infrastructure.
+We are using Mocha since we are using Node.js, which enables us to test very easily. Since we have a website with a lot of JavaScript functionality, especially for fetching the database, Mocha can help us greatly. For example, we can create functions that will send JSON files through the website to test if the database is correctly getting the data. This means we will be able to test CRUD functionality to see if the view is properly interacting with the model through our controllers (Since we are using an MVC software architecture). Mocha lets us test individual services, which works well with our project as we are using microservices as well.
+
+### How to add a new test to the code base.
+You first create a new testing script that can run on the code base. Then you log in to circleCI and add the testing script to the site. Then you add the testing script name into the VM execution environment and add code to ensure the new test runs when the VM is executed. 
+
+### Your CI service and how your project repository is linked to it.
+Linking the CI service to the project repository is easy, it’s all set up within the CircleCI website, where the owner of the project repository can connect it. Then CircleCI will be able to trigger automated scripts whenever changes are pushed to the repository. This is done from a config file being put in the root directory which implements the CircleCI pipeline, including jobs to be executed on each build.
+
+### A brief justification for why you chose that CI service.
+We choose CircleCI for our CI hosting service. One of the big reasons was it allowed for a free plan. Another reason is that CircleCI has extensive user documentation and has a Node.js tutorial for CircleCI. We built our program based on Node.js and html, so with CircleCI having guides Node.js
+
+### A pros/cons matrix for at least three CI services that you considered.
+**CircleCI**
+
+| Pros: | Cons: |
+| :---- | :---- |
+| Free | Up to 5 active users a month |
+| Extensive documentation | Cap of 6,000 build minutes |
+| Node.js support |  |
+| Cloud based |  |
+
+**Travis**
+
+| Pros: | Cons: |
+| :---- | :---- |
+| Extensive documentation | Not Free  |
+| Identified support for Node.js | 420,000 Linux build credits per year (Would not reach in this class, but could be a problem on larger projects) |
+| Premium VMs available |  |
+
+
+#### GitHub Actions
+| Pros  | Cons |
+| ------------- | ------------- |
+| Extensive documentation  | Did not clearly state support for Node.js  |
+| Free | Debugging can be difficult |
+| Native github integration | Over reliance on github services |
+| User friendly | Limits on certain usages/actions for the free tier |
+
+### Which tests will be executed in a CI build
+#### Use Cases:
+
+1. Monkeytype-style of program that allows users to type characters needed to create a specific file, the file contains some useful-to-know algorithm 
+   * Unit Test
+     * Manual testing within the “input string” validation function to show that the end state is reachable.
+   * Validation Test
+     * Manual testing in the automated process of showing code comments to the user.
+     * Manual testing of input processing the user input via AutoHotKey strokes to speed up typing tests.
+   * Integration Test
+     * Manual testing navigation between different levels to test that the code snippet and comments appear properly.
+   * System Test
+     * Manual testing different aspect ratios of the site, adjusting the font size to fit inline.
+
+4. Save user data in a database as long as they are logged in   
+   * Unit Test  
+  * Test if it successfully connects to the database and can store and get values  
+  * Validation Test  
+    * Ensure people are able to log in with valid email and password and are not able to log in with invalid email and password.  
+    * Additionally users should not be able to sign up for an account with a username that already exists  
+  * Integration Test  
+    * When run together is username and id stored in sessions  
+  * System Test  
+    * On both chrome and edge:  
+      * Log in   
+      * Navigate to algorithm  
+      * Type algorithm
+
