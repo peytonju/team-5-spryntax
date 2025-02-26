@@ -132,6 +132,7 @@ function validate() {
       $("#wincheck").addClass("lose");
     }
     $("#wincheck").html(displaywin);
+    let WPM = (Math.round(spans / 5) / (diff / 1000 / 60)).toFixed(2);
   }
 }
 
