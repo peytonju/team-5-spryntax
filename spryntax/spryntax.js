@@ -38,8 +38,6 @@ app.get("/", (request, response) => {
     response.status(200).sendFile(PATH.join(PATH_VIEWS, 'index.html'));
 });
 
-
-
 app.get("/login", (request, response) => {
     response.status(200).sendFile(PATH.join(PATH_VIEWS, "login.html"));
 });
@@ -97,7 +95,6 @@ app.get('/level_select/:name_level/:name_language/end', (request, response) => {
 app.get('/leaderboard', leaderboardController.table_select);
 
 
-
 /*****************************************Database******************************************************/
 
 app.use(session({
@@ -108,10 +105,10 @@ app.use(session({
 }));
 
 const con=mysql.createConnection({
-    host:'engr-db.engr.oregonstate.edu',
-    user:'cs362_polasekj',
-    password:'dwMoR2sY',
-    database:'cs362_polasekj',
+    host:'**',
+    user:'**',
+    password:'**',
+    database:'**',
     port: 3307
 });
 

@@ -9,10 +9,15 @@
     table, th, td {
         border:1px solid white;
         margin: 0px auto;
+        width: 100px;
+        height: 50px;
+        text-align: center;
     }
-    button {
-        margin: 0px auto;
-        align-items: center;
+    button { 
+        width: 100px;
+        height: 50px;
+        font-size: 15px;
+        font-weight: bold;
     }
 </style>
 
@@ -34,26 +39,29 @@
     <h2>Leaderboard</h2>
     
     <!-- have buttons for python and c++ -->
-    <button class="python-button" onclick="">Python </button>
-    <button class="c++-button" onclick="">C++</button>
+    <div style="margin: 0 auto; width: 656px; text-align:center">
+        <button class="python-button" id = "python-button" onclick="filterLeaderboard('Python')">Python </button>
+        <button class="c++-button" onclick="filterLeaderboard('C++')">C++</button>
+    </div>
+    
+    <h3 style="text-align:center">Leaderboard with all stats</h3>
     <div class="leaderboard-table">
         <table id="leaderboard-table" style="width:50%">
             <thead>
+
                 <tr>
                     <th>Rank</th>
                     <th>Username</th>
                     <th>Score (WPM)</th>
-                    <th>Language</th>
                 </tr>
             </thead>
 
             <tbody>
                 <% leaderboards.forEach(entry => { %>
-                    <tr>
+                     <tr class="leaderboard-row" data-language="<%= entry.program_language %>">
                         <td><%= entry.rank_place %></td>
-                        <td><%= entry.user_id %></td>
+                        <td><%= entry.username %></td>
                         <td><%= entry.wpm %></td>
-                        <td><%= entry.program_language %></td>
                     </tr>
                     
                     <!--<td><%= entry.program_language %></td>-->
@@ -61,6 +69,26 @@
             </tbody>
         </table>
     </div>
-   
+
+    <script>
+        function filterLeaderboard(language) {
+            let rows = document.querySelectorAll(".leaderboard-row");
+            let h3 = document.querySelector("h3");
+
+            rows.forEach(row => {
+                if (row.getAttribute("data-language") === language) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            if (language === 'Python') {
+                h3.textContent = "Python Leaderboard";
+            } else if (language === 'C++') {
+                h3.textContent = "C++ Leaderboard";
+            }
+        }
+    </script>
 </body>
 </html>
