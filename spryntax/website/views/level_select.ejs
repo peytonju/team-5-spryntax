@@ -24,9 +24,6 @@
     </header>
     <h1 class="gradient-text" data-text="Level Select">Level Select</h1>
 
-
-    
-
     <!-- Algorithm List -->
     <div class="gray-background">
         <div class="card-container">
@@ -34,44 +31,66 @@
                 <div class="custom-card">
                     <div class="card-header">
                         <h3><%= nonreadable_to_readable[level] %></h3> 
-                        <button class="favorite-button" data-algorithm="<%= nonreadable_to_readable[level] %>">
-                            Favorite
-                        </button>
+                        <% if (favorites && favorites.includes(level)) { %>
+                          <button class="unfavorite-button" data-algorithm="<%= level %>">Delete</button>
+                        <% } else { %>
+                          <button class="favorite-button" data-algorithm="<%= level %>">Favorite</button>
+                        <% } %>
                     </div>
-                    <p><strong>Difficulty:</strong> <%= level_tags[level]["difficulty"] %></p>
-                    <p><strong>Type:</strong> <%= level_tags[level]["type"] %></p>
+                    <p><strong>Difficulty:</strong> <%= level_tags[level].difficulty %></p>
+                    <p><strong>Type:</strong> <%= level_tags[level].type %></p>
                     <p>
-                            <button type="submit" onclick="location.href = 'level_select/<%-level%>/c';">C</button>
-                            <button type="submit" onclick="location.href = 'level_select/<%-level%>/py';">Python</button>
+                        <button type="button" onclick="location.href='level_select/<%- level %>/c';">C</button>
+                        <button type="button" onclick="location.href='level_select/<%- level %>/py';">Python</button>
                     </p>
                 </div>
-            <% }; %>
+            <% } %>
         </div>
     </div>
     <script>
-        document.querySelectorAll('.favorite-button').forEach(button => {
-          button.addEventListener('click', function() {
-            const algorithmName = this.getAttribute('data-algorithm');
-      
-            fetch('/favorites/add', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ algorithmName: algorithmName })
-            })
-            .then(response => response.json())
-            .then(data => {
-              if (data.success) {
-                alert("Favorite added!");
-              } else {
-                alert("Error adding favorite: " + data.error);
-              }
-            })
-            .catch(err => console.error('Error:', err));
-          });
+      // For adding a favorite
+      document.querySelectorAll('.favorite-button').forEach(button => {
+        button.addEventListener('click', function() {
+          const levelKey = this.getAttribute('data-algorithm');
+          fetch('/favorites/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ algorithmName: levelKey })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              alert("Favorite added!");
+              location.reload();
+            } else {
+              alert("Error: " + (data.message || data.error));
+            }
+          })
+          .catch(err => console.error('Error:', err));
         });
-    </script>
+      });
 
+      // For removing a favorite
+      document.querySelectorAll('.unfavorite-button').forEach(button => {
+        button.addEventListener('click', function() {
+          const levelKey = this.getAttribute('data-algorithm');
+          fetch('/favorites/remove', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ algorithmName: levelKey })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              alert("Favorite removed!");
+              location.reload();
+            } else {
+              alert("Error: " + (data.message || data.error));
+            }
+          })
+          .catch(err => console.error('Error:', err));
+        });
+      });
+    </script>
 </body>
 </html>
