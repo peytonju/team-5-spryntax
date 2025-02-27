@@ -392,40 +392,40 @@ We choose CircleCI for our CI hosting service. One of the big reasons was it all
 6. Allow users to favorite a level \- Aidan  
    * Unit Test  
      * Test if it successfully connects to the database and can store and get favorite values  
-1. Connect to the website  
-2. Log in  
-3. Check favorites tab  
-4. Log out and in on a different browser/device  
-5. Check favorites tab  
+	1. Connect to the website  
+	2. Log in  
+	3. Check favorites tab  
+	4. Log out and in on a different browser/device  
+	5. Check favorites tab  
    * Validation Test  
      * When a test is favorites, it should be added to the list of favorites and increase the size of the list  
-1. Connect to the website  
-2. Log in  
-3. Favorite a level  
-4. Check favorites tab  
-5. Log out and in on a different browser/device  
-6. Check favorites tab  
+	1. Connect to the website  
+	2. Log in  
+	3. Favorite a level  
+	4. Check favorites tab  
+	5. Log out and in on a different browser/device  
+	6. Check favorites tab  
    * When a test is unfavorited, it should be deducted from the list of favorites and decrease the size of the list  
-1. Connect to the website  
-2. Log in  
-3. Favorite a level  
-4. Check favorites tab  
-5. Unfavorite a level  
-6. Log out and in on a different browser/device  
-7. Check favorites tab  
+	1. Connect to the website  
+	2. Log in  
+	3. Favorite a level  
+	4. Check favorites tab  
+	5. Unfavorite a level  
+	6. Log out and in on a different browser/device  
+	7. Check favorites tab  
    * Integration Test  
      * Favorites page loads all correct values  
-1. Connect to the website  
-2. Log in  
-3. Favorite a level  
-4. Check favorites tab  
-5. Log out and in on a different browser/device  
+	1. Connect to the website  
+	2. Log in  
+	3. Favorite a level  
+	4. Check favorites tab  
+	5. Log out and in on a different browser/device  
 6. Check favorites tab  
    * System Test  
      * Works on all browsers  
-1. Connect to the website  
-2. Log in  
-3. Favorite a level  
-4. Check favorites tab  
-5. Log out and in on a different browser  
-6. Check favorites tab
+	1. Connect to the website  
+	2. Log in  
+	3. Favorite a level  
+	4. Check favorites tab  
+	5. Log out and in on a different browser  
+	6. Check favorites tab
