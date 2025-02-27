@@ -28,6 +28,14 @@ const db = require('./config/database');
 const session = require('express-session');
 const express = require('express');
 const app = express();
+
+app.use(session({
+    secret: 'ADvcxexXP!2', // Make stronger
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Set to true if using HTTPS
+}));
+
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -62,7 +70,33 @@ app.get('/stats', statsController.get_stat);
 
 /*favorites*/
 app.get('/favorites', favoritesController.get_favorite);
+app.post('/favorites/add', favoritesController.addFavorite);
 
+
+addFavorite: (req, res) => {
+    console.log("Session:", req.session); // Log session info
+    
+    if (!req.session.user_id) {
+      console.error('User not logged in');
+      return res.status(401).json({ error: "User not logged in" });
+    }
+    
+    const user_id = req.session.user_id;
+    const algorithmName = req.body.algorithmName;
+  
+    if (!algorithmName) {
+      console.error('Algorithm name missing');
+      return res.status(400).json({ error: "Algorithm name is required" });
+    }
+  
+    Favorites.addFavorite(user_id, algorithmName, (err, result) => {
+      if (err) {
+        console.error('Error adding favorite:', err);
+        return res.status(500).json({ error: "Database error" });
+      }
+      res.json({ success: true });
+    });
+  }
 
 /*****************************************LEVELS******************************************************/
 app.get('/level_select', (request, response) => {
@@ -106,12 +140,6 @@ app.get('/leaderboard', leaderboardController.table_select);
 
 /*****************************************Database******************************************************/
 
-app.use(session({
-    secret: 'ADvcxexXP!2', // Make stronger
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Set to true if using HTTPS
-}));
 
 
 app.post('/signup.php', async (req, res) => {

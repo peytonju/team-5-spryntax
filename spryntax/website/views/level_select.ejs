@@ -33,7 +33,10 @@
             <% for (let level in level_tags) { %>
                 <div class="custom-card">
                     <div class="card-header">
-                        <h3><%= nonreadable_to_readable[level] %></h3> <button id="Faves">Favorites</button>
+                        <h3><%= nonreadable_to_readable[level] %></h3> 
+                        <button class="favorite-button" data-algorithm="<%= nonreadable_to_readable[level] %>">
+                            Favorite
+                        </button>
                     </div>
                     <p><strong>Difficulty:</strong> <%= level_tags[level]["difficulty"] %></p>
                     <p><strong>Type:</strong> <%= level_tags[level]["type"] %></p>
@@ -45,6 +48,30 @@
             <% }; %>
         </div>
     </div>
+    <script>
+        document.querySelectorAll('.favorite-button').forEach(button => {
+          button.addEventListener('click', function() {
+            const algorithmName = this.getAttribute('data-algorithm');
+      
+            fetch('/favorites/add', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ algorithmName: algorithmName })
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                alert("Favorite added!");
+              } else {
+                alert("Error adding favorite: " + data.error);
+              }
+            })
+            .catch(err => console.error('Error:', err));
+          });
+        });
+    </script>
 
 </body>
 </html>
