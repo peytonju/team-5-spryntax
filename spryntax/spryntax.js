@@ -27,6 +27,7 @@ const db = require('./config/database');
 
 const session = require('express-session');
 const express = require('express');
+const reportController = require("./app/controllers/reportController");
 const app = express();
 
 app.use(session({
@@ -61,16 +62,15 @@ app.get("/settings", (request, response) => {
     response.status(200).sendFile(PATH.join(PATH_VIEWS, "settings.html"));
 });
 
-app.get("/report", (request, response) => {
-    response.status(200).sendFile(PATH.join(PATH_VIEWS, "report.html"));
-});
-
 /*stats*/
 app.get('/stats', statsController.get_stat);
 
 /*favorites*/
 app.get('/favorites', favoritesController.get_favorite);
 app.post('/favorites/add', favoritesController.addFavorite);
+
+/*report*/
+app.get('/report', reportController.report_select);
 
 
 addFavorite: (req, res) => {
@@ -251,14 +251,17 @@ app.get('/test', (req, res) => {                                //Can print user
 app.post('/report.php', (req, res) => {
     const name = req.body.name; 
     const problem = req.body.problem;
-    
-    //add an error message if name or problem is missing
+
+    if (!name || !problem) {
+        return res.render('report', { message: 'Please enter all fields before submitting', success: false });
+    }
 
     const last_id = "SELECT * FROM bug_reports ORDER BY id DESC LIMIT 1";   //gets the latest id number
     
     db.query(last_id, (err, result) => {
         if(err){
             console.log(err)
+            return res.render('report', { message: "Error with database.", success: false });
         }
         else{
             let new_id = 1;
@@ -271,12 +274,11 @@ app.post('/report.php', (req, res) => {
             db.query(query, [new_id, name, problem], (err, result) => {
                 if(err){
                     console.log(err)
+                    return res.render('report', { message: "Error with submitting the bug report.", success: false });
                 }else{
                     console.log("Added bug report to database")
+                    res.render('report', { message: "Thank you! Your bug report has been submitted and will be looked at.", success: true });
 
-                    //add a message later
-                    //res.send("Thank You! Your bug report has been submitted.");
-                    res.redirect('/');
                 }
             });
         }

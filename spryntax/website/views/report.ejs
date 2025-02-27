@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet" href="spryntax.css">
-        <!--<script src="spryntax_main.js"></script> -->
-    
-    </head>
+<head>
+    <title>Bug Report</title>
+    <link rel="stylesheet" href="spryntax.css">
+    <script src="spryntax_main.js"></script>
+</head>
+    <style>
+        button { 
+            width: 100px;
+            height: 30px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 25px; 
+            font-weight: bold;
+        }
+        #reportForm {
+            display: block;
+        }
+    </style>
     <header>
         <div class="top">
             <nav> 
@@ -21,11 +39,26 @@
         </div>
     </header>
 
-    <body class="text-center"> 
+    <body class="text-center" > 
         <h1 class="gradient-text" data-text="Report Bugs">Report Bugs</h1>
-        <div class="container">
+        <div class="container" style="margin: 0 auto; width: 656px; text-align:center">
 
-            <form action="/report.php" method="post" >
+            <% if (typeof message !== 'undefined') { %>
+                <div class="message <%= success ? 'success' : 'error' %>">
+                    <%= message %>
+                </div>
+            <% } %>
+            <% if (typeof message !== 'undefined') { %>
+                <% if (success === true) { %>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.getElementById('reportForm').style.display = 'none';
+                        });
+                    </script>
+                    <% } %>
+            <% } %>
+
+            <form id="reportForm" action="/report.php" method="post" >
                 <div class="form-group">
                     <label for="inputname">Username: </label>
                     <input type="text" class="form-control" id="name" name="name" aria-describedby="name" placeholder="Enter your name">
@@ -37,6 +70,10 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+
         </div>
+        <script>
+
+        </script>
     </body>
 </html>
