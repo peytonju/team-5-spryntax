@@ -3,6 +3,7 @@
 <head>
     <title>Favorites</title>
     <link rel="stylesheet" href="spryntax.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <script src="spryntax_main.js"></script>
 </head>
 <body>
@@ -22,5 +23,68 @@
         </div>
     </header>
     <h1 class="gradient-text" data-text="Favorites">Favorites</h1>
+
+    <!-- Favorites List -->
+    <div class="gray-background">
+        <div class="card-container">
+            <% favorites.forEach(favorite => { %>
+                <% 
+                    // Start with the stored value
+                    let levelKey = favorite.algorithm_name;
+                    // If level_tags doesn't have this key, assume it's a friendly name and convert it:
+                    if (!level_tags[levelKey] && typeof readable_to_nonreadable !== 'undefined') {
+                        levelKey = readable_to_nonreadable[favorite.algorithm_name] || favorite.algorithm_name;
+                    }
+                    const levelInfo = level_tags[levelKey];
+                    // Get the friendly display name from your mapping
+                    const friendlyName = nonreadable_to_readable[levelKey] || levelKey;
+                %>
+                <div class="custom-card">
+                    <div class="card-header">
+                        <h3><%= friendlyName %></h3>
+                        <button class="unfavorite-button" data-algorithm="<%= levelKey %>">
+                            Unfavorite
+                        </button>
+                    </div>
+                    <% if(levelInfo) { %>
+                        <p><strong>Difficulty:</strong> <%= levelInfo.difficulty %></p>
+                        <p><strong>Type:</strong> <%= levelInfo.type %></p>
+                    <% } else { %>
+                        <p>No level details available.</p>
+                    <% } %>
+                    <p>
+                        <button type="button" onclick="location.href = 'level_select/<%- levelKey %>/c';">C</button>
+                        <button type="button" onclick="location.href = 'level_select/<%- levelKey %>/py';">Python</button>
+                    </p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <script>
+      // Attach event listeners for unfavorite buttons
+      document.querySelectorAll('.unfavorite-button').forEach(button => {
+        button.addEventListener('click', function() {
+          const levelKey = this.getAttribute('data-algorithm');
+          fetch('/favorites/remove', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ algorithmName: levelKey })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              alert("Favorite removed!");
+              location.reload(); // Reload to update the favorites list
+            } else {
+              alert("Error removing favorite: " + data.error);
+            }
+          })
+          .catch(err => console.error('Error:', err));
+        });
+      });
+    </script>
 </body>
 </html>
