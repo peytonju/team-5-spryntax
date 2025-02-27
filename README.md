@@ -344,7 +344,40 @@ We choose CircleCI for our CI hosting service. One of the big reasons was it all
      * Manual testing navigation between different levels to test that the code snippet and comments appear properly.
    * System Test
      * Manual testing different aspect ratios of the site, adjusting the font size to fit inline.
-    
+2. Leaderboard for fastest times
+   * Unit Test
+     * Check its connection to the database and if it can get and print out the leaderboard data to page
+     * Steps:
+          * Go to the leaderboard page and see if there is any data on data. If there is then the database is connected, if not then the connection failed
+   * Validation Test
+     * When a new high score is achieved, it should be added to the leaderboard. 
+     * Steps:
+          * Login in or create account
+          * Obtain a high score or just use the database to add a new score to leaderboard table
+          * Go to leaderboard page
+          * Check if the added score/data is in the leaderboard table
+   * Integration Test
+     * Check if it can get and print out the leaderboard data to page and it can divided into “python” and “c++” section
+          * Manually test the two language buttons to make sure the table is able to filter
+     *  Steps:
+          * Login in or create account
+          * Obtain a high score or just use the database to add a new score to leaderboard table
+          * Go to leaderboard page
+          * Check if the added score/data is in the leaderboard table
+          * Click and use the filter buttons on the page to see if the table changes with each click
+          * Verify that the information is correct
+		
+   * System Test
+     *  When a new high score is achieved, the user should be able to view their score in the leaderboard right away
+          * The user should be able to view the leaderboard in chrome and edge
+          * Test the different aspect ratios
+     *  Steps:
+          * Login in or create account
+          * Obtain a high score or just use the database to add a new score to leaderboard table
+          * Go to leaderboard page right away
+          * Check if the added score/data is in the leaderboard table
+          * Do this process on chrome and edge and try out different window/aspect sizes
+
 4. Report a bug  
    * Unit Test  
      * Server-side input handler that checks whether the form data is valid and test it with good and bad inputs.  
