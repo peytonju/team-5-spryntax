@@ -42,6 +42,7 @@
     
     <!-- have buttons for python and c++ -->
     <div style="margin: 0 auto; width: 656px; text-align:center">
+        <button class="all-button" onclick="filterLeaderboard('all')">All</button>
         <button class="python-button" id = "python-button" onclick="filterLeaderboard('Python')">Python </button>
         <button class="c++-button" onclick="filterLeaderboard('C++')">C++</button>
     </div>
@@ -55,6 +56,7 @@
                     <th>Rank</th>
                     <th>Username</th>
                     <th>Score (WPM)</th>
+                    <th class = "language">Language</th>
                 </tr>
             </thead>
 
@@ -64,6 +66,7 @@
                         <td><%= entry.rank_place %></td>
                         <td><%= entry.username %></td>
                         <td><%= entry.wpm %></td>
+                        <td class = "language"><%= entry.program_language %></td>
                     </tr>
                     
                     <!--<td><%= entry.program_language %></td>-->
@@ -76,14 +79,31 @@
         function filterLeaderboard(language) {
             let rows = document.querySelectorAll(".leaderboard-row");
             let h3 = document.querySelector("h3");
+            let languageHeader = document.querySelector("th.language");
+            let languageRow = document.querySelectorAll("td.language");
 
             rows.forEach(row => {
                 if (row.getAttribute("data-language") === language) {
                     row.style.display = "";
+                    
                 } else {
                     row.style.display = "none";
+                    languageHeader.style.display = "none";
+                    languageRow.forEach(cell => cell.style.display = "none");
+                  
                 }
             });
+            //resets the table if all button is used
+            if (language === 'all') {
+                rows.forEach(row => {
+                    row.style.display = ""; 
+
+                    languageHeader.style.display = "";
+                    languageRow.forEach(cell => cell.style.display = "");
+                });
+                h3.textContent = "Leaderboard with all stats";
+                return;
+            }
 
             if (language === 'Python') {
                 h3.textContent = "Python Leaderboard";
