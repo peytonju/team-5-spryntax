@@ -24,37 +24,50 @@
     </header>
     <h1 class="gradient-text" data-text="Favorites">Favorites</h1>
 
-    <!-- Favorites List -->
+    <!-- Favorites List or Message -->
     <div class="gray-background">
-        <div class="card-container">
-            <% favorites.forEach(favorite => { %>
-                <% 
-                    // favorite.algorithm_name is the level key.
-                    const levelKey = favorite.algorithm_name;
-                    const levelInfo = level_tags[levelKey];
-                    const friendlyName = nonreadable_to_readable[levelKey] || levelKey;
-                %>
-                <div class="custom-card">
-                    <div class="card-header">
-                        <h3><%= friendlyName %></h3>
-                        <button class="unfavorite-button" data-algorithm="<%= levelKey %>">Delete</button>
+        <% if (!favorites) { %>
+            <div class="gradient-text" style="padding: 20px; text-align: center;">
+                Log in or sign up to see your favorites.
+            </div>
+        <% } else { %>
+            <div class="card-container">
+                <% if (favorites.length === 0) { %>
+                    <div class="gradient-text" style="padding: 20px; text-align: center;">
+                        You have no favorites yet.
                     </div>
-                    <% if(levelInfo) { %>
-                        <p><strong>Difficulty:</strong> <%= levelInfo.difficulty %></p>
-                        <p><strong>Type:</strong> <%= levelInfo.type %></p>
-                    <% } else { %>
-                        <p>No level details available.</p>
-                    <% } %>
-                    <p>
-                        <button type="button" onclick="location.href='level_select/<%- levelKey %>/c';">C</button>
-                        <button type="button" onclick="location.href='level_select/<%- levelKey %>/py';">Python</button>
-                    </p>
-                </div>
-            <% }); %>
-        </div>
+                <% } else { %>
+                    <% favorites.forEach(favorite => { %>
+                        <% 
+                            // favorite.algorithm_name should be the level key.
+                            const levelKey = favorite.algorithm_name;
+                            const levelInfo = level_tags[levelKey];
+                            const friendlyName = nonreadable_to_readable[levelKey] || levelKey;
+                        %>
+                        <div class="custom-card">
+                            <div class="card-header">
+                                <h3><%= friendlyName %></h3>
+                                <button class="unfavorite-button" data-algorithm="<%= levelKey %>">Delete</button>
+                            </div>
+                            <% if (levelInfo) { %>
+                                <p><strong>Difficulty:</strong> <%= levelInfo.difficulty %></p>
+                                <p><strong>Type:</strong> <%= levelInfo.type %></p>
+                            <% } else { %>
+                                <p>No level details available.</p>
+                            <% } %>
+                            <p>
+                                <button type="button" onclick="location.href='level_select/<%- levelKey %>/c';">C</button>
+                                <button type="button" onclick="location.href='level_select/<%- levelKey %>/py';">Python</button>
+                            </p>
+                        </div>
+                    <% }); %>
+                <% } %>
+            </div>
+        <% } %>
     </div>
+
     <script>
-      // Attach event listeners for unfavorite buttons on favorites page
+      // Attach event listeners for unfavorite buttons (if user is logged in)
       document.querySelectorAll('.unfavorite-button').forEach(button => {
         button.addEventListener('click', function() {
           const levelKey = this.getAttribute('data-algorithm');
