@@ -1,4 +1,6 @@
 # CS 362 Project, Team 5 - Spryntax
+Site available at http://flip1.engr.oregonstate.edu:8080/.  
+Please note that this is only accessible when on OSU's network (note that it is also accessible via VPN).
 
 # Project Proposal
 
