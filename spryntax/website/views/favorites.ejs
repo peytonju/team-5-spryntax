@@ -48,7 +48,7 @@
                         <div class="custom-card">
                             <div class="card-header">
                                 <h3><%= friendlyName %></h3>
-                                <button class="unfavorite-button" data-algorithm="<%= levelKey %>">Delete</button>
+                                <button class="heart-button favorited" data-algorithm="<%= levelKey %>">&#x2665;</button>
                             </div>
                             <% if (levelInfo) { %>
                                 <p><strong>Difficulty:</strong> <%= levelInfo.difficulty %></p>
@@ -68,27 +68,28 @@
     </div>
 
     <script>
-      // Attach event listeners for unfavorite buttons (if user is logged in)
-      document.querySelectorAll('.unfavorite-button').forEach(button => {
-        button.addEventListener('click', function() {
-          const levelKey = this.getAttribute('data-algorithm');
-          fetch('/favorites/remove', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ algorithmName: levelKey })
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.success) {
-              alert("Favorite removed!");
-              location.reload();
-            } else {
-              alert("Error: " + (data.message || data.error));
-            }
-          })
-          .catch(err => console.error('Error:', err));
+        // Attach event listeners for the heart button on the favorites page
+        document.querySelectorAll('.heart-button').forEach(button => {
+          button.addEventListener('click', function() {
+            const levelKey = this.getAttribute('data-algorithm');
+            // Since these are already favorited, clicking will remove the favorite.
+            fetch('/favorites/remove', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ algorithmName: levelKey })
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                alert("Favorite removed!");
+                location.reload();
+              } else {
+                alert("Error: " + (data.message || data.error));
+              }
+            })
+            .catch(err => console.error('Error:', err));
+          });
         });
-      });
     </script>
 </body>
 </html>
