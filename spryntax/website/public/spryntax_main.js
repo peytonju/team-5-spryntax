@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const nav = document.querySelector('.nav-container nav');
   const links = document.querySelectorAll('.nav-container nav a');
 
-  // Function to position the indicator under a given link.
+  // Function to position and style the indicator under a given link.
   function moveIndicator(link) {
     const navRect = nav.getBoundingClientRect();
     const linkRect = link.getBoundingClientRect();
@@ -225,24 +225,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Attach mouseenter event to all links.
+  // Disable transitions initially so the indicator appears in the correct position without animating.
+  indicator.style.transition = 'none';
+
+  // On page load, position the indicator under the active link (or logo if none are active).
+  const activeLink = document.querySelector('.nav-container nav a.active') || document.querySelector('.nav-left .logo');
+  if (activeLink) {
+    moveIndicator(activeLink);
+  }
+
+  // Re-enable the transitions after a short delay.
+  setTimeout(() => {
+    indicator.style.transition = 'left 0.2s ease, width 0.2s ease, background 0.2s ease';
+  }, 50);
+
+  // Attach mouseenter events to all links for hover animation.
   links.forEach(link => {
     link.addEventListener('mouseenter', function() {
       moveIndicator(this);
     });
   });
 
-  // On mouseleave, find the active link (or default to the logo if none).
+  // On mouseleave, move the indicator back to the active link.
   nav.addEventListener('mouseleave', function() {
     const activeLink = document.querySelector('.nav-container nav a.active') || document.querySelector('.nav-left .logo');
     if (activeLink) {
       moveIndicator(activeLink);
     }
   });
-
-  // On page load, move the indicator under the active link.
-  const activeLink = document.querySelector('.nav-container nav a.active') || document.querySelector('.nav-left .logo');
-  if (activeLink) {
-    moveIndicator(activeLink);
-  }
 });
