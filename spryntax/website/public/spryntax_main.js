@@ -156,7 +156,22 @@ function validate() {
     }
     $("#wincheck").html(displaywin);
     let WPM = (Math.round(spans / 5) / (diff / 1000 / 60)).toFixed(2);
+    if (typeof USER_LOGGED_IN !== "undefined" && USER_LOGGED_IN) {
+      // Send the WPM to the server
+      fetch('/stats/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ wpm: WPM })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Stats saved:", data);
+      })
+      .catch(err => console.error("Error saving stats:", err));
+    }
   }
+  
+  
 }
 
 $(document).ready(function () {
