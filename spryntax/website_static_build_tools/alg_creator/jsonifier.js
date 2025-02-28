@@ -1,3 +1,4 @@
+const assert = require("assert");
 const fs = require("fs");
 
 const DIR_WRITE = "levels.json";
@@ -11,10 +12,53 @@ const LANGUAGES = {
     },
     "py": {
         "line": "#",
-        "mline": ["'''", "''''"],
+        "mline": ["'''", "'''"],
         "aline": "#"
     }
 };
+
+
+function sanity_tests() {
+    /* trailing carriages tests */
+    assert(remove_trailing_carriages("↵↵↵↵↵↵") == "");
+    assert(remove_trailing_carriages("↵") == "");
+    assert(remove_trailing_carriages("uy1h49uihsdj124hlasd↵↵↵↵") == "uy1h49uihsdj124hlasd");
+    assert(remove_trailing_carriages("") == "");
+
+    /* trailing spaces tests */
+    assert(remove_trailing_spaces("        ↵") == "↵");
+    assert(remove_trailing_spaces("asdlajsd    ↵") == "asdlajsd↵");
+    assert(remove_trailing_spaces(" ↵") == "↵");
+    assert(remove_trailing_spaces("    asdf↵") == "    asdf↵");
+
+    /* is_line_fluff tests */
+    assert(is_line_fluff("     \r\n\t  ") == true);
+    assert(is_line_fluff("    a   ") == false);
+    assert(is_line_fluff("asdf") == false);
+    assert(is_line_fluff("\r") == true);
+    assert(is_line_fluff("") == true);
+
+    /* comment tests */
+    /* c */
+    assert(is_comment_line("asdf", LANGUAGES["c"]) == 0);
+    assert(is_comment_line("//asdf", LANGUAGES["c"]) == 1);
+    assert(is_comment_line("/* asdf", LANGUAGES["c"]) == 2);
+    assert(is_comment_line("asdf*/", LANGUAGES["c"]) == 3);
+    assert(is_comment_line("/*asdf*/", LANGUAGES["c"]) == 1);
+    /* py */
+    assert(is_comment_line("asdf", LANGUAGES["py"]) == 0);
+    assert(is_comment_line("#asdf", LANGUAGES["py"]) == 1);
+    assert(is_comment_line("'''asdf", LANGUAGES["py"]) == 2);
+    assert(is_comment_line("asdf'''", LANGUAGES["py"]) == 3);
+    assert(is_comment_line("'''asdf'''", LANGUAGES["py"]) == 1);
+
+    /* 
+     * NOTE about block comments!: 
+     *      '''asdf'''asdf
+     *          This is a block comment that has a non-comment next to it-- this entire line will be read as a single comment!
+     * Not currently an issue with how comments are currently done in the algorithms.
+    */
+}
 
 
 function remove_trailing_carriages(line) {
@@ -84,17 +128,17 @@ function line_formatter(line) {
 
 
 function is_comment_line(line, comment_styles) {
-    const CLEAN_LINE = line.replaceAll(" ", "").replaceAll("\t", "");
+    const CLEAN_LINE = line.replaceAll(" ", "").replaceAll("\t", "").replaceAll("\r", "");
     if (CLEAN_LINE.indexOf(comment_styles["line"]) == 0) {
         return 1;
     }
     if (CLEAN_LINE.indexOf(comment_styles["mline"][0]) == 0) {
-        if (CLEAN_LINE.indexOf(comment_styles["mline"][1]) >= 0) {
+        if (CLEAN_LINE.slice(comment_styles["mline"][0].length).indexOf(comment_styles["mline"][1]) >= 0) {
             return 1;
         }
         return 2;
     }
-    if (CLEAN_LINE.indexOf(comment_styles["mline"][1]) == 0) {
+    if ((CLEAN_LINE.indexOf(comment_styles["mline"][1]) >= 0)) {
         return 3;
     }
     return 0;
@@ -102,6 +146,8 @@ function is_comment_line(line, comment_styles) {
 }
 
 function main() {
+    sanity_tests();
+
     let all_jsons = {};
 
     for (const CATEGORY of CATEGORIES) {
