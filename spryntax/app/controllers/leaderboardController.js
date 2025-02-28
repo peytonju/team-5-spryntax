@@ -10,7 +10,8 @@ const leaderboardController = {
       }
       res.render('leaderboard', { 
         leaderboards: leaderboard,
-        username: req.session.username || 'undefined'
+        username: req.session.username || 'undefined',
+        activePage: 'leaderboard'
        });
     });
   }

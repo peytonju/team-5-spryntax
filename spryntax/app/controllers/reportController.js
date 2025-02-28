@@ -10,7 +10,8 @@ const reportController = {
       }
       res.render('report', { 
         reports: reports, 
-        username: req.session.username || 'undefined'
+        username: req.session.username || 'undefined',
+        activePage: 'report'
       });
     });
   }

@@ -232,9 +232,9 @@ br {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 80px; /* default, updated dynamically */
+  width: 80px; 
   height: 3px;
-  background: white; /* default under Spryntax */
+  background: cyan; 
   border-radius: 3px;
   transition: left 0.2s ease, width 0.2s ease, background 0.2s ease;
 }
@@ -263,8 +263,6 @@ br {
   height: 4px;
 }
 
-/* For each link in the left group, set the colors for the circles.
-   (Adjust nth-child indices to match your nav-left order) */
 .nav-left a:nth-child(1)::before { background-color: cyan; }
 .nav-left a:nth-child(1)::after { background-color: cyan; }
 
@@ -283,7 +281,6 @@ br {
 .nav-left a:nth-child(6)::before { background-color: rgb(255, 0, 0); }
 .nav-left a:nth-child(6)::after { background-color: rgb(255, 0, 208); }
 
-/* Right-side link circles (if desired) */
 .nav-right a::before,
 .nav-right a::after {
   content: "";
@@ -380,11 +377,10 @@ br {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 2rem;   /* Adjust size as needed */
+  font-size: 1.5rem;  
   transition: color 0.3s ease;
-  color: #aaa;       /* Default grey color for unselected state */
+  color: white; 
 }
-
 .heart-button.favorited {
   /* Use a gradient fill for the heart icon */
   background-color: red;
@@ -392,5 +388,4 @@ br {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  /* Optionally, you can also adjust font-weight or add a slight scale effect */
 }

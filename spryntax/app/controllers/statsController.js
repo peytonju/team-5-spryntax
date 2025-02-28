@@ -10,7 +10,8 @@ const statsController = {
       }
       res.render('stats', { 
         stats: stats,
-        username: req.session.username || 'undefined'
+        username: req.session.username || 'undefined',
+        activePage: 'stats'
        });
     });
   }

@@ -37,6 +37,13 @@ app.use(session({
     cookie: { secure: false } // Set to true if using HTTPS
 }));
 
+app.use((req, res, next) => {
+    if (typeof res.locals.activePage === 'undefined') {
+      res.locals.activePage = '';
+    }
+    next();
+});
+
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -119,6 +126,7 @@ app.get('/level_select', (req, res) => {
             readable_to_nonreadable: LEVEL_NAME_TO_NONREADABLE,
             nonreadable_to_readable: LEVEL_NAME_TO_READABLE,
             favorites: [],
+            activePage: 'level_select',
             username: username
           });
         }
@@ -128,6 +136,7 @@ app.get('/level_select', (req, res) => {
           readable_to_nonreadable: LEVEL_NAME_TO_NONREADABLE,
           nonreadable_to_readable: LEVEL_NAME_TO_READABLE,
           favorites: userFavorites,
+          activePage: 'level_select',
           username: username
         });
       });
@@ -137,10 +146,12 @@ app.get('/level_select', (req, res) => {
         readable_to_nonreadable: LEVEL_NAME_TO_NONREADABLE,
         nonreadable_to_readable: LEVEL_NAME_TO_READABLE,
         favorites: [],
+        activePage: 'level_select',
         username: username
       });
     }
   });
+  
   
 
 app.get('/level_select/:name_level/:name_language', (request, response) => {

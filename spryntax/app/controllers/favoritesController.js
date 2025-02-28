@@ -15,7 +15,8 @@ const favoritesController = {
         level_tags: JSON_LEVEL_TAGS,
         nonreadable_to_readable: LEVEL_NAME_TO_READABLE,
         readable_to_nonreadable: LEVEL_NAME_TO_NONREADABLE,
-        username: 'undefined'
+        username: 'undefined',
+        activePage: 'favorites'
       });
     }
     // If logged in, fetch favorites only for that user.
@@ -29,7 +30,8 @@ const favoritesController = {
         level_tags: JSON_LEVEL_TAGS,
         nonreadable_to_readable: LEVEL_NAME_TO_READABLE,
         readable_to_nonreadable: LEVEL_NAME_TO_NONREADABLE,
-        username: req.session.username || 'undefined'
+        username: req.session.username || 'undefined',
+        activePage: 'favorites'
       });
     });
   },
