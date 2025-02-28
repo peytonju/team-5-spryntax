@@ -27,19 +27,19 @@
     <!-- Favorites List or Message -->
     <div class="gray-background">
         <% if (!favorites) { %>
-            <div class="gradient-text" style="padding: 20px; text-align: center;">
+            <div class="gradient-text" style="padding: 20px; text-align: center; font-size: 40px">
                 Log in or sign up to see your favorites.
-            </div>
         <% } else { %>
-            <div class="card-container">
+            
                 <% if (favorites.length === 0) { %>
-                    <div class="gradient-text" style="padding: 20px; text-align: center;">
+                    <div class="gradient-text" style="padding: 20px; text-align: center; font-size: 40px;">
                         You have no favorites yet.
                     </div>
+                </div>
+            <div class="card-container">
                 <% } else { %>
                     <% favorites.forEach(favorite => { %>
                         <% 
-                            // favorite.algorithm_name should be the level key.
                             const levelKey = favorite.algorithm_name;
                             const levelInfo = level_tags[levelKey];
                             const friendlyName = nonreadable_to_readable[levelKey] || levelKey;
@@ -67,7 +67,6 @@
     </div>
 
     <script>
-      // Attach event listeners for unfavorite buttons (if user is logged in)
       document.querySelectorAll('.unfavorite-button').forEach(button => {
         button.addEventListener('click', function() {
           const levelKey = this.getAttribute('data-algorithm');
