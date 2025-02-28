@@ -206,3 +206,44 @@ $(document).ready(function () {
     validate();
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const indicator = document.getElementById('indicator');
+    const nav = document.querySelector('.nav-container nav');
+    const links = document.querySelectorAll('.nav-container nav a');
+
+    // Function to position the indicator under a given link.
+    function moveIndicator(link) {
+      const navRect = nav.getBoundingClientRect();
+      const linkRect = link.getBoundingClientRect();
+      const left = linkRect.left - navRect.left;
+      indicator.style.left = left + 'px';
+      indicator.style.width = linkRect.width + 'px';
+      // Set the indicator background based on the link's data-gradient.
+      const gradient = link.getAttribute('data-gradient');
+      if (gradient) {
+        indicator.style.background = gradient;
+      }
+    }
+
+    // Attach mouseenter events to all links.
+    links.forEach(link => {
+      link.addEventListener('mouseenter', function() {
+        moveIndicator(this);
+      });
+    });
+
+    // Reset indicator when leaving the nav to the default (Spryntax logo).
+    nav.addEventListener('mouseleave', function() {
+      const logo = document.querySelector('.nav-left .logo');
+      if (logo) {
+        moveIndicator(logo);
+      }
+    });
+
+    // On page load, position the indicator under the logo.
+    const logo = document.querySelector('.nav-left .logo');
+    if (logo) {
+      moveIndicator(logo);
+    }
+  });

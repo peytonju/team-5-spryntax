@@ -188,44 +188,134 @@ br {
   }
 }
 
-/* Navigation bar */
-.top {
-  overflow: hidden !important;
-  background-color: #000000 !important;
-  border-style: solid !important;
-  border-color: cyan !important;
-  border-radius: 25px !important;
+/* Navigation Container */
+.nav-container {
+  background-color: #333; /* Matches page background */
+  padding: 0 20px;
 }
 
-.top a {
-  float: left !important;
-  color: #f2f2f2 !important;
-  text-align: center !important;
-  padding: 14px 16px !important;
-  text-decoration: none !important;
-  font-size: 17px !important;
-  font-family: "Times New Roman", Times, serif !important;
+.nav-container nav {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 60px;
 }
 
-.top a:hover {
-  background-color: cyan !important;
-  color: black !important;
+/* Left and right groups */
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+}
+.nav-right {
+  margin-left: auto;
 }
 
-/* Create a right-aligned (split) link inside the navigation bar */
-.top a.split {
-  float: right !important;
-  background-color: cyan !important;
-  color: black !important;
-  text-align: center !important;
-  padding: 14px 16px !important;
-  text-decoration: none !important;
-  font-size: 17px !important;
+/* Link Styling */
+.nav-container nav a {
+  position: relative;
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: 17px;
+  font-family: "Overpass", sans-serif;
+  font-weight: bold;
+  padding: 14px 16px;
+  transition: 0.2s ease color;
 }
 
-.top a.split:hover {
-  background-color: #000000 !important;
-  color: rgb(255, 255, 255) !important;
+/* Hover */
+.nav-container nav a:hover {
+  color: #fff;
+}
+
+/* Indicator Bar */
+#indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px; /* default, updated dynamically */
+  height: 3px;
+  background: white; /* default under Spryntax */
+  border-radius: 3px;
+  transition: left 0.2s ease, width 0.2s ease, background 0.2s ease;
+}
+
+/* Pseudo-elements for hover circles in the left group */
+.nav-left a::before,
+.nav-left a::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.2s ease;
+}
+
+.nav-left a::before {
+  top: 0;
+  left: 10px;
+  width: 6px;
+  height: 6px;
+}
+
+.nav-left a::after {
+  top: 5px;
+  left: 18px;
+  width: 4px;
+  height: 4px;
+}
+
+/* For each link in the left group, set the colors for the circles.
+   (Adjust nth-child indices to match your nav-left order) */
+.nav-left a:nth-child(1)::before { background-color: cyan; }
+.nav-left a:nth-child(1)::after { background-color: cyan; }
+
+.nav-left a:nth-child(2)::before { background-color: cyan; }
+.nav-left a:nth-child(2)::after { background-color: lime; }
+
+.nav-left a:nth-child(3)::before { background-color: rgb(43, 255, 0); }
+.nav-left a:nth-child(3)::after { background-color: rgb(247, 255, 4); }
+
+.nav-left a:nth-child(4)::before { background-color: rgb(247, 255, 4); }
+.nav-left a:nth-child(4)::after { background-color: rgb(255, 132, 0); }
+
+.nav-left a:nth-child(5)::before { background-color: rgb(255, 132, 0); }
+.nav-left a:nth-child(5)::after { background-color: rgb(255, 0, 0); }
+
+.nav-left a:nth-child(6)::before { background-color: rgb(255, 0, 0); }
+.nav-left a:nth-child(6)::after { background-color: rgb(255, 0, 208); }
+
+/* Right-side link circles (if desired) */
+.nav-right a::before,
+.nav-right a::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.2s ease;
+}
+.nav-right a::before {
+  top: 0;
+  left: 10px;
+  width: 6px;
+  height: 6px;
+}
+.nav-right a::after {
+  top: 5px;
+  left: 18px;
+  width: 4px;
+  height: 4px;
+}
+
+.nav-right a:nth-child(1)::before { background-color: rgb(255, 0, 208); }
+.nav-right a:nth-child(1)::after { background-color: rgb(81, 0, 255); }
+.nav-right a:nth-child(2)::before { background-color: rgb(81, 0, 255); }
+.nav-right a:nth-child(2)::after { background-color: rgb(0, 247, 255); }
+.nav-right a:nth-child(3)::before { background-color: cyan }
+.nav-right a:nth-child(3)::after { background-color: lime }
+
+/* Reveal the circles on hover */
+.nav-container nav a:hover::before,
+.nav-container nav a:hover::after {
+  transform: scale(1);
 }
 
 .gradient-text {
