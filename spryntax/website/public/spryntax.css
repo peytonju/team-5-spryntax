@@ -285,3 +285,22 @@ br {
     background-position: 100% 50%;
   }
 }
+
+.heart-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;   /* Adjust size as needed */
+  transition: color 0.3s ease;
+  color: #aaa;       /* Default grey color for unselected state */
+}
+
+.heart-button.favorited {
+  /* Use a gradient fill for the heart icon */
+  background-color: red;
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* Optionally, you can also adjust font-weight or add a slight scale effect */
+}

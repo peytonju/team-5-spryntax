@@ -31,12 +31,12 @@
                 <div class="custom-card">
                     <div class="card-header">
                         <h3><%= nonreadable_to_readable[level] %></h3> 
-                        <% if (favorites && favorites.includes(level)) { %>
-                          <button class="unfavorite-button" data-algorithm="<%= level %>">Delete</button>
-                        <% } else { %>
-                          <button class="favorite-button" data-algorithm="<%= level %>">Favorite</button>
-                        <% } %>
-                    </div>
+                        <!-- Render the heart button. 
+                        If the current level is in the favorites array, add the 'favorited' class -->
+                      <button class="heart-button <%= (favorites && favorites.includes(level)) ? 'favorited' : '' %>" data-algorithm="<%= level %>">
+                        &#x2665;
+                      </button>
+                      </div>
                     <p><strong>Difficulty:</strong> <%= level_tags[level].difficulty %></p>
                     <p><strong>Type:</strong> <%= level_tags[level].type %></p>
                     <p>
@@ -48,47 +48,45 @@
         </div>
     </div>
     <script>
-      // For adding a favorite
-      document.querySelectorAll('.favorite-button').forEach(button => {
+       document.querySelectorAll('.heart-button').forEach(button => {
         button.addEventListener('click', function() {
           const levelKey = this.getAttribute('data-algorithm');
-          fetch('/favorites/add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ algorithmName: levelKey })
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.success) {
-              alert("Favorite added!");
-              location.reload();
-            } else {
-              alert("Error: " + (data.message || data.error));
-            }
-          })
-          .catch(err => console.error('Error:', err));
-        });
-      });
-
-      // For removing a favorite
-      document.querySelectorAll('.unfavorite-button').forEach(button => {
-        button.addEventListener('click', function() {
-          const levelKey = this.getAttribute('data-algorithm');
-          fetch('/favorites/remove', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ algorithmName: levelKey })
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.success) {
-              alert("Favorite removed!");
-              location.reload();
-            } else {
-              alert("Error: " + (data.message || data.error));
-            }
-          })
-          .catch(err => console.error('Error:', err));
+          // If the button already has the 'favorited' class, remove favorite; otherwise, add.
+          if (this.classList.contains('favorited')) {
+            // Remove favorite
+            fetch('/favorites/remove', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ algorithmName: levelKey })
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                alert("Favorite removed!");
+                location.reload();
+              } else {
+                alert("Error: " + (data.message || data.error));
+              }
+            })
+            .catch(err => console.error('Error:', err));
+          } else {
+            // Add favorite
+            fetch('/favorites/add', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ algorithmName: levelKey })
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                alert("Favorite added!");
+                location.reload();
+              } else {
+                alert("Error: " + (data.message || data.error));
+              }
+            })
+            .catch(err => console.error('Error:', err));
+          }
         });
       });
     </script>
