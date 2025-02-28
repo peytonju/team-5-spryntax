@@ -14,6 +14,25 @@ const statsController = {
         activePage: 'stats'
        });
     });
+  },
+  addStat: (req, res) => {
+    if (!req.session.user_id) {
+      return res.status(401).json({ error: "User not logged in" });
+    }
+    const user_id = req.session.user_id;
+    const wpm = req.body.wpm;
+    
+    if (!wpm) {
+      return res.status(400).json({ error: "WPM value is required" });
+    }
+
+    Stats.addStat(user_id, wpm, (err, result) => {
+      if (err) {
+        console.error("Error adding stat:", err);
+        return res.status(500).json({ error: "Database error" });
+      }
+      res.json({ success: true });
+    });
   }
 };
 

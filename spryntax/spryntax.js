@@ -65,6 +65,8 @@ app.get("/login", (request, response) => {
     response.status(200).sendFile(PATH.join(PATH_VIEWS, "login.html"));
 });
 
+app.post('/stats/add', statsController.addStat);
+
 app.get("/signup", (request, response) => {
     response.status(200).sendFile(PATH.join(PATH_VIEWS, "signup.html"));
 });
