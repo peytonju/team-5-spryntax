@@ -1,4 +1,6 @@
 # CS 362 Project, Team 5 - Spryntax
+Site available at http://flip1.engr.oregonstate.edu:8080/.  
+Please note that this is only accessible when on OSU's network (note that it is also accessible via VPN).
 
 # Project Proposal
 
@@ -104,6 +106,37 @@ Minimum Viable Product Goals:
       * Modal can be closed via an “x” at its top right  
   * Extensions: None (local javascript will be ran with no communication with the SQL or Express servers)  
   * Exceptions: None (level data, including comments, are stored with local javascript)
+* Algorithm Creator (JSONifier)  
+  * Actor: A developer building the project for all algorithms  
+  * Trigger: A developer initializes the JSONifier javascript file to compile all algorithms  
+  * Preconditions  
+    * “jsonifier.js” must have “algs-${LANGUAGE}” directories within the “algs\_creator” directory  
+      * Ex: the directory “algs-c” is for all C algorithms  
+    * “jsonifier.js” must have files following the style “${ALG\_NAME}.${LANGUAGE}” in the “algs-${LANGUAGE}” directory  
+      * Ex: “bubblesort.c” must be placed in “algs-${LANGUAGE}”  
+    * jsonifier.js must have the “CATEGORIES” and “LANGUAGES” constants filled out accordingly for the JSONifier to actually JSONify the algorithm  
+      * “CATEGORIES” is supposed to be a string array of every single “${ALG\_NAME}” as specified in the “algs-${LANGUAGE}” directories  
+      * “LANGUAGES” is a JSON for every language present (“c”, “py”). Note that these names MUST be equal to “${LANGUAGE}” (the file extension of the files “${ALG\_NAME}.${LANGUAGE}” under “algs-${LANGUAGE}”)  
+  * Postconditions  
+    * “levels.json” is created in the “alg\_creator” directory  
+  * Steps  
+    * Developer changes into “/spryntax” directory  
+    * Developer runs “npm run static-build-levels”  
+    * JSONifier runs and JSONifies all algorithms and places them into one JSON called “levels.json” under “alg\_creator”  
+  * Extensions: The data created here is utilized by “/spryntax/spryntax.js” and is templated into the “level\_select/${ALG\_NAME}/${LANGUAGE}” URL  
+  * Exceptions: None (completely self-containing)
+* Log out functionality  
+  * Actor: User wants to allow for another user to log in on the same machine  
+  * Trigger: User presses the log out button  
+  * Preconditions: The user has an account and is logged in   
+  * Postconditions: User is logged out and allows for a new user to sign in  
+  * Steps:   
+    * The first user is logged in   
+    * The first user wishes to log out  
+      * The user clicks on the log out button and user data is removed from sessions  
+    * A second user is now able to log in and use the website  
+  * Extensions: Sessions data is no longer stored.  
+  * Exceptions: User is not signed and so unable to log out
 
 Stretch Goals:
 - “Profile” for a particular user that other users can view  
