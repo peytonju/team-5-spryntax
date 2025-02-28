@@ -104,6 +104,18 @@ Minimum Viable Product Goals:
       * Modal can be closed via an “x” at its top right  
   * Extensions: None (local javascript will be ran with no communication with the SQL or Express servers)  
   * Exceptions: None (level data, including comments, are stored with local javascript)
+* Log out functionality  
+  * Actor: User wants to allow for another user to log in on the same machine  
+  * Trigger: User presses the log out button  
+  * Preconditions: The user has an account and is logged in   
+  * Postconditions: User is logged out and allows for a new user to sign in  
+  * Steps:   
+    * The first user is logged in   
+    * The first user wishes to log out  
+      * The user clicks on the log out button and user data is removed from sessions  
+    * A second user is now able to log in and use the website  
+  * Extensions: Sessions data is no longer stored.  
+  * Exceptions: User is not signed and so unable to log out
 
 Stretch Goals:
 - “Profile” for a particular user that other users can view  
