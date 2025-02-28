@@ -108,41 +108,40 @@ addFavorite: (req, res) => {
 
 /*****************************************LEVELS******************************************************/
 app.get('/level_select', (req, res) => {
+    const username = req.session.username || null;
     if (req.session.user_id) {
       const query = 'SELECT algorithm_name FROM favorites WHERE user_id = ?';
       db.query(query, [req.session.user_id], (err, results) => {
         if (err) {
           console.error(err);
-          // In case of error, pass an empty array for favorites
           return res.render("level_select.ejs", {
             level_tags: JSON_LEVEL_TAGS,
             readable_to_nonreadable: LEVEL_NAME_TO_NONREADABLE,
             nonreadable_to_readable: LEVEL_NAME_TO_READABLE,
             favorites: [],
-            username: req.session.username || 'undefined'
+            username: username
           });
         }
-        // Create an array of level keys from the results.
         const userFavorites = results.map(row => row.algorithm_name);
         res.render("level_select.ejs", {
           level_tags: JSON_LEVEL_TAGS,
           readable_to_nonreadable: LEVEL_NAME_TO_NONREADABLE,
           nonreadable_to_readable: LEVEL_NAME_TO_READABLE,
           favorites: userFavorites,
-          username: req.session.username || 'undefined'
+          username: username
         });
       });
     } else {
-      // If the user is not logged in, simply pass an empty array.
       res.render("level_select.ejs", {
         level_tags: JSON_LEVEL_TAGS,
         readable_to_nonreadable: LEVEL_NAME_TO_NONREADABLE,
         nonreadable_to_readable: LEVEL_NAME_TO_READABLE,
         favorites: [],
-        username: 'undefined'
+        username: username
       });
     }
   });
+  
 
 app.get('/level_select/:name_level/:name_language', (request, response) => {
     const NAME_LEVEL = request.params["name_level"].toLowerCase();
