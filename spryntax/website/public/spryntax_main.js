@@ -48,7 +48,6 @@ function validate() {
       if (tchar != null) {
         tchar = tchar[dchar_i];
       } else {
-       // console.log(currline, dchar_i);
         if (innerchar.hasClass("span_incorrect")) {
           innerchar.removeClass("span_incorrect");
           progress.errors++;
@@ -108,9 +107,7 @@ function validate() {
   $(".span").each(function (index, element) {
     //Select all spans in the font
     let span = $("#main_" + index);
-    if (!span.hasClass("line")){
-      spans++;
-    }
+    spans++;
     if (span.hasClass("span_correct")) {
       //Count correct classes
       correct++;
@@ -178,7 +175,7 @@ $(document).ready(function () {
       //Build comment if it exists
       if (comment_structure != null){
         if (comment_structure[progress.lbreaks] != null){
-          let modal = '<button class="span noselect line" id="line_'+progress.lbreaks+'" data-toggle="modal" data-target="#modal_'+progress.lbreaks+'" hidden>(?)</button>';
+          let modal = '<button class="noselect line" id="line_'+progress.lbreaks+'" data-toggle="modal" data-target="#modal_'+progress.lbreaks+'" hidden>(?)</button>';
           modal += '<div class="modal fade" id="modal_'+progress.lbreaks+'" tabindex="-1" role="dialog" aria-labelledby="modal_l_'+progress.lbreaks+'" aria-hidden="true"><div class="modal-dialog" role="document">'+
           '<div class="modal-content"><div class="modal-header"><h5 class="modal_l_modal-title" id="modal_l_'+progress.lbreaks+'">Comment</h5></div><div class="modal-body">'
           
@@ -215,7 +212,7 @@ $(document).ready(function () {
     }
   }
   progress.lines.push(insertlines);  
-  let testing = true;
+  let testing = false;
   if (testing) {
     //Show code to paste.
     displaycode = displaycode.replaceAll("⎵", "\u0020"); //Spaces
