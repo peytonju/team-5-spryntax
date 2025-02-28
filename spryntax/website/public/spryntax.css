@@ -27,6 +27,7 @@
   font-optical-sizing: auto;
   font-style: normal;
   font-size: large;
+  z-index: 5;
 }
 
 #main_body {
@@ -83,6 +84,10 @@ br {
   display: block;
   line-height: 1.5em !important;
   content: " ";
+}
+.line{
+  position: absolute;
+  z-index: 10;
 }
 
 /* Container for the cards */

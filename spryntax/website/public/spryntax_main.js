@@ -2,6 +2,9 @@ let displaycode =
   typeof DATA_LEVEL !== "undefined"
     ? DATA_LEVEL["lines"]
     : '#include\u0020<iostream>↵using namespace std;↵↵int main(){↵→cout << "Hello World!";↵→return 0;↵}';
+let comment_structure = 
+  typeof DATA_LEVEL !== "undefined"
+    ? DATA_LEVEL["comments"] : null;
 
 //Define a progress object
 let progress = {
@@ -9,7 +12,7 @@ let progress = {
   errors: 0,
   lbreaks: 0, //Count for linebreaks
   pasted: false,
-  lines: [],
+  lines: []
 };
 
 function validate() {
@@ -37,6 +40,7 @@ function validate() {
   }
   typedlines.push(storedline);
   for (let currline = 0; currline < progress.lines.length; currline++) {
+    let line_check = 0;
     for (let dchar_i in progress.lines[currline]) {
       // For each character in displayed line
       let innerchar = $(progress.lines[currline][dchar_i]);
@@ -44,6 +48,7 @@ function validate() {
       if (tchar != null) {
         tchar = tchar[dchar_i];
       } else {
+       // console.log(currline, dchar_i);
         if (innerchar.hasClass("span_incorrect")) {
           innerchar.removeClass("span_incorrect");
           progress.errors++;
@@ -59,6 +64,7 @@ function validate() {
             innerchar.removeClass("span_incorrect");
             progress.errors++;
           }
+          line_check++;
           innerchar.addClass("span_correct");
         } else {
           if (
@@ -71,6 +77,7 @@ function validate() {
               progress.errors++;
             }
             innerchar.addClass("span_correct");
+            line_check++;
           } else {
             if (innerchar.hasClass("span_correct")) {
               innerchar.removeClass("span_correct");
@@ -80,11 +87,30 @@ function validate() {
         }
       }
     }
+    //If line is complete, show comment if exists
+    if (comment_structure != null){
+      if (comment_structure[currline]!= null && typedlines[currline] != null){
+        let correct_linecount = 0;
+        for(checkspan of progress.lines[currline]){
+          if ($(checkspan).hasClass("span_correct")){
+            correct_linecount++;
+          }
+        }
+        let linebutton = $("#line_" + currline);
+        if (correct_linecount == typedlines[currline].length && typedlines[currline].length == progress.lines[currline].length){
+          linebutton.attr("hidden", false);
+        } else {
+          linebutton.attr("hidden", true);
+        }
+      }      
+    }
   }
   $(".span").each(function (index, element) {
     //Select all spans in the font
     let span = $("#main_" + index);
-    spans++;
+    if (!span.hasClass("line")){
+      spans++;
+    }
     if (span.hasClass("span_correct")) {
       //Count correct classes
       correct++;
@@ -104,7 +130,7 @@ function validate() {
     validate(); //Call the validation function again
     return;
   }
-  if (total == spans && spans == correct) {
+  if (total == correct) {
     //If the number of correct characters matches the number of expected characters
     $("#main_front").attr("disabled", true);
     $("#wincheck").attr("hidden", false);
@@ -146,8 +172,24 @@ $(document).ready(function () {
     insertlines.push("#main_" + char);
     if (displaycode[char] == "↵") {
       spannedcode +=
-        '<span class="span noselect lbreak" id="main_' + char + '"></span><br>';
+        '<span class="span noselect lbreak" id="main_' + char + '"></span>';
       progress.lines.push(insertlines);
+
+      //Build comment if it exists
+      if (comment_structure != null){
+        if (comment_structure[progress.lbreaks] != null){
+          let modal = '<button class="span noselect line" id="line_'+progress.lbreaks+'" data-toggle="modal" data-target="#modal_'+progress.lbreaks+'" hidden>(?)</button>';
+          modal += '<div class="modal fade" id="modal_'+progress.lbreaks+'" tabindex="-1" role="dialog" aria-labelledby="modal_l_'+progress.lbreaks+'" aria-hidden="true"><div class="modal-dialog" role="document">'+
+          '<div class="modal-content"><div class="modal-header"><h5 class="modal_l_modal-title" id="modal_l_'+progress.lbreaks+'">Comment</h5></div><div class="modal-body">'
+          
+          modal += "<p>"+comment_structure[progress.lbreaks]+"</p>"
+
+          modal += '</div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal_'+progress.lbreaks+'_close">Close</button>'+
+          '</div></div></div></div>'
+          spannedcode += modal;
+        }
+      }
+      spannedcode+="<br>";
       progress.lbreaks++;
       insertlines = [];
       continue;
@@ -172,8 +214,8 @@ $(document).ready(function () {
         "</span>";
     }
   }
-  progress.lines.push(insertlines);
-  let testing = false;
+  progress.lines.push(insertlines);  
+  let testing = true;
   if (testing) {
     //Show code to paste.
     displaycode = displaycode.replaceAll("⎵", "\u0020"); //Spaces
@@ -190,6 +232,18 @@ $(document).ready(function () {
     console.log(testline);
   }
   $("#main_body").html(spannedcode);
+  if (comment_structure != null){
+    for (let currline = 0; currline < progress.lines.length; currline++) {
+      if (comment_structure[currline]!= null){
+        $("#line_"+currline).on("click", function() {
+          $("#modal_"+currline).modal('show');
+        });
+        $("#modal_"+currline+"_close").on("click", function() {
+          $("#modal_"+currline).modal('hide');
+        });
+      }
+    }
+  }
   $("#main_back").on("keydown", "#main_front", function (e) {
     var keycode = e.keycode || e.which;
     if (keycode == 9) {
