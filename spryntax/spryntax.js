@@ -46,8 +46,12 @@ app.use(express.static(PATH_PUBLIC));
 app.use(express.json());
 
 
-app.get("/", (request, response) => {
-    response.status(200).sendFile(PATH.join(PATH_VIEWS, 'index.html'));
+app.get("/", (req, res) => {
+    if (req.session.username) {
+        res.render('index', { username: req.session.username });
+      } else {
+        res.render('index', { username: 'undefined' });
+      }
 });
 
 app.get("/login", (request, response) => {
