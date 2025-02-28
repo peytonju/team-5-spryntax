@@ -8,7 +8,10 @@ const reportController = {
         res.status(500).send('Error fetching products');
         return;
       }
-      res.render('report', { reports: reports });
+      res.render('report', { 
+        reports: reports, 
+        username: req.session.username || 'undefined'
+      });
     });
   }
 };

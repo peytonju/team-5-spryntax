@@ -8,7 +8,10 @@ const leaderboardController = {
         res.status(500).send('Error fetching products');
         return;
       }
-      res.render('leaderboard', { leaderboards: leaderboard });
+      res.render('leaderboard', { 
+        leaderboards: leaderboard,
+        username: req.session.username || 'undefined'
+       });
     });
   }
 };

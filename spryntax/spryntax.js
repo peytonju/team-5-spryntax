@@ -71,6 +71,7 @@ app.get('/stats', statsController.get_stat);
 
 /*favorites*/
 app.get('/favorites', favoritesController.get_favorite);
+
 app.post('/favorites/add', favoritesController.addFavorite);
 
 /*report*/
@@ -117,7 +118,8 @@ app.get('/level_select', (req, res) => {
             level_tags: JSON_LEVEL_TAGS,
             readable_to_nonreadable: LEVEL_NAME_TO_NONREADABLE,
             nonreadable_to_readable: LEVEL_NAME_TO_READABLE,
-            favorites: []
+            favorites: [],
+            username: req.session.username || 'undefined'
           });
         }
         // Create an array of level keys from the results.
@@ -126,7 +128,8 @@ app.get('/level_select', (req, res) => {
           level_tags: JSON_LEVEL_TAGS,
           readable_to_nonreadable: LEVEL_NAME_TO_NONREADABLE,
           nonreadable_to_readable: LEVEL_NAME_TO_READABLE,
-          favorites: userFavorites
+          favorites: userFavorites,
+          username: req.session.username || 'undefined'
         });
       });
     } else {
@@ -135,7 +138,8 @@ app.get('/level_select', (req, res) => {
         level_tags: JSON_LEVEL_TAGS,
         readable_to_nonreadable: LEVEL_NAME_TO_NONREADABLE,
         nonreadable_to_readable: LEVEL_NAME_TO_READABLE,
-        favorites: []
+        favorites: [],
+        username: 'undefined'
       });
     }
   });
@@ -146,6 +150,7 @@ app.get('/level_select/:name_level/:name_language', (request, response) => {
 
     if (NAME_LEVEL in JSON_LEVEL_DATA && NAME_LANGUAGE in JSON_LEVEL_DATA[NAME_LEVEL]) {
         response.status(200).render("level_play.ejs", {
+            username: request.session.username || 'undefined',
             level_data: JSON_LEVEL_DATA[NAME_LEVEL][NAME_LANGUAGE]
         });
     } else {

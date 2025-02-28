@@ -8,7 +8,10 @@ const statsController = {
         res.status(500).send('Error fetching products');
         return;
       }
-      res.render('stats', { stats: stats });
+      res.render('stats', { 
+        stats: stats,
+        username: req.session.username || 'undefined'
+       });
     });
   }
 };

@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
     <title>User Stats</title>
-    <link rel="stylesheet" href="spryntax.css">
-    <script src="spryntax_main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/bootstrap.css">
+    <link rel="stylesheet" href="/spryntax.css">
+    <script src="/jquery-3.7.1.min.js"></script>
+    <script src="/spryntax_main.js"></script>
 </head>
 <style>
     table, th, td {
@@ -23,18 +28,28 @@
 
 <body>
     <header>
-        <div class="top">
-            <nav> 
-                <a href="/">Home</a>
-                <a href="/level_select">Level Select</a>
-                <a href="/favorites">Favorites</a>
-                <a href="/stats">Stats</a>
-                <a href="/leaderboard">Leaderboard</a>
-                <a href="/report">Report</a>
-                <a href="/settings" class="split">Settings</a>
-                <a href="/signup" class="split">Sign up</a>
-                <a href="/login" class="split">Log in</a>
-            </nav>
+        <div class="nav-container">
+          <nav>
+            <div class="nav-left">
+              <!-- Spryntax: using white-to-cyan for default -->
+              <a href="/" class="logo" data-gradient="linear-gradient(130deg, cyan, cyan)">Spryntax</a>
+              <a href="/level_select" data-gradient="linear-gradient(130deg, cyan, lime)">Level Select</a>
+              <a href="/favorites" data-gradient="linear-gradient(130deg, rgb(43, 255, 0), rgb(247, 255, 4))">Favorites</a>
+              <a href="/stats" data-gradient="linear-gradient(130deg, rgb(247, 255, 4), rgb(255, 132, 0))">Stats</a>
+              <a href="/leaderboard" data-gradient="linear-gradient(130deg, rgb(255, 132, 0), rgb(255, 0, 0))">Leaderboard</a>
+              <a href="/report" data-gradient="linear-gradient(130deg, rgb(255, 0, 0), rgb(255, 0, 208))">Report</a>
+            </div>
+            <div class="nav-right">
+              <a href="/settings" data-gradient="linear-gradient(130deg, rgb(255, 0, 208), rgb(81, 0, 255))">Settings</a>
+              <% if (username && username !== 'undefined') { %>
+                <a href="#" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Welcome <%= username %>!</a>
+              <% } else { %>
+                <a href="/signup" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Sign up</a>
+                <a href="/login" data-gradient="linear-gradient(130deg, cyan, lime)">Log in</a>
+              <% } %>
+            </div>
+            <div id="indicator"></div>
+          </nav>
         </div>
     </header>
 
