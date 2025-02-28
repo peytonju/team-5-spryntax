@@ -130,7 +130,7 @@ function validate() {
     validate(); //Call the validation function again
     return;
   }
-  if (total == correct) {
+  if (total == correct && total == spans) {
     //If the number of correct characters matches the number of expected characters
     $("#main_front").attr("disabled", true);
     $("#wincheck").attr("hidden", false);
