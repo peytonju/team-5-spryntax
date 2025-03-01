@@ -9,6 +9,7 @@
     <script>
         const DATA_LEVEL = <%- JSON.stringify(level_data) %>;
     </script>
+    <script> var USER_LOGGED_IN = <%= (username && username !== 'undefined') ? true : false %>; </script>
     <script src="/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="/spryntax_main.js"></script>
@@ -18,7 +19,6 @@
     <div class="nav-container">
       <nav>
         <div class="nav-left">
-          <!-- Spryntax: using white-to-cyan for default -->
           <a href="/" class="logo" data-gradient="linear-gradient(130deg, cyan, cyan)">Spryntax</a>
           <a href="/level_select" data-gradient="linear-gradient(130deg, cyan, lime)">Level Select</a>
           <a href="/favorites" data-gradient="linear-gradient(130deg, rgb(43, 255, 0), rgb(247, 255, 4))">Favorites</a>

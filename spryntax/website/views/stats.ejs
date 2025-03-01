@@ -7,24 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/spryntax.css">
     <script src="/jquery-3.7.1.min.js"></script>
-    <script src="/spryntax_main.js"></script>
 </head>
-<style>
-    table, th, td {
-        border: 1px solid white;
-        margin: 0px auto;
-        width: 120px;
-        height: 50px;
-        text-align: center;
-    }
-    button { 
-        width: 100px;
-        height: 50px;
-        font-size: 15px;
-        font-weight: bold;
-    }
-</style>
-
 <body>
     <header>
         <div class="nav-container">
@@ -53,47 +36,46 @@
 
     <h1 class="gradient-text" data-text="User Statistics">User Statistics</h1>
 
-    <!-- Filter buttons for Python and C++ stats -->
-    <div style="margin: 0 auto; width: 656px; text-align: center;">
-        <button class="python-button" onclick="filterStats('Python')">Python</button>
-        <button class="c++-button" onclick="filterStats('C++')">C++</button>
+    <div class="gray-background" style="padding: 20px; margin: 20px;">
+      <% if (!stats) { %>
+          <div class="gradient-text" style="padding: 20px; text-align: center; font-size: 2rem;">
+              Sign up or log in to save statistics.
+          </div>
+      <% } else { %>
+          <div class="stats-container">
+            <% stats.forEach(stat => { %>
+              <div class="stat-card">
+                <h3><%= stat.program_language %></h3>
+                <p>Levels Completed: <%= stat.games_played %></p>
+                <p>Average WPM: <%= Number(stat.avg_wpm).toFixed(2) %></p>
+                <p>Best WPM: <%= stat.best_wpm %></p>
+              </div>
+            <% }); %>
+          </div>
+      <% } %>
     </div>
 
-    <h3 style="text-align: center">All Stats</h3>
-    <div class="stats-table">
-        <table id="stats-table" style="width:60%">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Games Played</th>
-                    <th>Average WPM</th>
-                    <th>Best WPM</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% stats.forEach(entry => { %>
-                    <tr class="stats-row" data-language="<%= entry.program_language %>">
-                        <td><%= entry.username %></td>
-                        <td><%= entry.games_played %></td>
-                        <td><%= entry.average_wpm %></td>
-                        <td><%= entry.best_wpm %></td>
-                    </tr>
-                <% }); %>
-            </tbody>
-        </table>
-    </div>
-
-    <script>
-        function filterStats(language) {
-            const rows = document.querySelectorAll(".stats-row");
-            const heading = document.querySelector("h3");
-
-            rows.forEach(row => {
-                row.style.display = (row.getAttribute("data-language") === language) ? "" : "none";
-            });
-
-            heading.textContent = `${language} Stats`;
-        }
-    </script>
+    <style>
+      .stats-container {
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
+         gap: 20px;
+      }
+      .stat-card {
+         background-color: #000;
+         border: 1px solid #000;
+         border-radius: 8px;
+         box-shadow: 0 2px 10px cyan;
+         padding: 20px;
+         width: 250px;
+         text-align: center;
+         color: #fff;
+         transition: transform 0.2s ease;
+      }
+      .stat-card:hover {
+         transform: scale(1.05);
+      }
+    </style>
 </body>
 </html>

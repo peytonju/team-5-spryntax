@@ -77,6 +77,7 @@ app.get("/settings", (request, response) => {
 
 /*stats*/
 app.get('/stats', statsController.get_stat);
+app.post('/stats/add', statsController.addStat);
 
 /*favorites*/
 app.get('/favorites', favoritesController.get_favorite);
