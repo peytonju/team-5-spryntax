@@ -55,7 +55,10 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
     if (req.session.username) {
-        res.render('index', { username: req.session.username });
+        res.render('index', { 
+            username: req.session.username,
+            level_language: 'c'
+         });
       } else {
         res.render('index', { username: 'undefined' });
       }
@@ -164,6 +167,7 @@ app.get('/level_select/:name_level/:name_language', (request, response) => {
     if (NAME_LEVEL in JSON_LEVEL_DATA && NAME_LANGUAGE in JSON_LEVEL_DATA[NAME_LEVEL]) {
         response.status(200).render("level_play.ejs", {
             username: request.session.username || 'undefined',
+            level_language: NAME_LANGUAGE,
             level_data: JSON_LEVEL_DATA[NAME_LEVEL][NAME_LANGUAGE]
         });
     } else {

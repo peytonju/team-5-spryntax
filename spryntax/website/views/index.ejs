@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="/bootstrap.css">
     <link rel="stylesheet" href="/spryntax.css">
     <script src="/jquery-3.7.1.min.js"></script>
-    <script> var USER_LOGGED_IN = <%= (username && username !== 'undefined') ? true : false %>; </script>
+    <script> var USER_LOGGED_IN = <%= (username && username !== 'undefined') ? true : false %>; 
+             var PROGRAM_LANGUAGE = "<%= level_language %>";
+    </script>
     <script src="/spryntax_main.js"></script>
 </head>
 <body>

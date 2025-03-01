@@ -155,12 +155,17 @@ function validate() {
       $("#wincheck").addClass("lose");
     }
     $("#wincheck").html(displaywin);
+    let time_spent = Math.floor(diff / 1000);   // convert to seconds
     let WPM = (Math.round(spans / 5) / (diff / 1000 / 60)).toFixed(2);
     if (typeof USER_LOGGED_IN !== "undefined" && USER_LOGGED_IN) {
       fetch('/stats/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ wpm: WPM, program_language: PROGRAM_LANGUAGE })
+        body: JSON.stringify({ 
+          wpm: WPM, 
+          program_language: PROGRAM_LANGUAGE,  // Make sure PROGRAM_LANGUAGE is defined
+          time_spent: time_spent 
+        })
       })
       .then(response => response.json())
       .then(data => {
@@ -169,7 +174,7 @@ function validate() {
       .catch(err => console.error("Error saving stats:", err));
     }
     
-  }
+  }    
 }
 
 $(document).ready(function () {
