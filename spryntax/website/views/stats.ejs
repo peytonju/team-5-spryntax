@@ -142,19 +142,17 @@
           
             <!-- Bottom month labels -->
             <div class="months">
-              <div class="monthRow">
-                <% for (let i = 0; i < colDates.length; i++) {
-                     const colDate = colDates[i];
-                     // If it's the first day of the month, or month changed from previous column
-                     if (colDate.getDate() === 1 || i === 0 || colDate.getMonth() !== colDates[i-1]?.getMonth()) {
-                       const monthName = colDate.toLocaleString('en', { month: 'short' });
-                %>
-                  <div class="monthLabel" style="grid-column: <%= i+1 %>">
-                    <%= monthName %>
-                  </div>
-                <% } } %>
-              </div>
+              <% for (let i = 0; i < colDates.length; i++) {
+                  const colDate = colDates[i];
+                  if (colDate.getDate() === 1 || i === 0 || colDate.getMonth() !== colDates[i-1]?.getMonth()) {
+                    const monthName = colDate.toLocaleString('en', { month: 'short' });
+              %>
+                <div class="monthLabel" style="grid-column: <%= i+1 %> / <%= i+2 %>">
+                  <%= monthName %>
+                </div>
+              <% } } %>
             </div>
+
           </div>
           
           <!-- Custom tooltip JS -->

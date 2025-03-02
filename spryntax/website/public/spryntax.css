@@ -438,17 +438,20 @@ br {
 .day-level-3 { background-color: #6b58a6; }
 .day-level-4 { background-color: #b574d4; }
 
-/* Bottom months row */
 .months {
   margin-top: 6px;
+  margin-left: 25px;
   display: grid;
-  grid-template-columns: repeat(53, auto);
+  grid-template-columns: repeat(53, 12px); /* or use auto if you prefer */
+  gap: 2px;
 }
+
 .monthLabel {
   text-align: center;
   font-size: 0.7rem;
   color: #999;
 }
+
 
 /* Custom tooltip styling */
 .custom-tooltip {
