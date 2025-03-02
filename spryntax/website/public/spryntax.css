@@ -394,3 +394,71 @@ br {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Container around day labels + squares */
+.heatmapWrapper {
+  display: flex; /* day labels on the left, squares on the right */
+}
+
+/* 7 row day labels, from top to bottom: Sun -> Mon -> Tue -> Wed -> Thu -> Fri -> Sat */
+.daysFull {
+  display: flex;
+  flex-direction: column;
+  margin-right: 8px;
+  justify-content: start;
+}
+.daysFull .text {
+  font-size: 0.7rem;
+  color: #999;
+  line-height: 12px; 
+  margin-top: 2px;
+}
+
+/* 53 columns x 7 rows grid */
+.weeks {
+  display: grid;
+  grid-template-columns: repeat(53, auto);
+  gap: 2px;
+}
+.week {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Squares */
+.day {
+  width: 12px;
+  height: 12px;
+  background-color: #333;
+  cursor: pointer;
+}
+.day-level-1 { background-color: #282750; }
+.day-level-2 { background-color: #443c7f; }
+.day-level-3 { background-color: #6b58a6; }
+.day-level-4 { background-color: #b574d4; }
+
+/* Bottom months row */
+.months {
+  margin-top: 6px;
+  display: grid;
+  grid-template-columns: repeat(53, auto);
+}
+.monthLabel {
+  text-align: center;
+  font-size: 0.7rem;
+  color: #999;
+}
+
+/* Custom tooltip styling */
+.custom-tooltip {
+  position: absolute;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 9999;
+}
