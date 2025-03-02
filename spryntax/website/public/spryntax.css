@@ -406,10 +406,11 @@ br {
   flex-direction: column;
   margin-right: 8px;
   justify-content: start;
+  gap: 5px;
 }
 .daysFull .text {
   font-size: 0.7rem;
-  color: #999;
+  color: #ffffff;
   line-height: 12px; 
   margin-top: 2px;
 }
@@ -418,18 +419,18 @@ br {
 .weeks {
   display: grid;
   grid-template-columns: repeat(53, auto);
-  gap: 2px;
+  gap: 4px;
 }
 .week {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 /* Squares */
 .day {
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
   background-color: #333;
   cursor: pointer;
 }
@@ -440,16 +441,15 @@ br {
 
 .months {
   margin-top: 6px;
-  margin-left: 25px;
-  display: grid;
-  grid-template-columns: repeat(53, 12px); /* or use auto if you prefer */
-  gap: 2px;
+  margin-left: 50px;
+  display: flex;
+  gap: 58px;
 }
 
 .monthLabel {
   text-align: center;
-  font-size: 0.7rem;
-  color: #999;
+  font-size: 1rem;
+  color: #ffffff;
 }
 
 
