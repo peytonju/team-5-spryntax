@@ -395,6 +395,7 @@ br {
   background-clip: text;
 }
 
+
 /* Container around day labels + squares */
 .heatmapWrapper {
   display: flex; /* day labels on the left, squares on the right */

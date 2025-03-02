@@ -5,6 +5,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/spryntax.css">
     <script src="/jquery-3.7.1.min.js"></script>
 </head>
@@ -54,10 +55,11 @@
       <% } else { %>
         <!-- Profile Header -->
         <div class="profile-header" style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
-          <div class="profile-info">
-            <h2><%= username %></h2>
+          <div class="profile-info" style="display:flex; justify-content: center;">
+            <i class="material-icons" style="font-size: 70px; padding-right: 5px; padding-top: 42px;">account_circle</i>
+            <h2 class="gradient-text" data-text="<%= username %>" style="font-size: 50px;"><%= username %></h2>
           </div>
-          <div class="profile-stats">
+          <div class="profile-stats";>
             <p>Tests Completed: <%= profileHeader.tests_completed %></p>
             <p>Time Typed: <%= formatTime(profileHeader.total_time_spent) %></p>
           </div>
