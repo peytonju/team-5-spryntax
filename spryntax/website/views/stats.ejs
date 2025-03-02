@@ -7,24 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/spryntax.css">
     <script src="/jquery-3.7.1.min.js"></script>
-    <script src="/spryntax_main.js"></script>
 </head>
-<style>
-    table, th, td {
-        border: 1px solid white;
-        margin: 0px auto;
-        width: 120px;
-        height: 50px;
-        text-align: center;
+    <%
+    function formatTime(seconds) {
+        const hrs = Math.floor(seconds / 3600);
+        const mins = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+        return hrs + "h " + mins + "m " + secs + "s";
     }
-    button { 
-        width: 100px;
-        height: 50px;
-        font-size: 15px;
-        font-weight: bold;
-    }
-</style>
-
+    %>
 <body>
     <header>
         <div class="nav-container">
@@ -51,49 +42,33 @@
         </div>
     </header>
 
+
     <h1 class="gradient-text" data-text="User Statistics">User Statistics</h1>
 
-    <!-- Filter buttons for Python and C++ stats -->
-    <div style="margin: 0 auto; width: 656px; text-align: center;">
-        <button class="python-button" onclick="filterStats('Python')">Python</button>
-        <button class="c++-button" onclick="filterStats('C++')">C++</button>
+    <div class="gray-background" style="padding: 20px; margin: 20px;">
+      <% if (!stats) { %>
+        <!-- Not logged in -->
+        <div class="gradient-text" style="padding: 20px; text-align: center; font-size: 2rem;">
+            Sign up or log in to save statistics.
+        </div>
+      <% } else { %>
+        <!-- Profile Header -->
+        <div class="profile-header" style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
+          <div class="profile-info">
+            <h2><%= username %></h2>
+          </div>
+          <div class="profile-stats">
+            <p>Tests Completed: <%= profileHeader.tests_completed %></p>
+            <p>Time Typed: <%= formatTime(profileHeader.total_time_spent) %></p>
+          </div>
+        </div>
+        
+        <!-- Example: Additional content below (like charts, aggregated stats, etc.) -->
+        <!-- <div class="rest-of-page"> ... </div> -->
+      <% } %>
     </div>
 
-    <h3 style="text-align: center">All Stats</h3>
-    <div class="stats-table">
-        <table id="stats-table" style="width:60%">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Games Played</th>
-                    <th>Average WPM</th>
-                    <th>Best WPM</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% stats.forEach(entry => { %>
-                    <tr class="stats-row" data-language="<%= entry.program_language %>">
-                        <td><%= entry.username %></td>
-                        <td><%= entry.games_played %></td>
-                        <td><%= entry.average_wpm %></td>
-                        <td><%= entry.best_wpm %></td>
-                    </tr>
-                <% }); %>
-            </tbody>
-        </table>
-    </div>
+    
 
-    <script>
-        function filterStats(language) {
-            const rows = document.querySelectorAll(".stats-row");
-            const heading = document.querySelector("h3");
-
-            rows.forEach(row => {
-                row.style.display = (row.getAttribute("data-language") === language) ? "" : "none";
-            });
-
-            heading.textContent = `${language} Stats`;
-        }
-    </script>
 </body>
 </html>

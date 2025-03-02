@@ -146,8 +146,8 @@ br {
   background-color: #1a1a1a !important;
   border: 0px solid #000000 !important;
   border-radius: 30px !important;
-  margin: 25px;
-  position: relative;
+  margin: 25px !important;
+  position: relative !important;
 }
 
 @property --angle {
@@ -158,10 +158,10 @@ br {
 
 .gray-background::after,
 .gray-background::before {
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 100%;
+  content: "" !important;
+  position: absolute !important;
+  height: 100% !important;
+  width: 100% !important;
   background-image: conic-gradient(
     from var(--angle),
     #ff4545,
@@ -169,19 +169,19 @@ br {
     #006aff,
     #ff0095,
     #ff4545
-  );
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-  z-index: -1;
-  padding: 3px;
-  border-radius: 30px;
-  animation: 3s spin linear infinite;
+  ) !important;
+  top: 50% !important;
+  left: 50% !important;
+  translate: -50% -50% !important;
+  z-index: -1 !important;
+  padding: 3px !important;
+  border-radius: 30px !important;
+  animation: 3s spin linear infinite !important;
 }
 
 .gray-background::before {
-  filter: blur(1.5rem);
-  opacity: 0.5;
+  filter: blur(1.5rem) !important;
+  opacity: 0.5 !important;
 }
 
 @keyframes spin {
