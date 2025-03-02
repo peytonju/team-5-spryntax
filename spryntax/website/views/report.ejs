@@ -57,28 +57,26 @@
         <div class="container" style="margin: 0 auto; width: 656px; text-align:center">
 
             <% if (typeof message !== 'undefined') { %>
-                <div class="message <%= success ? 'success' : 'error' %>">
-                    <%= message %>
-                </div>
-            <% } %>
-            <% if (typeof message !== 'undefined') { %>
                 <% if (success === true) { %>
+                    <div class="message success">
+                        <%= message %>
+                    </div>
                     <script>
                         document.addEventListener("DOMContentLoaded", function() {
                             document.getElementById('reportForm').style.display = 'none';
                         });
                     </script>
-                    <% } %>
+                <% } %>
             <% } %>
 
             <form id="reportForm" action="/report.php" method="post" >
                 <div class="form-group">
                     <label for="inputname">Username: </label>
-                    <input type="text" class="form-control" id="name" name="name" aria-describedby="name" placeholder="Enter your name">
+                    <input type="text" class="form-control" id="name" name="name" aria-describedby="name" value="<%= username && username !== 'undefined' ? username : '' %>" placeholder="Enter your name" required>
                 </div>
                 <div class="form-group">
                     <p><label for="inputproblem">Please describe the bug that you wish to report:</label></p>
-                    <textarea id="problem" name="problem" rows="4" cols="50">Please write a short description about what the bug is and where it is located.</textarea>
+                    <textarea id="problem" name="problem" rows="4" cols="50" placeholder="Please write a short description about what the bug is and where it is located." required></textarea>
                     <br>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>

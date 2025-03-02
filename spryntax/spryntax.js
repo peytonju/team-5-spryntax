@@ -277,6 +277,7 @@ app.get('/test', (req, res) => {                                //Can print user
 app.post('/report.php', (req, res) => {
     const name = req.body.name; 
     const problem = req.body.problem;
+    const username = req.session.username || null;
 
     if (!name || !problem) {
         return res.render('report', { message: 'Please enter all fields before submitting', success: false });
@@ -303,7 +304,11 @@ app.post('/report.php', (req, res) => {
                     return res.render('report', { message: "Error with submitting the bug report.", success: false });
                 }else{
                     console.log("Added bug report to database")
-                    res.render('report', { message: "Thank you! Your bug report has been submitted and will be looked at.", success: true });
+                    res.render('report', { 
+                        message: "Thank you! Your bug report has been submitted and will be looked at.", 
+                        success: true,
+                        username: username,
+                    });
 
                 }
             });
