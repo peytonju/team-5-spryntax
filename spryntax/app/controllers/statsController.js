@@ -10,7 +10,6 @@ const statsController = {
     const program_language = req.body.program_language || 'Unknown';
     const time_spent = req.body.time_spent || 0;
 
-    // Basic validations
     if (!wpm) {
       return res.status(400).json({ error: "WPM value is required" });
     }
@@ -25,32 +24,37 @@ const statsController = {
   },
 
   get_stat: (req, res) => {
-    // If user not logged in
     if (!req.session.user_id) {
       return res.render('stats', {
         stats: null,
         username: null,
-        profileHeader: null, // We'll use this to store tests/time typed
+        profileHeader: null,
+        aggregatedData: null,
         activePage: 'stats'
       });
     }
-
-    // 1 Fetch aggregated data for the profile header
+    // First, fetch aggregated data for the profile header
     Stats.getProfileHeaderStats(req.session.user_id, (err, profileHeader) => {
       if (err) {
-        console.error('Error fetching aggregated stats:', err);
+        console.error('Error fetching profile header stats:', err);
         return res.status(500).send('Error fetching stats');
       }
-      // 2 Fetch the rest of the stats data (like aggregatedStats or raw stats)
-      // For now, just pass null or do another query if you want
-      res.render('stats', {
-        stats: [], // or aggregated stats
-        username: req.session.username,
-        profileHeader: profileHeader, // pass our aggregated data
-        activePage: 'stats'
+      Stats.getDailyStatsForPastYear(req.session.user_id, (err, dailyStats) => {
+        if (err) {
+          console.error('Error fetching daily stats:', err);
+          return res.status(500).send('Error fetching stats');
+        }
+        // Finally, render with dailyStats
+        res.render('stats', {
+          stats: [], // or more data
+          username: req.session.username,
+          profileHeader: profileHeader,
+          activePage: 'stats',
+          dailyStats: dailyStats  // pass the array to the view
+        });
       });
-    });
-  }
-};
+  });
+ }
+}
 
 module.exports = statsController;
