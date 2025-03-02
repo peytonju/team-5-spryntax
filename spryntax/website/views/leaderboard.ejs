@@ -56,8 +56,8 @@
     <!-- have buttons for python and c++ -->
     <div style="margin: 0 auto; width: 656px; text-align:center">
         <button class="all-button" onclick="filterLeaderboard('all')">All</button>
-        <button class="python-button" id = "python-button" onclick="filterLeaderboard('Python')">Python </button>
-        <button class="c++-button" onclick="filterLeaderboard('C++')">C++</button>
+        <button class="python-button" id = "python-button" onclick="filterLeaderboard('py')">Python </button>
+        <button class="c-button" onclick="filterLeaderboard('c')">C</button>
     </div>
     
     <h3 style="text-align:center">Leaderboard with all stats</h3>
@@ -74,9 +74,9 @@
             </thead>
 
             <tbody>
-                <% leaderboards.forEach(entry => { %>
+                <% leaderboards.forEach((entry, index) => { %>
                      <tr class="leaderboard-row" data-language="<%= entry.program_language %>">
-                        <td><%= entry.rank_place %></td>
+                        <td><%= index + 1 %></td>
                         <td><%= entry.username %></td>
                         <td><%= entry.wpm %></td>
                         <td class = "language"><%= entry.program_language %></td>
@@ -89,40 +89,66 @@
     </div>
 
     <script>
+        //makes the intial py and c into Python and C
+        document.addEventListener("DOMContentLoaded", () => {
+            let languageRow = document.querySelectorAll("td.language");
+
+            languageRow.forEach(cell => {
+                let row = cell.parentElement;
+                let language = row.getAttribute("data-language");
+                if (language === 'py') {
+                    cell.textContent = "Python";
+                } else if (language === 'c') {
+                    cell.textContent = "C";
+                }
+            });
+        });
         function filterLeaderboard(language) {
             let rows = document.querySelectorAll(".leaderboard-row");
             let h3 = document.querySelector("h3");
             let languageHeader = document.querySelector("th.language");
             let languageRow = document.querySelectorAll("td.language");
+            let count = 1;
+            const limit = 10;
 
-            rows.forEach(row => {
-                if (row.getAttribute("data-language") === language) {
-                    row.style.display = "";
-                    
+            rows.forEach((row, index) => {
+                if (row.getAttribute("data-language") === language || language === 'all') {
+                    //limit table to 10 values per table
+                    if (index < limit) {
+                        row.style.display = "";
+                        row.children[0].textContent = count++; 
+                    } else {
+                        row.style.display = "none"; 
+                    }
                 } else {
                     row.style.display = "none";
-                    languageHeader.style.display = "none";
-                    languageRow.forEach(cell => cell.style.display = "none");
-                  
                 }
             });
-            //resets the table if all button is used
+            
+            //printing the table header depending on button clicked
             if (language === 'all') {
-                rows.forEach(row => {
-                    row.style.display = ""; 
-
-                    languageHeader.style.display = "";
-                    languageRow.forEach(cell => cell.style.display = "");
-                });
+                rows.forEach(row => row.style.display = "");
+                languageHeader.style.display = "";
+                languageRow.forEach(cell => cell.style.display = "");
                 h3.textContent = "Leaderboard with all stats";
-                return;
             }
-
-            if (language === 'Python') {
+            if (language === 'py') {
                 h3.textContent = "Python Leaderboard";
-            } else if (language === 'C++') {
-                h3.textContent = "C++ Leaderboard";
+            } else if (language === 'c') {
+                h3.textContent = "C Leaderboard";
             }
+            
+            //renames language value to Python and C
+            languageRow.forEach(cell => {
+                if (cell.parentElement.style.display !== "none") {
+                    if (language === 'py') {
+                        cell.textContent = "Python";
+                    } else if (language === 'c') {
+                        cell.textContent = "C";
+                    }
+                }
+            });
+            
         }
     </script>
 </body>

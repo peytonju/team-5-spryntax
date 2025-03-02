@@ -60,7 +60,7 @@ app.get("/", (req, res) => {
             level_language: 'c'
          });
       } else {
-        res.render('index', { username: 'undefined' });
+        res.render('index', { username: 'undefined',  level_language: 'null'});
       }
 });
 
