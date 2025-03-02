@@ -498,3 +498,31 @@ We choose CircleCI for our CI hosting service. One of the big reasons was it all
 	4. Check favorites tab  
 	5. Log out and in on a different browser  
 	6. Check favorites tab
+7. Inputing and Outputting correct data on the stats page
+   * Unit Test
+   	* Verify that the stats page can fetch and display user-specific statistics from the database.
+   	  	1. Log in with a user account that has existing stats data in the database.
+   	  	2. Navigate to the stats page.
+   	  	3. Check if the following data is displayed correctly; Typing speed (WPM), Accuracy percentage, Number of completed levels, and Average time per level.
+   	  	4. Verify that the data matches the records stored in the database.
+   * Validation Test
+     	* Ensure that the stats page correctly validates and displays data for users with no stats (new users and users with existing stats).
+     	  	1. Log in with a new user account (no stats recorded).
+     	  	2. Navigate to the stats page.
+     	  	3. Verify that the page displays a message like "No stats available yet. Complete a level to see your progress!"
+     	  	4. Log in with a user account that has existing stats.
+     	  	5. Navigate to the stats page.
+     	  	6. Verify that the stats are displayed correctly and match the database records.
+   * Integration Test
+     	* Test the integration between the stats page and the backend database to ensure data consistency and real-time updates.
+     	  	1. Log in with a user account.
+     	  	2. Complete a typing level.
+     	  	3. Navigate to the stats page immediately after completing the level.
+     	  	4. Verify that the stats page updates in real-time to reflect new data.
+     	  	5. check the database to ensure the new stats are recorded and stored.
+   * System Test
+     	* Test the stats page across different browsers, devices, and screen sizes to ensure consistent functionality and display.
+     	  	1. log in with the user account that has the existing stats.
+     	  	2. Navigate to the stats page using different browsers and devices.
+     	  	3. Verify that the stats page is displayed correctly in different browsers and correctly on different devices.
+     	  	4. Then verify that all the functionalities are working on the different browsers and devices. 
