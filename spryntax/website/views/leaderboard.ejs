@@ -60,11 +60,10 @@
         <button class="c-button" onclick="filterLeaderboard('c')">C</button>
     </div>
     
-    <h3 style="text-align:center">Leaderboard with all stats</h3>
+    <h3 style="text-align:center">Highest WPM overall</h3>
     <div class="leaderboard-table">
         <table id="leaderboard-table" style="width:50%">
             <thead>
-
                 <tr>
                     <th>Rank</th>
                     <th>Username</th>
@@ -72,7 +71,6 @@
                     <th class = "language">Language</th>
                 </tr>
             </thead>
-
             <tbody>
                 <% leaderboards.forEach((entry, index) => { %>
                      <tr class="leaderboard-row" data-language="<%= entry.program_language %>">
@@ -81,8 +79,6 @@
                         <td><%= entry.wpm %></td>
                         <td class = "language"><%= entry.program_language %></td>
                     </tr>
-                    
-                    <!--<td><%= entry.program_language %></td>-->
                 <% }); %>
             </tbody>
         </table>
@@ -92,6 +88,9 @@
         //makes the intial py and c into Python and C
         document.addEventListener("DOMContentLoaded", () => {
             let languageRow = document.querySelectorAll("td.language");
+            let rows = document.querySelectorAll(".leaderboard-row");
+            let rowCount = 0;       //for row appearance
+            let loggedInUser = "<%= username %>".trim();
 
             languageRow.forEach(cell => {
                 let row = cell.parentElement;
@@ -102,35 +101,83 @@
                     cell.textContent = "C";
                 }
             });
+
+            rows.forEach(row => row.style.display = "none");
+            let maxWPM = {};
+            rows.forEach(row => {
+                let username = row.children[1].textContent;
+                let wpm = parseInt(row.children[2].textContent, 10);
+    
+                if (!maxWPM[username] || wpm > maxWPM[username].wpm) {
+                    maxWPM[username] = { wpm, row };
+                }
+            });
+    
+            //show the highest wpm per user
+            //hides the rows so only 10 appear on the board
+            Object.values(maxWPM).sort((a, b) => b.wpm - a.wpm).forEach(entry => {
+                if (rowCount < 10) {
+                    entry.row.style.display = "";
+                    entry.row.children[0].textContent = rowCount + 1;
+                    rowCount++;
+                }
+            });
         });
+
         function filterLeaderboard(language) {
             let rows = document.querySelectorAll(".leaderboard-row");
             let h3 = document.querySelector("h3");
             let languageHeader = document.querySelector("th.language");
             let languageRow = document.querySelectorAll("td.language");
-            let count = 1;
-            const limit = 10;
+            let count = 1;      //for rank number
+            let rowCount = 0;   //for row appearance
 
-            rows.forEach((row, index) => {
-                if (row.getAttribute("data-language") === language || language === 'all') {
-                    //limit table to 10 values per table
-                    if (index < limit) {
-                        row.style.display = "";
-                        row.children[0].textContent = count++; 
-                    } else {
-                        row.style.display = "none"; 
-                    }
-                } else {
-                    row.style.display = "none";
-                }
-            });
-            
-            //printing the table header depending on button clicked
+            rows.forEach(row => row.style.display = "none");
             if (language === 'all') {
-                rows.forEach(row => row.style.display = "");
+                let maxWPM = {};
+                rows.forEach(row => {
+                    let username = row.children[1].textContent;
+                    let wpm = parseInt(row.children[2].textContent, 10);
+        
+                    if (!maxWPM[username] || wpm > maxWPM[username].wpm) {
+                        maxWPM[username] = { wpm, row };
+                    }
+                });
+        
+                //show the highest wpm per user
+                //hides the rows so only 10 appear on the board
+                Object.values(maxWPM).sort((a, b) => b.wpm - a.wpm).forEach(entry => {
+                    if (rowCount < 10) {
+                        entry.row.style.display = "";
+                        entry.row.children[0].textContent = count++;
+                        rowCount++;
+                    }
+                });
+        
                 languageHeader.style.display = "";
                 languageRow.forEach(cell => cell.style.display = "");
-                h3.textContent = "Leaderboard with all stats";
+                h3.textContent = "Highest WPM overall";
+            } 
+            else {
+                //for python and c
+                rows.forEach(row => {
+                    if (row.getAttribute("data-language") === language) {
+                        if (rowCount < 10) {
+                            row.style.display = "";
+                            row.children[0].textContent = count++;
+                            languageHeader.style.display = "none";
+                            languageRow.forEach(cell => cell.style.display = "none");
+                            rowCount++;
+                        }
+                    }
+                });
+            }
+            //printing the table header depending on button clicked
+            if (language === 'all') {
+                
+                languageHeader.style.display = "";
+                languageRow.forEach(cell => cell.style.display = "");
+                h3.textContent = "Highest WPM overall";
             }
             if (language === 'py') {
                 h3.textContent = "Python Leaderboard";

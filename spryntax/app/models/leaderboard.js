@@ -9,9 +9,10 @@ const Leaderboard = {
         SELECT MAX(new_stats.wpm) 
         FROM stats new_stats
         WHERE new_stats.user_id = stats.user_id
+        AND new_stats.program_language = stats.program_language
         ) 
-        GROUP BY stats.user_id 
-        ORDER BY wpm DESC`
+        GROUP BY stats.user_id, stats.program_language
+        ORDER BY stats.wpm DESC`
         , callback);
     }
   };
