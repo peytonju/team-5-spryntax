@@ -90,7 +90,7 @@
             let languageRow = document.querySelectorAll("td.language");
             let rows = document.querySelectorAll(".leaderboard-row");
             let rowCount = 0;       //for row appearance
-            let loggedInUser = "<%= username %>".trim();
+            let loginUsername = "<%= username %>".trim();
 
             languageRow.forEach(cell => {
                 let row = cell.parentElement;
@@ -120,10 +120,15 @@
                     entry.row.style.display = "";
                     entry.row.children[0].textContent = rowCount + 1;
                     rowCount++;
+
+                    //highlight username if logged in
+                    let usernameCell = entry.row.children[1].textContent.trim();
+                    if (usernameCell === loginUsername) {
+                        entry.row.style.backgroundColor = "lightblue";
+                    }
                 }
             });
         });
-
         function filterLeaderboard(language) {
             let rows = document.querySelectorAll(".leaderboard-row");
             let h3 = document.querySelector("h3");
@@ -131,6 +136,7 @@
             let languageRow = document.querySelectorAll("td.language");
             let count = 1;      //for rank number
             let rowCount = 0;   //for row appearance
+            let loginUsername = "<%= username %>".trim();
 
             rows.forEach(row => row.style.display = "none");
             if (language === 'all') {
@@ -143,17 +149,15 @@
                         maxWPM[username] = { wpm, row };
                     }
                 });
-        
                 //show the highest wpm per user
                 //hides the rows so only 10 appear on the board
                 Object.values(maxWPM).sort((a, b) => b.wpm - a.wpm).forEach(entry => {
                     if (rowCount < 10) {
                         entry.row.style.display = "";
                         entry.row.children[0].textContent = count++;
-                        rowCount++;
+                        rowCount++;                       
                     }
                 });
-        
                 languageHeader.style.display = "";
                 languageRow.forEach(cell => cell.style.display = "");
                 h3.textContent = "Highest WPM overall";
@@ -168,23 +172,27 @@
                             languageHeader.style.display = "none";
                             languageRow.forEach(cell => cell.style.display = "none");
                             rowCount++;
+                            
+                            //highlight username if logged in
+                            if (row.children[1].textContent.trim() === loginUsername) {
+                                row.style.backgroundColor = "lightblue";
+                            }
                         }
                     }
                 });
             }
             //printing the table header depending on button clicked
-            if (language === 'all') {
-                
+            if (language === 'all') { 
                 languageHeader.style.display = "";
                 languageRow.forEach(cell => cell.style.display = "");
                 h3.textContent = "Highest WPM overall";
             }
             if (language === 'py') {
                 h3.textContent = "Python Leaderboard";
-            } else if (language === 'c') {
+            } 
+            else if (language === 'c') {
                 h3.textContent = "C Leaderboard";
             }
-            
             //renames language value to Python and C
             languageRow.forEach(cell => {
                 if (cell.parentElement.style.display !== "none") {
@@ -195,7 +203,6 @@
                     }
                 }
             });
-            
         }
     </script>
 </body>
