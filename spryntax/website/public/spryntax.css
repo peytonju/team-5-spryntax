@@ -113,6 +113,7 @@ br {
   position: relative;
 }
 
+
 /* Hover effect for cards */
 .custom-card:hover {
   transform: scale(1.05) !important;
@@ -313,6 +314,7 @@ br {
 .nav-right a:nth-child(2)::after { background-color: rgb(0, 247, 255); }
 .nav-right a:nth-child(3)::before { background-color: cyan }
 .nav-right a:nth-child(3)::after { background-color: lime }
+
 
 /* Reveal the circles on hover */
 .nav-container nav a:hover::before,

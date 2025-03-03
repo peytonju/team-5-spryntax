@@ -265,6 +265,17 @@ app.post('/login.php', (req, res) => {
     });
 });
 
+app.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Failed to destroy session:', err);
+            return res.status(500).send('Error occurred during logout.');
+        }
+        res.redirect('/'); // Redirect to the homepage
+    });
+});
+
+
 app.get('/test', (req, res) => {                                //Can print username and id in ejs. May be able to save data that way
     if (req.session.username) {
         res.render('test', { username: req.session.username, user_id: req.session.user_id });
