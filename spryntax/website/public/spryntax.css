@@ -503,3 +503,13 @@ br {
   min-height: 150px;
   margin:20px;
 }
+
+
+
+.gradient-text a {
+  color: inherit;
+  text-decoration: underline;
+
+  -webkit-text-stroke: inherit;
+  -webkit-text-fill-color: inherit;
+}
