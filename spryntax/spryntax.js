@@ -271,7 +271,7 @@ app.post('/logout', (req, res) => {
             console.error('Failed to destroy session:', err);
             return res.status(500).send('Error occurred during logout.');
         }
-        res.redirect('/'); // Redirect to the homepage or login page after logout
+        res.redirect('/'); // Redirect to the homepage
     });
 });
 
