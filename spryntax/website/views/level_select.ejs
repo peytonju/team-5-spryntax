@@ -201,7 +201,7 @@
       });
     </script>
 
- <!--Get random level-->
+<!-- Get random level -->
 <script>
   function redirectToRandomLevel() {
     // Convert EJS object to JavaScript array
@@ -209,10 +209,17 @@
 
     const randomLevel = levels[Math.floor(Math.random() * levels.length)]; // Pick a random level
 
-    // Redirect to a random level (default to Python)
-    window.location.href = `/level_select/${randomLevel}/py`;
+    const randomNum = Math.floor(Math.random() * 2) + 1; // 1 or 2
+
+    // Redirect based on the random number
+    if (randomNum == 1) {
+      window.location.href = `/level_select/${randomLevel}/c`;
+    } else {
+      window.location.href = `/level_select/${randomLevel}/py`;
+    }
   }
 </script>
+
 
 
   </body>
