@@ -33,28 +33,37 @@ const statsController = {
         activePage: 'stats'
       });
     }
-    // First, fetch aggregated data for the profile header
-    Stats.getProfileHeaderStats(req.session.user_id, (err, profileHeader) => {
+
+    // First, fetch the raw data points
+    Stats.getRawStats(req.session.user_id, (err, rawStats) => {
       if (err) {
-        console.error('Error fetching profile header stats:', err);
-        return res.status(500).send('Error fetching stats');
+        console.error("Error fetching raw stats:", err);
+        return res.status(500).send("Error fetching stats");
       }
-      Stats.getDailyStatsForPastYear(req.session.user_id, (err, dailyStats) => {
+      // Next, fetch aggregated profile header stats
+      Stats.getProfileHeaderStats(req.session.user_id, (err, profileHeader) => {
         if (err) {
-          console.error('Error fetching daily stats:', err);
-          return res.status(500).send('Error fetching stats');
+          console.error("Error fetching profile header stats:", err);
+          return res.status(500).send("Error fetching stats");
         }
-        // Finally, render with dailyStats
-        res.render('stats', {
-          stats: [], // or more data
-          username: req.session.username,
-          profileHeader: profileHeader,
-          activePage: 'stats',
-          dailyStats: dailyStats  // pass the array to the view
+        // Finally, fetch the daily stats for the heatmap
+        Stats.getDailyStatsForPastYear(req.session.user_id, (err, dailyStats) => {
+          if (err) {
+            console.error("Error fetching daily stats:", err);
+            return res.status(500).send("Error fetching stats");
+          }
+          res.render('stats', {
+            stats: [], // You can add additional aggregated stats here if needed.
+            username: req.session.username,
+            profileHeader: profileHeader,
+            dailyStats: dailyStats,
+            rawData: rawStats, // Pass raw data to the view
+            activePage: 'stats'
+          });
         });
       });
-  });
- }
-}
+    });
+  }
+};
 
 module.exports = statsController;

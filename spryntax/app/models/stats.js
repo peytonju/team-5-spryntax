@@ -63,8 +63,13 @@ const Stats = {
     db.query(query, [user_id], (err, results) => {
       if (err) return callback(err);
   
-      // Convert MySQL rows to an object or array
-      // e.g. [ { date: '2024-03-02', tests_done: 5 }, ... ]
+      callback(null, results);
+    });
+  },
+  getRawStats: (user_id, callback) => {
+    const query = "SELECT created_at, wpm FROM stats WHERE user_id = ? ORDER BY created_at ASC";
+    db.query(query, [user_id], (err, results) => {
+      if (err) return callback(err);
       callback(null, results);
     });
   }
