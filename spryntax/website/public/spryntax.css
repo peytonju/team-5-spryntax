@@ -315,6 +315,7 @@ br {
 .nav-right a:nth-child(3)::before { background-color: cyan }
 .nav-right a:nth-child(3)::after { background-color: lime }
 
+
 /* Reveal the circles on hover */
 .nav-container nav a:hover::before,
 .nav-container nav a:hover::after {

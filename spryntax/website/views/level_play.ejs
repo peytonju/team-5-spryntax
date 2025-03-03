@@ -33,9 +33,9 @@
           <a href="/settings" data-gradient="linear-gradient(130deg, rgb(255, 0, 208), rgb(81, 0, 255))">Settings</a>
           <% if (username && username !== 'undefined') { %>
             <a href="#" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Welcome <%= username %>!</a>
-            <form action="/logout" method="POST">
-              <button type="submit" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Logout</button>
-            </form>
+            <a href="#" class="logout-link" data-gradient="linear-gradient(130deg, rgb(0, 247, 255), lime)">Logout</a>
+              <form id="logout-form" action="/logout" method="POST" style="display: none;">
+              </form>
            <% } else { %>
             <a href="/signup" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Sign up</a>
             <a href="/login" data-gradient="linear-gradient(130deg, cyan, lime)">Log in</a>

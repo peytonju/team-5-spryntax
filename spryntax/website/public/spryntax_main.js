@@ -277,6 +277,14 @@ $(document).ready(function () {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+  const logoutLink = document.querySelector('.logout-link');
+  logoutLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('logout-form').submit();
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
   const indicator = document.getElementById('indicator');
   const nav = document.querySelector('.nav-container nav');
   const links = document.querySelectorAll('.nav-container nav a');
