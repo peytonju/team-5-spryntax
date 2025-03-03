@@ -482,3 +482,23 @@ br {
   border-color: white;
   box-shadow: 0 0px 15px rgb(255, 255, 255)
 }
+
+.section-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.section-box {
+  flex: 1;
+  background-color: rgb(80, 80, 80);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  min-height: 150px;
+}
