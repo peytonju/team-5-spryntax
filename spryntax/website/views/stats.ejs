@@ -179,14 +179,24 @@
           Daily Level Activity
         </h2>
 
-        <% // Build a JS date for "today" and "365 days ago" const today = new
-        Date(); const oneYearAgo = new Date();
-        oneYearAgo.setDate(oneYearAgo.getDate() - 365); // Convert dailyStats
-        array into a quick lookup const statsMap = {}; dailyStats.forEach(row =>
-        { // row.date might be a Date object or a string const isoDate =
-        row.date.toISOString().slice(0, 10); statsMap[isoDate] = row.tests_done;
-        }); let current = new Date(oneYearAgo); let colCount = 0; let colDates =
-        []; // store the date at the start of each column %>
+        <%
+            // Build a JS date for "today" and "365 days ago"
+            const today = new Date();
+            const oneYearAgo = new Date();
+            oneYearAgo.setDate(oneYearAgo.getDate() - 365);
+        
+            // Convert dailyStats array into a quick lookup
+            const statsMap = {};
+            dailyStats.forEach(row => {
+              // row.date might be a Date object or a string
+              const isoDate = row.date.toISOString().slice(0, 10);
+              statsMap[isoDate] = row.tests_done;
+            });
+        
+            let current = new Date(oneYearAgo);
+            let colCount = 0;
+            let colDates = []; // store the date at the start of each column
+          %>
 
         <div class="heatmapWrapper">
           <!-- LEFT DAY LABELS (7 rows: Sunday->Saturday) -->
@@ -202,35 +212,53 @@
 
           <!-- 53 columns x 7 rows grid -->
           <div class="weeks">
-            <% // Outer loop for columns (weeks) while (current <= today &&
-            colCount < 53) { const columnStartDate = new Date(current);
-            colDates.push(columnStartDate); // track the start date of this
-            column %>
+            <% 
+              // Outer loop for columns (weeks) 
+              while (current <= today && colCount < 53) {
+              const columnStartDate = new Date(current);
+              colDates.push(columnStartDate);
+              // track the start date of this
+              column 
+            %>
             <div class="week">
-              <% // Inner loop: 7 days (Sun->Mon->Tue->Wed->Thu->Fri->Sat) for
-              (let wDay = 0; wDay < 7; wDay++) { if (current > today) break;
-              const dateKey = current.toISOString().slice(0,10); const count =
-              statsMap[dateKey] || 0; // Determine color level let level = 0; if
-              (count > 0) level = 1; if (count > 2) level = 2; if (count > 5)
-              level = 3; if (count > 10) level = 4; // Tooltip message const
-              tooltipMsg = `${count} tests on ${current.toDateString()}`; %>
+              <% 
+                // Inner loop: 7 days (Sun->Mon->Tue->Wed->Thu->Fri->Sat) 
+                for (let wDay = 0; wDay < 7; wDay++) { 
+                  if (current > today) break;
+                  const dateKey = current.toISOString().slice(0,10); 
+                  const count = statsMap[dateKey] || 0; 
+                // Determine color level let level = 0; 
+                if (count > 0) level = 1; 
+                if (count > 2) level = 2; 
+                if (count > 5) level = 3;
+                if (count > 10) level = 4;
+                // Tooltip message const
+                tooltipMsg = `${count} tests on ${current.toDateString()}`; 
+              %>
               <div
                 class="day day-level-<%= level %>"
                 data-tooltip="<%= tooltipMsg %>"
               ></div>
-              <% // Next day current.setDate(current.getDate() + 1); } // end
-              for (7 days) %>
+              <% 
+                // Next day 
+                current.setDate(current.getDate() + 1); 
+              } // end for (7 days) 
+              %>
             </div>
-            <% colCount++; } // end while (53 columns) %>
+            <% 
+              colCount++; } 
+              // end while (53 columns) 
+            %>
           </div>
         </div>
 
         <!-- Bottom month labels -->
         <div class="months">
-          <% for (let i = 0; i < colDates.length; i++) { const colDate =
-          colDates[i]; if (colDate.getDate() === 1 || i === 0 ||
-          colDate.getMonth() !== colDates[i-1]?.getMonth()) { const monthName =
-          colDate.toLocaleString('en', { month: 'short' }); %>
+          <% 
+            for (let i = 0; i < colDates.length; i++) { 
+              const colDate = colDates[i];
+              if (colDate.getDate() === 1 || i === 0 || colDate.getMonth() !== colDates[i-1]?.getMonth()) { const monthName = colDate.toLocaleString('en', { month: 'short' }); 
+          %>
           <div class="monthLabel" style="flex: <%= i + 1 %> / <%= i + 2 %>">
             <%= monthName %>
           </div>

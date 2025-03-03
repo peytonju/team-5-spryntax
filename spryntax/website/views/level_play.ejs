@@ -38,27 +38,37 @@
         >
         <a
           href="/level_select"
+          class="<%= activePage === 'level_select' ? 'active' : '' %>"
           data-gradient="linear-gradient(130deg, cyan, lime)"
+          title="View and Play Algorithms"
           >Level Select</a
         >
         <a
           href="/favorites"
+          class="<%= activePage === 'favorites' ? 'active' : '' %>"
           data-gradient="linear-gradient(130deg, rgb(43, 255, 0), rgb(247, 255, 4))"
+          title="View Saved Algorithms"
           >Favorites</a
         >
         <a
           href="/stats"
+          class="<%= activePage === 'stats' ? 'active' : '' %>"
           data-gradient="linear-gradient(130deg, rgb(247, 255, 4), rgb(255, 132, 0))"
+          title="View Your Progress"
           >Stats</a
         >
         <a
           href="/leaderboard"
+          class="<%= activePage === 'leaderboard' ? 'active' : '' %>"
           data-gradient="linear-gradient(130deg, rgb(255, 132, 0), rgb(255, 0, 0))"
+          title="Compete With Others"
           >Leaderboard</a
         >
         <a
           href="/report"
+          class="<%= activePage === 'report' ? 'active' : '' %>"
           data-gradient="linear-gradient(130deg, rgb(255, 0, 0), rgb(255, 0, 208))"
+          title="Send Bugs Here"
           >Report</a
         >
       </div>

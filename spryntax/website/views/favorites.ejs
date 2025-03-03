@@ -25,7 +25,6 @@
               href="/"
               class="logo <%= activePage === 'home' ? 'active' : '' %>"
               data-gradient="linear-gradient(130deg, cyan, cyan)"
-              title="Spryntax Home"
               >Spryntax</a
             >
             <a
@@ -128,10 +127,13 @@
       </div>
       <% } else { %>
       <div class="card-container">
-        <% favorites.forEach(favorite => { %> <% // favorite.algorithm_name
-        should be the level key. const levelKey = favorite.algorithm_name; const
-        levelInfo = level_tags[levelKey]; const friendlyName =
-        nonreadable_to_readable[levelKey] || levelKey; %>
+        <% favorites.forEach(favorite => { %>
+          <% 
+              // favorite.algorithm_name should be the level key.
+              const levelKey = favorite.algorithm_name;
+              const levelInfo = level_tags[levelKey];
+              const friendlyName = nonreadable_to_readable[levelKey] || levelKey;
+          %>
         <div class="custom-card">
           <div class="card-header">
             <h3><%= friendlyName %></h3>
