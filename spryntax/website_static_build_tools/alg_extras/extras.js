@@ -5,7 +5,7 @@ const PATH_TAGGED_LEVELS_JSON = PATH.join(__dirname, "levels.json");
 const PATH_TO_CLEAN_NAMES = PATH.join(__dirname, "to_clean_names.json");
 const PATH_TO_NONCLEAN_NAMES = PATH.join(__dirname, "to_nonclean_names.json");
 
-const CATEGORIES = ["bubblesort", "pattern", "insertionsort", "queue", "stack", "slink", "dlink", "mergesort", "heapsort"];
+const CATEGORIES = ["bubblesort", "pattern", "insertionsort", "queue", "stack", "slink", "dlink", "mergesort", "heapsort","depthfirstsearch"];
 const CLEAN_CATEGORIES = {
     "bubblesort": "Bubble Sort",
     "mergesort": "Merge Sort",
