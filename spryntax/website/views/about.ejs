@@ -1,100 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>About Us</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/spryntax.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/spryntax.css" />
     <script src="/jquery-3.7.1.min.js"></script>
     <script src="/spryntax_main.js"></script>
-</head>
-<body>
-    
+  </head>
+  <body>
     <header>
-        <div class="nav-container">
-          <nav>
-            <div class="nav-left">
-              <a href="/" class="logo <%= activePage === 'home' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, cyan, cyan)">Spryntax</a>
-              <a href="/level_select" class="<%= activePage === 'level_select' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, cyan, lime)">Level Select</a>
-              <a href="/favorites" class="<%= activePage === 'favorites' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(43, 255, 0), rgb(247, 255, 4))">Favorites</a>
-              <a href="/stats" class="<%= activePage === 'stats' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(247, 255, 4), rgb(255, 132, 0))">Stats</a>
-              <a href="/leaderboard" class="<%= activePage === 'leaderboard' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(255, 132, 0), rgb(255, 0, 0))">Leaderboard</a>
-              <a href="/report" class="<%= activePage === 'report' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(255, 0, 0), rgb(255, 0, 208))">Report</a>
-            </div>
-            <div class="nav-right">
-              <a href="/about" class="<%= activePage === 'about' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(255, 0, 208), rgb(81, 0, 255))">About Us</a>
-              <% if (username && username !== 'undefined') { %>
-                <a href="#" class="<%= activePage === 'profile' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Welcome <%= username %>!</a>
-                <form action="/logout" method="POST">
-                  <button type="submit" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Logout</button>
-                </form>
-              <% } else { %>
-                <a href="/signup" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Sign up</a>
-                <a href="/login" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Log in</a>
-              <% } %>
-            </div>
-            <div id="indicator"></div>
-          </nav>
-        </div>
+      <div class="nav-container">
+        <nav>
+          <div class="nav-left">
+            <a
+              href="/"
+              class="logo <%= activePage === 'home' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, cyan, cyan)"
+              title="Spryntax Home"
+              >Spryntax</a
+            >
+            <a
+              href="/level_select"
+              class="<%= activePage === 'level_select' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, cyan, lime)"
+              title="View and Play Algorithms"
+              >Level Select</a
+            >
+            <a
+              href="/favorites"
+              class="<%= activePage === 'favorites' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, rgb(43, 255, 0), rgb(247, 255, 4))"
+              title="View Saved Algorithms"
+              >Favorites</a
+            >
+            <a
+              href="/stats"
+              class="<%= activePage === 'stats' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, rgb(247, 255, 4), rgb(255, 132, 0))"
+              title="View Your Progress"
+              >Stats</a
+            >
+            <a
+              href="/leaderboard"
+              class="<%= activePage === 'leaderboard' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, rgb(255, 132, 0), rgb(255, 0, 0))"
+              title="Compete With Others"
+              >>Leaderboard</a
+            >
+            <a
+              href="/report"
+              class="<%= activePage === 'report' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, rgb(255, 0, 0), rgb(255, 0, 208))"
+              title="Send Bugs Here"
+              >Report</a
+            >
+          </div>
+          <div class="nav-right">
+            <a
+              href="/about"
+              class="<%= activePage === 'about' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, rgb(255, 0, 208), rgb(81, 0, 255))"
+              >About Us</a
+            >
+            <% if (username && username !== 'undefined') { %>
+            <a
+              href="#"
+              class="<%= activePage === 'profile' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))"
+              >Welcome <%= username %>!</a
+            >
+            <form action="/logout" method="POST">
+              <button
+                type="submit"
+                data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))"
+              >
+                Logout
+              </button>
+            </form>
+            <% } else { %>
+            <a
+              href="/signup"
+              data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))"
+              >Sign up</a
+            >
+            <a
+              href="/login"
+              data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))"
+              >Log in</a
+            >
+            <% } %>
+          </div>
+          <div id="indicator"></div>
+        </nav>
+      </div>
     </header>
-    
+
     <!-- Use the glowing gradient-text effect -->
     <h1 class="gradient-text" data-text="About Us">About Us</h1>
 
     <!-- Use gray-background for styling -->
-    <div class="gray-background" style="padding: 40px; margin: 20px; display: flex; align-items: center; justify-content: center; gap: 30px; flex-wrap: wrap;">
-        
-        <!-- Left Side Image -->
-        <div style="flex: 1; text-align: center;">
-            <img src="/images/spryntax.png" alt="Spryntax Logo" style="max-width: 80%; height: auto; border-radius: 10px;">
-        </div>
+    <div
+      class="gray-background"
+      style="
+        padding: 40px;
+        margin: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+      "
+    >
+      <!-- Left Side Image -->
+      <div style="flex: 1; text-align: center">
+        <img
+          src="/images/spryntax.png"
+          alt="Spryntax Logo"
+          style="max-width: 80%; height: auto; border-radius: 10px"
+        />
+      </div>
 
-        <!-- Right Side -->
-        <div style="flex: 1; text-align: left;">
-            <h2 class="gradient-text" data-text="Spryntax">Spryntax</h2>
-            <p>Placeholder</p>
-            
-            <h2 class="gradient-text" data-text="Our Mission">Our Mission</h2>
-            <p>Placeholder</p>
+      <!-- Right Side -->
+      <div style="flex: 1; text-align: left">
+        <h2 class="gradient-text" data-text="Spryntax">Spryntax</h2>
+        <p>Placeholder</p>
 
-            <h2 class="gradient-text" data-text="Contact Us">Contact Us</h2>
-            <p>Placeholder</p>
-        </div>
+        <h2 class="gradient-text" data-text="Our Mission">Our Mission</h2>
+        <p>Placeholder</p>
+
+        <h2 class="gradient-text" data-text="Contact Us">Contact Us</h2>
+        <p>Placeholder</p>
+      </div>
     </div>
 
-<!-- Section Split Down the Middle -->
-<div class="gray-background" style="display: flex;">
-  <!-- Left Section -->
-  <div class="section-box" style="margin-right: 10px;">
-      <h2 class="gradient-text" data-text="Placeholder Section 1">Placeholder</h2>
-      <p>Placeholder </p>
-  </div>
+    <!-- Section Split Down the Middle -->
+    <div class="gray-background" style="display: flex">
+      <!-- Left Section -->
+      <div class="section-box" style="margin-right: 10px">
+        <h2 class="gradient-text" data-text="Placeholder Section 1">
+          Placeholder
+        </h2>
+        <p>Placeholder</p>
+      </div>
 
-  <!-- Right Section -->
-  <div class="section-box" style="margin-left: 10px;">
-      <h2 class="gradient-text" data-text="Placeholder Section 2">Placeholder</h2>
-      <p>Placeholder </p>
-  </div>
-</div>
+      <!-- Right Section -->
+      <div class="section-box" style="margin-left: 10px">
+        <h2 class="gradient-text" data-text="Placeholder Section 2">
+          Placeholder
+        </h2>
+        <p>Placeholder</p>
+      </div>
+    </div>
 
+    <!-- FOOTER -->
+    <footer
+      style="
+        margin-top: 40px;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+      "
+    >
+      <!-- Gradient Bar -->
+      <div
+        style="
+          height: 5px;
+          width: 100%;
+          background: linear-gradient(
+            90deg,
+            #ff4545,
+            #00ff99,
+            #006aff,
+            #ff0095,
+            #ff4545
+          );
+          border-radius: 5px;
+          margin-bottom: 10px;
+        "
+      ></div>
 
-        <!-- FOOTER -->
-        <footer style="margin-top: 40px; text-align: center; padding: 20px; position: relative;">
-        
-          <!-- Gradient Bar -->
-          <div style="
-              height: 5px;
-              width: 100%;
-              background: linear-gradient(90deg, #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
-              border-radius: 5px;
-              margin-bottom: 10px;">
-          </div>
-  
-          <!-- Names -->
-          <p style="font-size: 18px; color: white;">Created by: <span style="color: cyan;">Creator 1</span>, <span style="color: lime;">Creator 2</span>, <span style="color: orange;">Creator 3</span></p>
-      
-      </footer>
-
-</body>
+      <!-- Names -->
+      <p style="font-size: 18px; color: white">
+        Created by: <span style="color: cyan">Creator 1</span>,
+        <span style="color: lime">Creator 2</span>,
+        <span style="color: orange">Creator 3</span>
+      </p>
+    </footer>
+  </body>
 </html>

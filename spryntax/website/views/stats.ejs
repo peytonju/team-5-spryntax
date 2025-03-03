@@ -1,371 +1,445 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>User Stats</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/spryntax.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="/spryntax.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0"></script>
     <script src="/jquery-3.7.1.min.js"></script>
     <script src="/spryntax_main.js"></script>
-</head>
-    <%
-    function formatTime(seconds) {
-        const hrs = Math.floor(seconds / 3600);
-        const mins = Math.floor((seconds % 3600) / 60);
-        const secs = seconds % 60;
-        return hrs + "h " + mins + "m " + secs + "s";
-    }
-    %>
-<body>
+  </head>
+  <% function formatTime(seconds) { const hrs = Math.floor(seconds / 3600);
+  const mins = Math.floor((seconds % 3600) / 60); const secs = seconds % 60;
+  return hrs + "h " + mins + "m " + secs + "s"; } %>
+  <body>
     <header>
-        <div class="nav-container">
-          <nav>
-            <div class="nav-left">
-              <a href="/" class="logo <%= activePage === 'home' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, cyan, cyan)">Spryntax</a>
-              <a href="/level_select" class="<%= activePage === 'level_select' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, cyan, lime)">Level Select</a>
-              <a href="/favorites" class="<%= activePage === 'favorites' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(43, 255, 0), rgb(247, 255, 4))">Favorites</a>
-              <a href="/stats" class="<%= activePage === 'stats' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(247, 255, 4), rgb(255, 132, 0))">Stats</a>
-              <a href="/leaderboard" class="<%= activePage === 'leaderboard' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(255, 132, 0), rgb(255, 0, 0))">Leaderboard</a>
-              <a href="/report" class="<%= activePage === 'report' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(255, 0, 0), rgb(255, 0, 208))">Report</a>
-            </div>
-            <div class="nav-right">
-              <a href="/about" class="<%= activePage === 'about' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(255, 0, 208), rgb(81, 0, 255))">About Us</a>
-              <% if (username && username !== 'undefined') { %>
-                <a href="#" class="<%= activePage === 'profile' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Welcome <%= username %>!</a>
-                <a href="#" class="logout-link" data-gradient="linear-gradient(130deg, rgb(0, 247, 255), lime)">Logout</a>
-                <form id="logout-form" action="/logout" method="POST" style="display: none;">
-                </form>
-              <% } else { %>
-                <a href="/signup" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Sign up</a>
-                <a href="/login" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Log in</a>
-              <% } %>
-            </div>
-            <div id="indicator"></div>
-          </nav>
-        </div>
+      <div class="nav-container">
+        <nav>
+          <div class="nav-left">
+            <a
+              href="/"
+              class="logo <%= activePage === 'home' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, cyan, cyan)"
+              title="Spryntax Home"
+              >Spryntax</a
+            >
+            <a
+              href="/level_select"
+              class="<%= activePage === 'level_select' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, cyan, lime)"
+              title="View and Play Algorithms"
+              >Level Select</a
+            >
+            <a
+              href="/favorites"
+              class="<%= activePage === 'favorites' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, rgb(43, 255, 0), rgb(247, 255, 4))"
+              title="View Saved Algorithms"
+              >Favorites</a
+            >
+            <a
+              href="/stats"
+              class="<%= activePage === 'stats' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, rgb(247, 255, 4), rgb(255, 132, 0))"
+              title="View Your Progress"
+              >Stats</a
+            >
+            <a
+              href="/leaderboard"
+              class="<%= activePage === 'leaderboard' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, rgb(255, 132, 0), rgb(255, 0, 0))"
+              title="Compete With Others"
+              >>Leaderboard</a
+            >
+            <a
+              href="/report"
+              class="<%= activePage === 'report' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, rgb(255, 0, 0), rgb(255, 0, 208))"
+              title="Send Bugs Here"
+              >Report</a
+            >
+          </div>
+          <div class="nav-right">
+            <a
+              href="/about"
+              class="<%= activePage === 'about' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, rgb(255, 0, 208), rgb(81, 0, 255))"
+              >About Us</a
+            >
+            <% if (username && username !== 'undefined') { %>
+            <a
+              href="#"
+              class="<%= activePage === 'profile' ? 'active' : '' %>"
+              data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))"
+              >Welcome <%= username %>!</a
+            >
+            <a
+              href="#"
+              class="logout-link"
+              data-gradient="linear-gradient(130deg, rgb(0, 247, 255), lime)"
+              >Logout</a
+            >
+            <form
+              id="logout-form"
+              action="/logout"
+              method="POST"
+              style="display: none"
+            ></form>
+            <% } else { %>
+            <a
+              href="/signup"
+              data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))"
+              >Sign up</a
+            >
+            <a
+              href="/login"
+              data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))"
+              >Log in</a
+            >
+            <% } %>
+          </div>
+          <div id="indicator"></div>
+        </nav>
+      </div>
     </header>
-
 
     <h1 class="gradient-text" data-text="User Statistics">User Statistics</h1>
 
-    <div class="gray-background" style="padding: 20px; margin: 20px;">
+    <div class="gray-background" style="padding: 20px; margin: 20px">
       <% if (!stats) { %>
-        <!-- Not logged in -->
-        <div class="gradient-text" style="padding: 20px; text-align: center; font-size: 2rem;">
-          <a href="/signup">Sign up</a> or <a href="/login">log in</a> to save statistics.
-        </div>
+      <!-- Not logged in -->
+      <div
+        class="gradient-text"
+        style="padding: 20px; text-align: center; font-size: 2rem"
+      >
+        <a href="/signup">Sign up</a> or <a href="/login">log in</a> to save
+        statistics.
+      </div>
       <% } else { %>
-        <!-- Profile Header -->
-        <div class="profile-header" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; ">
-          <div class="stat-border">
-            <div class="profile-info" style="display:flex; justify-content: center; ">
-              <i class="material-icons" style="font-size: 70px; padding-right: 5px; padding-top: 42px;">account_circle</i>
-              <h2 class="gradient-text" data-text="<%= username %>" style="font-size: 50px;"><%= username %></h2>
-            </div>
-            <div class="profile-stats" style="padding-left: 30px;";>
-              <p>Level Completed: <%= profileHeader.tests_completed %></p>
-              <p>Time Typed: <%= formatTime(profileHeader.total_time_spent) %></p>
-            </div>
-        </div>
-        </div>
-        
-        <div class="stat-border" style=" display: grid; padding-left: 0px; padding-right: 0px; padding-bottom: 20px">
-
-            <h2 class="gradient-text" data-text="Daily Level Activity" style="font-size: 40px; text-align: center;">
-              Daily Level Activity
+      <!-- Profile Header -->
+      <div
+        class="profile-header"
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+        "
+      >
+        <div class="stat-border">
+          <div
+            class="profile-info"
+            style="display: flex; justify-content: center"
+          >
+            <i
+              class="material-icons"
+              style="font-size: 70px; padding-right: 5px; padding-top: 42px"
+              >account_circle</i
+            >
+            <h2
+              class="gradient-text"
+              data-text="<%= username %>"
+              style="font-size: 50px"
+            >
+              <%= username %>
             </h2>
-          
-            <%
-              // Build a JS date for "today" and "365 days ago"
-              const today = new Date();
-              const oneYearAgo = new Date();
-              oneYearAgo.setDate(oneYearAgo.getDate() - 365);
-          
-              // Convert dailyStats array into a quick lookup
-              const statsMap = {};
-              dailyStats.forEach(row => {
-                // row.date might be a Date object or a string
-                const isoDate = row.date.toISOString().slice(0, 10);
-                statsMap[isoDate] = row.tests_done;
-              });
-          
-              let current = new Date(oneYearAgo);
-              let colCount = 0;
-              let colDates = []; // store the date at the start of each column
-            %>
-          
-            <div class="heatmapWrapper">
-              <!-- LEFT DAY LABELS (7 rows: Sunday->Saturday) -->
-              <div class="daysFull">
-                <div><div class="text">Sat</div></div>
-                <div><div class="text">Sun</div></div>
-                <div><div class="text">Mon</div></div>
-                <div><div class="text">Tue</div></div>
-                <div><div class="text">Wed</div></div>
-                <div><div class="text">Thu</div></div>
-                <div><div class="text">Fri</div></div>
-              </div>
-          
-              <!-- 53 columns x 7 rows grid -->
-              <div class="weeks">
-                <% 
-                  // Outer loop for columns (weeks)
-                  while (current <= today && colCount < 53) {
-                    const columnStartDate = new Date(current);
-                    colDates.push(columnStartDate); // track the start date of this column
-                %>
-                  <div class="week">
-                    <% 
-                      // Inner loop: 7 days (Sun->Mon->Tue->Wed->Thu->Fri->Sat)
-                      for (let wDay = 0; wDay < 7; wDay++) {
-                        if (current > today) break;
-          
-                        const dateKey = current.toISOString().slice(0,10);
-                        const count = statsMap[dateKey] || 0;
-          
-                        // Determine color level
-                        let level = 0;
-                        if (count > 0) level = 1;
-                        if (count > 2) level = 2;
-                        if (count > 5) level = 3;
-                        if (count > 10) level = 4;
-          
-                        // Tooltip message
-                        const tooltipMsg = `${count} tests on ${current.toDateString()}`;
-                    %>
-                      <div class="day day-level-<%= level %>"
-                           data-tooltip="<%= tooltipMsg %>">
-                      </div>
-                    <%
-                        // Next day
-                        current.setDate(current.getDate() + 1);
-                      } // end for (7 days)
-                    %>
-                  </div>
-                <%
-                  colCount++;
-                  } // end while (53 columns)
-                %>
-              </div>
-            </div>
-          
-            <!-- Bottom month labels -->
-            <div class="months">
-              <% for (let i = 0; i < colDates.length; i++) {
-                  const colDate = colDates[i];
-                  if (colDate.getDate() === 1 || i === 0 || colDate.getMonth() !== colDates[i-1]?.getMonth()) {
-                    const monthName = colDate.toLocaleString('en', { month: 'short' });
-              %>
-                <div class="monthLabel" style="flex: <%= i+1 %> / <%= i+2 %>">
-                  <%= monthName %>
-                </div>
-              <% } } %>
-            </div>
-          
           </div>
-          <!-- Graph Section -->
-          <div class="stat-border" style="padding-bottom: 10px">
-            <h2 class="gradient-text" data-text="Level Performance Over Time" style="font-size: 40px; text-align: center;">
-              Level Performance Over Time
-            </h2>
-            
-            <!-- Chart Canvas -->
-            <canvas id="performanceChart" style="max-width: 100%;"></canvas>
-            
-            <!-- Toggle Buttons for Average Lines -->
-            <div class="toggle-buttons" style="text-align: center; margin-top: 10px;">
-              <button id="toggleAvg10" style="padding: 8px 16px; margin-right: 10px;">
-                Toggle Avg (last 10)
-              </button>
-              <button id="toggleAvg100" style="padding: 8px 16px;">
-                Toggle Avg (last 100)
-              </button>
-            </div>
+          <div class="profile-stats" style="padding-left: 30px" ;>
+            <p>Level Completed: <%= profileHeader.tests_completed %></p>
+            <p>Time Typed: <%= formatTime(profileHeader.total_time_spent) %></p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="stat-border"
+        style="
+          display: grid;
+          padding-left: 0px;
+          padding-right: 0px;
+          padding-bottom: 20px;
+        "
+      >
+        <h2
+          class="gradient-text"
+          data-text="Daily Level Activity"
+          style="font-size: 40px; text-align: center"
+        >
+          Daily Level Activity
+        </h2>
+
+        <% // Build a JS date for "today" and "365 days ago" const today = new
+        Date(); const oneYearAgo = new Date();
+        oneYearAgo.setDate(oneYearAgo.getDate() - 365); // Convert dailyStats
+        array into a quick lookup const statsMap = {}; dailyStats.forEach(row =>
+        { // row.date might be a Date object or a string const isoDate =
+        row.date.toISOString().slice(0, 10); statsMap[isoDate] = row.tests_done;
+        }); let current = new Date(oneYearAgo); let colCount = 0; let colDates =
+        []; // store the date at the start of each column %>
+
+        <div class="heatmapWrapper">
+          <!-- LEFT DAY LABELS (7 rows: Sunday->Saturday) -->
+          <div class="daysFull">
+            <div><div class="text">Sat</div></div>
+            <div><div class="text">Sun</div></div>
+            <div><div class="text">Mon</div></div>
+            <div><div class="text">Tue</div></div>
+            <div><div class="text">Wed</div></div>
+            <div><div class="text">Thu</div></div>
+            <div><div class="text">Fri</div></div>
           </div>
 
-          <script>
-            const rawStats = <%- JSON.stringify(rawData) %>;
-            // Convert the created_at string to a Date object
-            const rawData = rawStats.map(item => ({
-              x: new Date(item.created_at),
-              y: item.wpm
-            }));
-            
-            // Helper function: Compute a rolling average over the last N data points.
-            function computeRollingAverage(data, windowSize) {
-              let result = [];
-              for (let i = 0; i < data.length; i++) {
-                let sum = 0;
-                let count = 0;
-                // Calculate average for window ending at index i
-                for (let j = Math.max(0, i - windowSize + 1); j <= i; j++) {
-                  sum += data[j].y;
-                  count++;
-                }
-                result.push({ x: data[i].x, y: sum / count });
-              }
-              return result;
+          <!-- 53 columns x 7 rows grid -->
+          <div class="weeks">
+            <% // Outer loop for columns (weeks) while (current <= today &&
+            colCount < 53) { const columnStartDate = new Date(current);
+            colDates.push(columnStartDate); // track the start date of this
+            column %>
+            <div class="week">
+              <% // Inner loop: 7 days (Sun->Mon->Tue->Wed->Thu->Fri->Sat) for
+              (let wDay = 0; wDay < 7; wDay++) { if (current > today) break;
+              const dateKey = current.toISOString().slice(0,10); const count =
+              statsMap[dateKey] || 0; // Determine color level let level = 0; if
+              (count > 0) level = 1; if (count > 2) level = 2; if (count > 5)
+              level = 3; if (count > 10) level = 4; // Tooltip message const
+              tooltipMsg = `${count} tests on ${current.toDateString()}`; %>
+              <div
+                class="day day-level-<%= level %>"
+                data-tooltip="<%= tooltipMsg %>"
+              ></div>
+              <% // Next day current.setDate(current.getDate() + 1); } // end
+              for (7 days) %>
+            </div>
+            <% colCount++; } // end while (53 columns) %>
+          </div>
+        </div>
+
+        <!-- Bottom month labels -->
+        <div class="months">
+          <% for (let i = 0; i < colDates.length; i++) { const colDate =
+          colDates[i]; if (colDate.getDate() === 1 || i === 0 ||
+          colDate.getMonth() !== colDates[i-1]?.getMonth()) { const monthName =
+          colDate.toLocaleString('en', { month: 'short' }); %>
+          <div class="monthLabel" style="flex: <%= i + 1 %> / <%= i + 2 %>">
+            <%= monthName %>
+          </div>
+          <% } } %>
+        </div>
+      </div>
+      <!-- Graph Section -->
+      <div class="stat-border" style="padding-bottom: 10px">
+        <h2
+          class="gradient-text"
+          data-text="Level Performance Over Time"
+          style="font-size: 40px; text-align: center"
+        >
+          Level Performance Over Time
+        </h2>
+
+        <!-- Chart Canvas -->
+        <canvas id="performanceChart" style="max-width: 100%"></canvas>
+
+        <!-- Toggle Buttons for Average Lines -->
+        <div
+          class="toggle-buttons"
+          style="text-align: center; margin-top: 10px"
+        >
+          <button
+            id="toggleAvg10"
+            style="padding: 8px 16px; margin-right: 10px"
+          >
+            Toggle Avg (last 10)
+          </button>
+          <button id="toggleAvg100" style="padding: 8px 16px">
+            Toggle Avg (last 100)
+          </button>
+        </div>
+      </div>
+
+      <script>
+        const rawStats = <%- JSON.stringify(rawData) %>;
+        // Convert the created_at string to a Date object
+        const rawData = rawStats.map(item => ({
+          x: new Date(item.created_at),
+          y: item.wpm
+        }));
+
+        // Helper function: Compute a rolling average over the last N data points.
+        function computeRollingAverage(data, windowSize) {
+          let result = [];
+          for (let i = 0; i < data.length; i++) {
+            let sum = 0;
+            let count = 0;
+            // Calculate average for window ending at index i
+            for (let j = Math.max(0, i - windowSize + 1); j <= i; j++) {
+              sum += data[j].y;
+              count++;
             }
-            
-            // Compute the average datasets
-            const avg10Data = computeRollingAverage(rawData, 10);
-            const avg100Data = computeRollingAverage(rawData, 100);
-            
-            // Create the Chart.js scatter chart with the three datasets.
-            const ctx = document.getElementById('performanceChart').getContext('2d');
-            const performanceChart = new Chart(ctx, {
-              type: 'scatter',
-              data: {
-                datasets: [
-                  {
-                    label: 'Level WPM',
-                    data: rawData,
-                    backgroundColor: 'cyan',
-                    pointRadius: 4,
-                    showLine: false,
-                    borderWidth: 0
-                  },
-                  {
-                    label: 'Avg (last 10)',
-                    data: avg10Data,
-                    type: 'line',
-                    borderColor: 'lime',
-                    borderWidth: 2,
-                    fill: false,
-                    hidden: true,  // Initially hidden
-                    tension: 0.2
-                  },
-                  {
-                    label: 'Avg (last 100)',
-                    data: avg100Data,
-                    type: 'line',
-                    borderColor: 'orange',
-                    borderWidth: 2,
-                    fill: false,
-                    hidden: true,  // Initially hidden
-                    tension: 0.2
-                  }
-                ]
+            result.push({ x: data[i].x, y: sum / count });
+          }
+          return result;
+        }
+
+        // Compute the average datasets
+        const avg10Data = computeRollingAverage(rawData, 10);
+        const avg100Data = computeRollingAverage(rawData, 100);
+
+        // Create the Chart.js scatter chart with the three datasets.
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        const performanceChart = new Chart(ctx, {
+          type: 'scatter',
+          data: {
+            datasets: [
+              {
+                label: 'Level WPM',
+                data: rawData,
+                backgroundColor: 'cyan',
+                pointRadius: 4,
+                showLine: false,
+                borderWidth: 0
               },
-              options: {
-                responsive: true,
-                plugins: {
-                  legend: {
-                    labels: {
-                      color: '#fff'
-                    }
+              {
+                label: 'Avg (last 10)',
+                data: avg10Data,
+                type: 'line',
+                borderColor: 'lime',
+                borderWidth: 2,
+                fill: false,
+                hidden: true,  // Initially hidden
+                tension: 0.2
+              },
+              {
+                label: 'Avg (last 100)',
+                data: avg100Data,
+                type: 'line',
+                borderColor: 'orange',
+                borderWidth: 2,
+                fill: false,
+                hidden: true,  // Initially hidden
+                tension: 0.2
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                labels: {
+                  color: '#fff'
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  title: function(context) {
+                    const date = new Date(context[0].parsed.x);
+                    return date.toLocaleDateString();
                   },
-                  tooltip: {
-                    callbacks: {
-                      title: function(context) {
-                        const date = new Date(context[0].parsed.x);
-                        return date.toLocaleDateString(); 
-                      },
-                      label: function(context) {
-                        return context.dataset.label + ': ' + context.parsed.y + ' WPM';
-                      }
-                    }
-                  }
-                },
-                scales: {
-                  x: {
-                    display: false
-                  },
-                  y: {
-                    beginAtZero: true,
-                    title: {
-                      display: true,
-                      text: 'WPM',
-                      color: 'white'
-                    },
-                    grid: {
-                      color: 'rgba(255,255,255,0.4)'
-                    },
-                    ticks: {
-                      
-                      color: 'white'
-                    }
+                  label: function(context) {
+                    return context.dataset.label + ': ' + context.parsed.y + ' WPM';
                   }
                 }
               }
-            });
-            
-            document.getElementById('toggleAvg10').addEventListener('click', function() {
-              const ds = performanceChart.data.datasets[1];
-              ds.hidden = !ds.hidden;
+            },
+            scales: {
+              x: {
+                display: false
+              },
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'WPM',
+                  color: 'white'
+                },
+                grid: {
+                  color: 'rgba(255,255,255,0.4)'
+                },
+                ticks: {
 
-              // If the line is hidden, revert the button style
-              // If it's shown, color the button to match the line
-              if (ds.hidden) {
-                this.style.backgroundColor = '';
-                this.style.color = '';
-              } else {
-                this.style.backgroundColor = 'lime';
-                this.style.color = 'black';
+                  color: 'white'
+                }
               }
+            }
+          }
+        });
 
-              performanceChart.update();
-            });
+        document.getElementById('toggleAvg10').addEventListener('click', function() {
+          const ds = performanceChart.data.datasets[1];
+          ds.hidden = !ds.hidden;
 
-            // Toggle button for Avg (last 100)
-            document.getElementById('toggleAvg100').addEventListener('click', function() {
-              const ds = performanceChart.data.datasets[2];
-              ds.hidden = !ds.hidden;
+          // If the line is hidden, revert the button style
+          // If it's shown, color the button to match the line
+          if (ds.hidden) {
+            this.style.backgroundColor = '';
+            this.style.color = '';
+          } else {
+            this.style.backgroundColor = 'lime';
+            this.style.color = 'black';
+          }
 
-              if (ds.hidden) {
-                this.style.backgroundColor = '';
-                this.style.color = '';
-              } else {
-                this.style.backgroundColor = 'orange';
-                this.style.color = 'black';
+          performanceChart.update();
+        });
+
+        // Toggle button for Avg (last 100)
+        document.getElementById('toggleAvg100').addEventListener('click', function() {
+          const ds = performanceChart.data.datasets[2];
+          ds.hidden = !ds.hidden;
+
+          if (ds.hidden) {
+            this.style.backgroundColor = '';
+            this.style.color = '';
+          } else {
+            this.style.backgroundColor = 'orange';
+            this.style.color = 'black';
+          }
+
+          performanceChart.update();
+        });
+      </script>
+
+      <!-- Custom tooltip JS -->
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const days = document.querySelectorAll(".day");
+          // Create a tooltip element
+          const tooltip = document.createElement("div");
+          tooltip.className = "custom-tooltip";
+          tooltip.style.display = "none";
+          document.body.appendChild(tooltip);
+
+          days.forEach((day) => {
+            day.addEventListener("mouseenter", (e) => {
+              const msg = day.getAttribute("data-tooltip");
+              if (msg) {
+                tooltip.textContent = msg;
+                tooltip.style.display = "block";
+                tooltip.style.left = e.pageX + 10 + "px";
+                tooltip.style.top = e.pageY + 10 + "px";
               }
-
-              performanceChart.update();
             });
-          </script>
-
-          
-          <!-- Custom tooltip JS -->
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              const days = document.querySelectorAll('.day');
-              // Create a tooltip element
-              const tooltip = document.createElement('div');
-              tooltip.className = 'custom-tooltip';
-              tooltip.style.display = 'none';
-              document.body.appendChild(tooltip);
-          
-              days.forEach(day => {
-                day.addEventListener('mouseenter', e => {
-                  const msg = day.getAttribute('data-tooltip');
-                  if (msg) {
-                    tooltip.textContent = msg;
-                    tooltip.style.display = 'block';
-                    tooltip.style.left = (e.pageX + 10) + 'px';
-                    tooltip.style.top = (e.pageY + 10) + 'px';
-                  }
-                });
-                day.addEventListener('mousemove', e => {
-                  tooltip.style.left = (e.pageX + 10) + 'px';
-                  tooltip.style.top = (e.pageY + 10) + 'px';
-                });
-                day.addEventListener('mouseleave', () => {
-                  tooltip.style.display = 'none';
-                });
-              });
+            day.addEventListener("mousemove", (e) => {
+              tooltip.style.left = e.pageX + 10 + "px";
+              tooltip.style.top = e.pageY + 10 + "px";
             });
-          </script>
-
+            day.addEventListener("mouseleave", () => {
+              tooltip.style.display = "none";
+            });
+          });
+        });
+      </script>
 
       <% } %>
     </div>
-      
-    
-
-</body>
+  </body>
 </html>

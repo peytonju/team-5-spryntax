@@ -1,93 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Bug Report</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/spryntax.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/spryntax.css" />
     <script src="/jquery-3.7.1.min.js"></script>
     <script src="/spryntax_main.js"></script>
-</head>
-    <style>
-        button { 
-            width: 100px;
-            height: 30px;
-            font-size: 15px;
-            font-weight: bold;
-        }
-        .message {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            font-size: 25px; 
-            font-weight: bold;
-        }
-        #reportForm {
-            display: block;
-        }
-    </style>
-    <header>
-        <div class="nav-container">
-          <nav>
-            <div class="nav-left">
-              <a href="/" class="logo <%= activePage === 'home' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, cyan, cyan)">Spryntax</a>
-              <a href="/level_select" class="<%= activePage === 'level_select' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, cyan, lime)">Level Select</a>
-              <a href="/favorites" class="<%= activePage === 'favorites' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(43, 255, 0), rgb(247, 255, 4))">Favorites</a>
-              <a href="/stats" class="<%= activePage === 'stats' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(247, 255, 4), rgb(255, 132, 0))">Stats</a>
-              <a href="/leaderboard" class="<%= activePage === 'leaderboard' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(255, 132, 0), rgb(255, 0, 0))">Leaderboard</a>
-              <a href="/report" class="<%= activePage === 'report' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(255, 0, 0), rgb(255, 0, 208))">Report</a>
-            </div>
-            <div class="nav-right">
-                <a href="/about" class="<%= activePage === 'about' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(255, 0, 208), rgb(81, 0, 255))">About Us</a>
-              <% if (username && username !== 'undefined') { %>
-                <a href="#" class="<%= activePage === 'profile' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Welcome <%= username %>!</a>
-                <a href="#" class="logout-link" data-gradient="linear-gradient(130deg, rgb(0, 247, 255), lime)">Logout</a>
-                <form id="logout-form" action="/logout" method="POST" style="display: none;">
-                </form>
-              <% } else { %>
-                <a href="/signup" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Sign up</a>
-                <a href="/login" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Log in</a>
-              <% } %>
-            </div>
-            <div id="indicator"></div>
-          </nav>
+  </head>
+  <style>
+    button {
+      width: 100px;
+      height: 30px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .message {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      font-size: 25px;
+      font-weight: bold;
+    }
+    #reportForm {
+      display: block;
+    }
+  </style>
+  <header>
+    <div class="nav-container">
+      <nav>
+        <div class="nav-left">
+          <a
+            href="/"
+            class="logo <%= activePage === 'home' ? 'active' : '' %>"
+            data-gradient="linear-gradient(130deg, cyan, cyan)"
+            title="Spryntax Home"
+            >Spryntax</a
+          >
+          <a
+            href="/level_select"
+            class="<%= activePage === 'level_select' ? 'active' : '' %>"
+            data-gradient="linear-gradient(130deg, cyan, lime)"
+            title="View and Play Algorithms"
+            >Level Select</a
+          >
+          <a
+            href="/favorites"
+            class="<%= activePage === 'favorites' ? 'active' : '' %>"
+            data-gradient="linear-gradient(130deg, rgb(43, 255, 0), rgb(247, 255, 4))"
+            title="View Saved Algorithms"
+            >Favorites</a
+          >
+          <a
+            href="/stats"
+            class="<%= activePage === 'stats' ? 'active' : '' %>"
+            data-gradient="linear-gradient(130deg, rgb(247, 255, 4), rgb(255, 132, 0))"
+            title="View Your Progress"
+            >Stats</a
+          >
+          <a
+            href="/leaderboard"
+            class="<%= activePage === 'leaderboard' ? 'active' : '' %>"
+            data-gradient="linear-gradient(130deg, rgb(255, 132, 0), rgb(255, 0, 0))"
+            title="Compete With Others"
+            >>Leaderboard</a
+          >
+          <a
+            href="/report"
+            class="<%= activePage === 'report' ? 'active' : '' %>"
+            data-gradient="linear-gradient(130deg, rgb(255, 0, 0), rgb(255, 0, 208))"
+            title="Send Bugs Here"
+            >Report</a
+          >
         </div>
-    </header>
-
-    <body class="text-center" > 
-        <h1 class="gradient-text" data-text="Report Bugs">Report Bugs</h1>
-        <div class="container" style="margin: 0 auto; width: 656px; text-align:center">
-
-            <% if (typeof message !== 'undefined') { %>
-                <% if (success === true) { %>
-                    <div class="message success">
-                        <%= message %>
-                    </div>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.getElementById('reportForm').style.display = 'none';
-                        });
-                    </script>
-                <% } %>
-            <% } %>
-
-            <form id="reportForm" action="/report.php" method="post" >
-                <div class="form-group">
-                    <label for="inputname">Username: </label>
-                    <input type="text" class="form-control" id="name" name="name" aria-describedby="name" value="<%= username && username !== 'undefined' ? username : '' %>" placeholder="Enter your name" required>
-                </div>
-                <div class="form-group">
-                    <p><label for="inputproblem">Please describe the bug that you wish to report:</label></p>
-                    <textarea id="problem" name="problem" rows="4" cols="50" placeholder="Please write a short description about what the bug is and where it is located." required></textarea>
-                    <br>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-
+        <div class="nav-right">
+          <a
+            href="/about"
+            class="<%= activePage === 'about' ? 'active' : '' %>"
+            data-gradient="linear-gradient(130deg, rgb(255, 0, 208), rgb(81, 0, 255))"
+            >About Us</a
+          >
+          <% if (username && username !== 'undefined') { %>
+          <a
+            href="#"
+            class="<%= activePage === 'profile' ? 'active' : '' %>"
+            data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))"
+            >Welcome <%= username %>!</a
+          >
+          <a
+            href="#"
+            class="logout-link"
+            data-gradient="linear-gradient(130deg, rgb(0, 247, 255), lime)"
+            >Logout</a
+          >
+          <form
+            id="logout-form"
+            action="/logout"
+            method="POST"
+            style="display: none"
+          ></form>
+          <% } else { %>
+          <a
+            href="/signup"
+            data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))"
+            >Sign up</a
+          >
+          <a
+            href="/login"
+            data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))"
+            >Log in</a
+          >
+          <% } %>
         </div>
-        <script>
+        <div id="indicator"></div>
+      </nav>
+    </div>
+  </header>
 
-        </script>
-    </body>
+  <body class="text-center">
+    <h1 class="gradient-text" data-text="Report Bugs">Report Bugs</h1>
+    <div
+      class="container"
+      style="margin: 0 auto; width: 656px; text-align: center"
+    >
+      <% if (typeof message !== 'undefined') { %> <% if (success === true) { %>
+      <div class="message success"><%= message %></div>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          document.getElementById("reportForm").style.display = "none";
+        });
+      </script>
+      <% } %> <% } %>
+
+      <form id="reportForm" action="/report.php" method="post">
+        <div class="form-group">
+          <label for="inputname">Username: </label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            aria-describedby="name"
+            value="<%= username && username !== 'undefined' ? username : '' %>"
+            placeholder="Enter your name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <p>
+            <label for="inputproblem"
+              >Please describe the bug that you wish to report:</label
+            >
+          </p>
+          <textarea
+            id="problem"
+            name="problem"
+            rows="4"
+            cols="50"
+            placeholder="Please write a short description about what the bug is and where it is located."
+            required
+          ></textarea>
+          <br />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <script></script>
+  </body>
 </html>
