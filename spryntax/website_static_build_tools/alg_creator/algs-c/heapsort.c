@@ -2,9 +2,12 @@
 
 // Function to heapify a subtree rooted at index i
 void heapify(int arr[], int n, int i) {
-    int largest = i;  // Initialize largest as root
-    int left = 2 * i + 1;  // Left child index
-    int right = 2 * i + 2;  // Right child index
+    // Initialize largest as root
+    int largest = i;
+    // Left child index
+    int left = 2 * i + 1;
+    // Right child index
+    int right = 2 * i + 2;
 
     // Check if left child of root exists and is greater than root
     if (left < n && arr[left] > arr[largest]) {
@@ -32,7 +35,8 @@ void heapify(int arr[], int n, int i) {
 void heapSort(int arr[], int n) {
     // Build a max heap
     for (int i = n / 2 - 1; i >= 0; i--) {
-        heapify(arr, n, i);  // Heapify the subtree rooted at index i
+        // Heapify the subtree rooted at index i
+        heapify(arr, n, i);
     }
 
     // Extract elements from the heap one by one
@@ -43,7 +47,8 @@ void heapSort(int arr[], int n) {
         arr[i] = temp;
 
         // Heapify the reduced heap
-        heapify(arr, i, 0);  // Heapify the root node of the reduced heap
+        // Heapify the root node of the reduced heap
+        heapify(arr, i, 0);
     }
 }
 
@@ -57,8 +62,10 @@ void printArray(int arr[], int size) {
 
 // Driver code to test the heapSort function
 int main() {
-    int arr[] = {12, 11, 13, 5, 6, 7};  // Example array
-    int n = sizeof(arr) / sizeof(arr[0]);  // Calculate the size of the array
+    // Example array
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    // Calculate the size of the array
+    int n = sizeof(arr) / sizeof(arr[0]);
 
     printf("Original array: ");
     printArray(arr, n);
