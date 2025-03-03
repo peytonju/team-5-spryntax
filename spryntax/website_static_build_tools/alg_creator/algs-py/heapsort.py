@@ -1,5 +1,4 @@
 # Heap Sort implementation in Python
-
 # Function to heapify a subtree rooted at index i
 def heapify(arr, n, i):
     largest = i  # Initialize largest as root
