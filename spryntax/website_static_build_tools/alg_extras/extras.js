@@ -5,7 +5,7 @@ const PATH_TAGGED_LEVELS_JSON = PATH.join(__dirname, "levels.json");
 const PATH_TO_CLEAN_NAMES = PATH.join(__dirname, "to_clean_names.json");
 const PATH_TO_NONCLEAN_NAMES = PATH.join(__dirname, "to_nonclean_names.json");
 
-const CATEGORIES = ["bubblesort", "insertionsort", "queue", "stack", "slink", "dlink", "mergesort"];
+const CATEGORIES = ["bubblesort", "pattern", "insertionsort", "queue", "stack", "slink", "dlink", "mergesort"];
 const CLEAN_CATEGORIES = {
     "bubblesort": "Bubble Sort",
     "mergesort": "Merge Sort",
@@ -13,7 +13,8 @@ const CLEAN_CATEGORIES = {
     "dlink": "Doubly Linked List",
     "queue": "Queue",
     "insertionsort": "Insertion Sort",
-    "stack": "Stack"
+    "stack": "Stack",
+    "pattern": "Star Pattern"
 };
 const NONCLEAN_CATEGORIES = {
     "Bubble Sort": "bubblesort",
@@ -22,13 +23,14 @@ const NONCLEAN_CATEGORIES = {
     "Doubly Linked list": "dlink",
     "Queue": "queue",
     "Insertion Sort": "insertionsort",
-    "Stack": "stack"
+    "Stack": "stack",
+    "Star Pattern": "pattern"
 };
 
 /*                      0       1          2 */
 const DIFFICULTIES = ["Easy", "Medium", "Hard"];
-/*                  0       1 */
-const TYPES = ["Sorting", "Data Structure"];
+/*                  0       1                      2 */
+const TYPES = ["Sorting", "Data Structure", "ASCII Art"];
 
 /* 
  * current order: 
@@ -40,6 +42,7 @@ const CATEGORY_EXTRAS = {
     "insertionsort": [0,0],
     "queue": [0,1],
     "stack": [0,1],
+    "pattern": [0, 2],
     "slink": [1,1],
     "dlink": [1,1],
     "mergesort": [2,1]
