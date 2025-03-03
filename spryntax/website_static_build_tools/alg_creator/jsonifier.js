@@ -2,7 +2,7 @@ const fs = require("fs");
 
 const DIR_WRITE = "levels.json";
 const DIR_PREFIX = "algs-";
-const CATEGORIES = ["bubblesort", "mergesort", "slink", "dlink", "queue", "insertionsort", "stack"];
+const CATEGORIES = ["bubblesort", "mergesort", "slink", "dlink", "queue", "insertionsort", "stack", "making star pattern"];
 const LANGUAGES = {
     "c": {
         "line": "//",
