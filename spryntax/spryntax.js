@@ -60,7 +60,7 @@ app.get("/", (req, res) => {
             level_language: 'c'
          });
       } else {
-        res.render('index', { username: 'undefined' });
+        res.render('index', { username: 'undefined',  level_language: 'null'});
       }
 });
 
@@ -265,6 +265,17 @@ app.post('/login.php', (req, res) => {
     });
 });
 
+app.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Failed to destroy session:', err);
+            return res.status(500).send('Error occurred during logout.');
+        }
+        res.redirect('/'); // Redirect to the homepage
+    });
+});
+
+
 app.get('/test', (req, res) => {                                //Can print username and id in ejs. May be able to save data that way
     if (req.session.username) {
         res.render('test', { username: req.session.username, user_id: req.session.user_id });
@@ -277,6 +288,7 @@ app.get('/test', (req, res) => {                                //Can print user
 app.post('/report.php', (req, res) => {
     const name = req.body.name; 
     const problem = req.body.problem;
+    const username = req.session.username || null;
 
     if (!name || !problem) {
         return res.render('report', { message: 'Please enter all fields before submitting', success: false });
@@ -303,7 +315,11 @@ app.post('/report.php', (req, res) => {
                     return res.render('report', { message: "Error with submitting the bug report.", success: false });
                 }else{
                     console.log("Added bug report to database")
-                    res.render('report', { message: "Thank you! Your bug report has been submitted and will be looked at.", success: true });
+                    res.render('report', { 
+                        message: "Thank you! Your bug report has been submitted and will be looked at.", 
+                        success: true,
+                        username: username,
+                    });
 
                 }
             });

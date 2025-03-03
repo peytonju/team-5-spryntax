@@ -41,6 +41,9 @@
               <a href="/settings" class="<%= activePage === 'settings' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(255, 0, 208), rgb(81, 0, 255))">Settings</a>
               <% if (username && username !== 'undefined') { %>
                 <a href="#" class="<%= activePage === 'profile' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Welcome <%= username %>!</a>
+                <a href="#" class="logout-link" data-gradient="linear-gradient(130deg, rgb(0, 247, 255), lime)">Logout</a>
+                <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                </form>
               <% } else { %>
                 <a href="/signup" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Sign up</a>
                 <a href="/login" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Log in</a>
@@ -56,15 +59,14 @@
     <!-- have buttons for python and c++ -->
     <div style="margin: 0 auto; width: 656px; text-align:center">
         <button class="all-button" onclick="filterLeaderboard('all')">All</button>
-        <button class="python-button" id = "python-button" onclick="filterLeaderboard('Python')">Python </button>
-        <button class="c++-button" onclick="filterLeaderboard('C++')">C++</button>
+        <button class="python-button" id = "python-button" onclick="filterLeaderboard('py')">Python </button>
+        <button class="c-button" onclick="filterLeaderboard('c')">C</button>
     </div>
     
-    <h3 style="text-align:center">Leaderboard with all stats</h3>
+    <h3 style="text-align:center">Highest WPM overall</h3>
     <div class="leaderboard-table">
         <table id="leaderboard-table" style="width:50%">
             <thead>
-
                 <tr>
                     <th>Rank</th>
                     <th>Username</th>
@@ -72,57 +74,138 @@
                     <th class = "language">Language</th>
                 </tr>
             </thead>
-
             <tbody>
-                <% leaderboards.forEach(entry => { %>
+                <% leaderboards.forEach((entry, index) => { %>
                      <tr class="leaderboard-row" data-language="<%= entry.program_language %>">
-                        <td><%= entry.rank_place %></td>
+                        <td><%= index + 1 %></td>
                         <td><%= entry.username %></td>
                         <td><%= entry.wpm %></td>
                         <td class = "language"><%= entry.program_language %></td>
                     </tr>
-                    
-                    <!--<td><%= entry.program_language %></td>-->
                 <% }); %>
             </tbody>
         </table>
     </div>
 
     <script>
+        //makes the intial py and c into Python and C
+        document.addEventListener("DOMContentLoaded", () => {
+            let languageRow = document.querySelectorAll("td.language");
+            let rows = document.querySelectorAll(".leaderboard-row");
+            let rowCount = 0;       //for row appearance
+            let loginUsername = "<%= username %>".trim();
+
+            languageRow.forEach(cell => {
+                let row = cell.parentElement;
+                let language = row.getAttribute("data-language");
+                if (language === 'py') {
+                    cell.textContent = "Python";
+                } else if (language === 'c') {
+                    cell.textContent = "C";
+                }
+            });
+
+            rows.forEach(row => row.style.display = "none");
+            let maxWPM = {};
+            rows.forEach(row => {
+                let username = row.children[1].textContent;
+                let wpm = parseInt(row.children[2].textContent, 10);
+    
+                if (!maxWPM[username] || wpm > maxWPM[username].wpm) {
+                    maxWPM[username] = { wpm, row };
+                }
+            });
+    
+            //show the highest wpm per user
+            //hides the rows so only 10 appear on the board
+            Object.values(maxWPM).sort((a, b) => b.wpm - a.wpm).forEach(entry => {
+                if (rowCount < 10) {
+                    entry.row.style.display = "";
+                    entry.row.children[0].textContent = rowCount + 1;
+                    rowCount++;
+
+                    //highlight username if logged in
+                    let usernameCell = entry.row.children[1].textContent.trim();
+                    if (usernameCell === loginUsername) {
+                        entry.row.style.backgroundColor = "lightblue";
+                    }
+                }
+            });
+        });
         function filterLeaderboard(language) {
             let rows = document.querySelectorAll(".leaderboard-row");
             let h3 = document.querySelector("h3");
             let languageHeader = document.querySelector("th.language");
             let languageRow = document.querySelectorAll("td.language");
+            let count = 1;      //for rank number
+            let rowCount = 0;   //for row appearance
+            let loginUsername = "<%= username %>".trim();
 
-            rows.forEach(row => {
-                if (row.getAttribute("data-language") === language) {
-                    row.style.display = "";
-                    
-                } else {
-                    row.style.display = "none";
-                    languageHeader.style.display = "none";
-                    languageRow.forEach(cell => cell.style.display = "none");
-                  
+            rows.forEach(row => row.style.display = "none");
+            if (language === 'all') {
+                let maxWPM = {};
+                rows.forEach(row => {
+                    let username = row.children[1].textContent;
+                    let wpm = parseInt(row.children[2].textContent, 10);
+        
+                    if (!maxWPM[username] || wpm > maxWPM[username].wpm) {
+                        maxWPM[username] = { wpm, row };
+                    }
+                });
+                //show the highest wpm per user
+                //hides the rows so only 10 appear on the board
+                Object.values(maxWPM).sort((a, b) => b.wpm - a.wpm).forEach(entry => {
+                    if (rowCount < 10) {
+                        entry.row.style.display = "";
+                        entry.row.children[0].textContent = count++;
+                        rowCount++;                       
+                    }
+                });
+                languageHeader.style.display = "";
+                languageRow.forEach(cell => cell.style.display = "");
+                h3.textContent = "Highest WPM overall";
+            } 
+            else {
+                //for python and c
+                rows.forEach(row => {
+                    if (row.getAttribute("data-language") === language) {
+                        if (rowCount < 10) {
+                            row.style.display = "";
+                            row.children[0].textContent = count++;
+                            languageHeader.style.display = "none";
+                            languageRow.forEach(cell => cell.style.display = "none");
+                            rowCount++;
+                            
+                            //highlight username if logged in
+                            if (row.children[1].textContent.trim() === loginUsername) {
+                                row.style.backgroundColor = "lightblue";
+                            }
+                        }
+                    }
+                });
+            }
+            //printing the table header depending on button clicked
+            if (language === 'all') { 
+                languageHeader.style.display = "";
+                languageRow.forEach(cell => cell.style.display = "");
+                h3.textContent = "Highest WPM overall";
+            }
+            if (language === 'py') {
+                h3.textContent = "Python Leaderboard";
+            } 
+            else if (language === 'c') {
+                h3.textContent = "C Leaderboard";
+            }
+            //renames language value to Python and C
+            languageRow.forEach(cell => {
+                if (cell.parentElement.style.display !== "none") {
+                    if (language === 'py') {
+                        cell.textContent = "Python";
+                    } else if (language === 'c') {
+                        cell.textContent = "C";
+                    }
                 }
             });
-            //resets the table if all button is used
-            if (language === 'all') {
-                rows.forEach(row => {
-                    row.style.display = ""; 
-
-                    languageHeader.style.display = "";
-                    languageRow.forEach(cell => cell.style.display = "");
-                });
-                h3.textContent = "Leaderboard with all stats";
-                return;
-            }
-
-            if (language === 'Python') {
-                h3.textContent = "Python Leaderboard";
-            } else if (language === 'C++') {
-                h3.textContent = "C++ Leaderboard";
-            }
         }
     </script>
 </body>

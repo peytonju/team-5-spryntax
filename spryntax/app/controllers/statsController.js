@@ -10,7 +10,6 @@ const statsController = {
     const program_language = req.body.program_language || 'Unknown';
     const time_spent = req.body.time_spent || 0;
 
-    // Basic validations
     if (!wpm) {
       return res.status(400).json({ error: "WPM value is required" });
     }
@@ -25,29 +24,43 @@ const statsController = {
   },
 
   get_stat: (req, res) => {
-    // If user not logged in
     if (!req.session.user_id) {
       return res.render('stats', {
         stats: null,
         username: null,
-        profileHeader: null, // We'll use this to store tests/time typed
+        profileHeader: null,
+        aggregatedData: null,
         activePage: 'stats'
       });
     }
 
-    // 1 Fetch aggregated data for the profile header
-    Stats.getProfileHeaderStats(req.session.user_id, (err, profileHeader) => {
+    // First, fetch the raw data points
+    Stats.getRawStats(req.session.user_id, (err, rawStats) => {
       if (err) {
-        console.error('Error fetching aggregated stats:', err);
-        return res.status(500).send('Error fetching stats');
+        console.error("Error fetching raw stats:", err);
+        return res.status(500).send("Error fetching stats");
       }
-      // 2 Fetch the rest of the stats data (like aggregatedStats or raw stats)
-      // For now, just pass null or do another query if you want
-      res.render('stats', {
-        stats: [], // or aggregated stats
-        username: req.session.username,
-        profileHeader: profileHeader, // pass our aggregated data
-        activePage: 'stats'
+      // Next, fetch aggregated profile header stats
+      Stats.getProfileHeaderStats(req.session.user_id, (err, profileHeader) => {
+        if (err) {
+          console.error("Error fetching profile header stats:", err);
+          return res.status(500).send("Error fetching stats");
+        }
+        // Finally, fetch the daily stats for the heatmap
+        Stats.getDailyStatsForPastYear(req.session.user_id, (err, dailyStats) => {
+          if (err) {
+            console.error("Error fetching daily stats:", err);
+            return res.status(500).send("Error fetching stats");
+          }
+          res.render('stats', {
+            stats: [], // You can add additional aggregated stats here if needed.
+            username: req.session.username,
+            profileHeader: profileHeader,
+            dailyStats: dailyStats,
+            rawData: rawStats, // Pass raw data to the view
+            activePage: 'stats'
+          });
+        });
       });
     });
   }

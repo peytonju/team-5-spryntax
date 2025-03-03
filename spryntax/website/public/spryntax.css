@@ -103,15 +103,16 @@ br {
 /* Custom card styles */
 .custom-card {
   background-color: #000000 !important;
-  border: 1px solid #000000 !important;
+  border: 1px solid #ffffff !important;
   border-radius: 8px !important;
-  box-shadow: 0 2px 10px cyan !important;
+  box-shadow: 0 0px 20px rgb(255, 255, 255) !important;
   padding: 10px !important;
   transition: transform 0.2s ease-in-out !important;
   width: auto !important;
   overflow: hidden;
   position: relative;
 }
+
 
 /* Hover effect for cards */
 .custom-card:hover {
@@ -314,6 +315,7 @@ br {
 .nav-right a:nth-child(3)::before { background-color: cyan }
 .nav-right a:nth-child(3)::after { background-color: lime }
 
+
 /* Reveal the circles on hover */
 .nav-container nav a:hover::before,
 .nav-container nav a:hover::after {
@@ -393,4 +395,90 @@ br {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+
+/* Container around day labels + squares */
+.heatmapWrapper {
+  display: flex; /* day labels on the left, squares on the right */
+}
+
+/* 7 row day labels, from top to bottom: Sun -> Mon -> Tue -> Wed -> Thu -> Fri -> Sat */
+.daysFull {
+  display: flex;
+  flex-direction: column;
+  margin-right: 8px;
+  justify-content: start;
+  gap: 5px;
+}
+.daysFull .text {
+  font-size: 15px;
+  color: #ffffff;
+  line-height: 12px; 
+  margin-top: 2px;
+}
+
+/* 53 columns x 7 rows grid */
+.weeks {
+  display: grid;
+  grid-template-columns: repeat(53, auto);
+  gap: 4px;
+}
+.week {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Squares */
+.day {
+  width: 15px;
+  height: 15px;
+  background-color: #333;
+  cursor: pointer;
+}
+.day-level-1 { background-color: rgba(0, 255, 255, 0.4); }
+.day-level-2 { background-color: rgba(0, 255, 255, 0.6); }
+.day-level-3 { background-color: rgba(0, 255, 255, 0.8); }
+.day-level-4 { background-color: cyan; }
+
+.months {
+  margin-top: 6px;
+  margin-left: 50px;
+  display: flex;
+  gap: 58px;
+}
+
+.monthLabel {
+  text-align: center;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+
+/* Custom tooltip styling */
+.custom-tooltip {
+  position: absolute;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.stat-border {
+  display: flex; 
+  justify-content: center;  
+  margin: 20px;
+  align-items: center; 
+  flex-wrap: wrap; 
+  border-style: solid; 
+  border-radius: 30px; 
+  padding-left: 15px; 
+  padding-right: 15px;
+  border-color: white;
+  box-shadow: 0 0px 15px rgb(255, 255, 255)
 }
