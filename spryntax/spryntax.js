@@ -192,7 +192,7 @@ app.get('/level_select/:name_level/:name_language/end', (request, response) => {
 /*****************************************LEADERBOARD******************************************************/
 app.get('/leaderboard', leaderboardController.table_select);
 
-/*************************************************/
+/*******************************************About us*******************************************************/
 app.get("/about", (req, res) => {
     res.render("about", { activePage: "about", username: req.session.username || null });
 });
