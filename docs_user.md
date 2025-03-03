@@ -20,6 +20,15 @@ Documentation on software usage is based on tooltips.
 - These will appear at the end of a line of code in the programming input once the user successfully types a line of code and will go away if the line of code becomes incorrect.
 - Hovering over the object will show what that line of code does.
 The following is documentation for individualized pages:
+* Sign up  
+  * Click the sign up button on the top right of the webpage.   
+  * Enter a valid email, a unique username, and a password.  
+  * Click Signup and fix any errors if prompted  
+* Log in  
+  * Have an existing account  
+  * Click the Login button on the top right of the webpage.   
+  * Enter a valid email and a password.  
+  * Click Login, if an incorrect email or password is entered the user will be prompted to reinput
 - Programming Page
   - On the programming page, the user can select an algorithm and type. As the user types in the program, each character is highlighted either blue or orange.
     - Blue indicates that the character is a correct match.
