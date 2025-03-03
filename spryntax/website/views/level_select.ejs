@@ -141,6 +141,20 @@
           </p>
         </div>
         <% } %>
+
+                <!-- Surprise Me Card -->
+                <div class="custom-card" onclick="redirectToRandomLevel()">
+                  <div class="card-header">
+                    <h3>Surprise Me!</h3>
+                  </div>
+                  <p>
+                    <strong>Can't decide?</strong> Click here for something random
+                  </p>
+                  <p>
+                    <button type="button">Random Level</button>
+                  </p>
+                </div>
+        
       </div>
     </div>
     <script>
@@ -186,5 +200,20 @@
         });
       });
     </script>
+
+ <!--Get random level-->
+<script>
+  function redirectToRandomLevel() {
+    // Convert EJS object to JavaScript array
+    const levels = <%- JSON.stringify(Object.keys(level_tags)) %>;
+
+    const randomLevel = levels[Math.floor(Math.random() * levels.length)]; // Pick a random level
+
+    // Redirect to a random level (default to Python)
+    window.location.href = `/level_select/${randomLevel}/py`;
+  }
+</script>
+
+
   </body>
 </html>
