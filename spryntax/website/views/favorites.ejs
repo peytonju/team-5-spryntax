@@ -43,9 +43,9 @@
     <!-- Favorites List or Message -->
     <div class="gray-background">
         <% if (!favorites) { %>
-            <div class="gradient-text" style="padding: 40px; text-align: center; font-size: 40px;">
-                Log in or sign up to see your favorites
-            </div>
+          <div class="gradient-text" style="padding: 20px; text-align: center; font-size: 2rem;">
+            <a href="/signup">Sign up</a> or <a href="/login">log in</a> to save statistics.
+          </div>
         <% } else { %>
             
                 <% if (favorites.length === 0) { %>
