@@ -230,7 +230,7 @@ $(document).ready(function () {
     }
   }
   progress.lines.push(insertlines);  
-  let testing = false;
+  let testing = true;
   if (testing) {
     //Show code to paste.
     displaycode = displaycode.replaceAll("⎵", "\u0020"); //Spaces
