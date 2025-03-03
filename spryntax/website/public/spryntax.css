@@ -386,7 +386,7 @@ br {
   cursor: pointer;
   font-size: 1.5rem;  
   transition: color 0.3s ease;
-  color: white; 
+  color: black; 
 }
 .heart-button.favorited {
   /* Use a gradient fill for the heart icon */
