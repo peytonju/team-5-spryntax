@@ -31,7 +31,6 @@
         </div>
         <div class="nav-right">
           <a href="/about" class="<%= activePage === 'about' ? 'active' : '' %>" data-gradient="linear-gradient(130deg, rgb(255, 0, 208), rgb(81, 0, 255))">About Us</a>
-          <a href="/settings" data-gradient="linear-gradient(130deg, rgb(255, 0, 208), rgb(81, 0, 255))">Settings</a>
           <% if (username && username !== 'undefined') { %>
             <a href="#" data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))">Welcome <%= username %>!</a>
             <a href="#" class="logout-link" data-gradient="linear-gradient(130deg, rgb(0, 247, 255), lime)">Logout</a>

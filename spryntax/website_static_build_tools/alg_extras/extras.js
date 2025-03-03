@@ -5,7 +5,7 @@ const PATH_TAGGED_LEVELS_JSON = PATH.join(__dirname, "levels.json");
 const PATH_TO_CLEAN_NAMES = PATH.join(__dirname, "to_clean_names.json");
 const PATH_TO_NONCLEAN_NAMES = PATH.join(__dirname, "to_nonclean_names.json");
 
-const CATEGORIES = ["bubblesort", "pattern", "insertionsort", "queue", "stack", "slink", "dlink", "mergesort", "heapsort"];
+const CATEGORIES = ["bubblesort", "pattern", "insertionsort", "queue", "stack", "slink", "dlink", "mergesort", "heapsort","depthfirstsearch"];
 const CLEAN_CATEGORIES = {
     "bubblesort": "Bubble Sort",
     "mergesort": "Merge Sort",
@@ -15,7 +15,8 @@ const CLEAN_CATEGORIES = {
     "insertionsort": "Insertion Sort",
     "stack": "Stack",
     "pattern": "Star Pattern",
-    "heapsort": "Heap Sort"
+    "heapsort": "Heap Sort",
+    "depthfirstsearch": "Depth First Search"
 };
 const NONCLEAN_CATEGORIES = {
     "Bubble Sort": "bubblesort",
@@ -26,7 +27,8 @@ const NONCLEAN_CATEGORIES = {
     "Insertion Sort": "insertionsort",
     "Stack": "stack",
     "Star Pattern": "pattern",
-    "Heap Sort": "heapsort"
+    "Heap Sort": "heapsort",
+    "Depth First Search": "depthfirstsearch"
 };
 
 /*                      0       1          2 */
@@ -48,7 +50,8 @@ const CATEGORY_EXTRAS = {
     "slink": [1,1],
     "dlink": [1,1],
     "mergesort": [2,1],
-    "heapsort":[2,0]
+    "heapsort":[2,0],
+    "depthfirstsearch": [1,1]
 };
 
 function main() {
