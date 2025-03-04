@@ -530,18 +530,62 @@ br {
   text-align: center;
 }
 
-/* Change button styling */
 .surprise-btn {
-  background-color: rgb(255, 0, 0) !important;
+  background-color: rgb(65, 111, 180); /* Red */
   color: white;
-  border: 2px solid white;
-  padding: 8px 16px;
+  border: 1px solid white;
+  padding: 5px 10px; /* Smaller padding */
+  font-size: 12px; /* Smaller text */
+  font-weight: bold;
+  border-radius: 4px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.2s ease-in-out;
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .surprise-btn:hover {
   background-color: white;
+  color: rgb(65, 111, 180);
+  border: 1px solid rgb(65, 111, 180);
+}
+
+/* General button styles */
+.lang-btn {
+  padding: 5px 10px; /* Smaller padding */
+  font-size: 12px; /* Smaller text */
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  display: inline-block;
+  min-width: 80px; /* Ensures buttons remain compact */
+  text-align: center;
+}
+
+/* C Button */
+.c-lang {
+  background-color: rgb(65, 111, 180); /* Blue */
+  color: white;
+  border: 1px solid white;
+}
+
+.c-lang:hover {
+  background-color: white;
+  color: rgb(65, 111, 180);
+  border: 1px solid rgb(65, 111, 180);
+}
+
+/* Python Button */
+.py-lang {
+  background-color: rgb(228, 127, 54); /* Orange */
   color: black;
-  border: 2px solid red;
+  border: 1px solid white;
+}
+
+.py-lang:hover {
+  background-color: white;
+  color: rgb(228, 127, 54);
+  border: 1px solid rgb(228, 127, 54);
 }
