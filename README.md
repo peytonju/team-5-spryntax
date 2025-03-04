@@ -526,3 +526,15 @@ We choose CircleCI for our CI hosting service. One of the big reasons was it all
      	  	2. Navigate to the stats page using different browsers and devices.
      	  	3. Verify that the stats page is displayed correctly in different browsers and correctly on different devices.
      	  	4. Then verify that all the functionalities are working on the different browsers and devices. 
+8. JSONifier  
+    * Unit Test  
+      * Asserting that the line cleaner for the JSONifier successfully deletes all trailing spaces  
+      * Asserting that the carriage return cleaner removes every trailing carriage return at the end of the code string  
+      * Asserting that it successfully parses a file and strips it of all comments  
+    * Validation Test  
+      * Asserting that every level has a consistent JSON that can be parsed and modularly used for any generic algorithm we may add  
+        * Iterate through every subJSON and ensure that the structure is maintained (is “lines” present, is “comments” present)  
+    * Integration Test  
+      * Manually ensuring that the “spryntax.js” file receives the exact same JSON file as specified at website-static-build-tools/alg\_creator/levels.json  
+    * System Test  
+      * Manually ensuring that the received code on the level typing site is identical to the file in question.
