@@ -171,7 +171,7 @@ app.get('/level_select/:name_level/:name_language', (request, response) => {
             level_data: JSON_LEVEL_DATA[NAME_LEVEL][NAME_LANGUAGE]
         });
     } else {
-        response.status(404).sendFile(PATH.join(PATH_VIEWS, "level_not_found.html"));
+        response.redirect("/");
     }
 });
 
@@ -185,7 +185,7 @@ app.get('/level_select/:name_level/:name_language/end', (request, response) => {
             level_language: NAME_LANGUAGE
         });
     } else {
-        response.status(404).sendFile(PATH.join(PATH_VIEWS, "level_not_found.html"));
+        response.redirect("/");
     }
 });
 
