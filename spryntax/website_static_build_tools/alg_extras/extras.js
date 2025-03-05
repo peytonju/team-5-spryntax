@@ -31,6 +31,18 @@ const NONCLEAN_CATEGORIES = {
     "Depth First Search": "depthfirstsearch"
 };
 
+const CATEGORY_CITATIONS = {
+    "bubblesort": "https://www.geeksforgeeks.org/bubble-sort-algorithm/",
+    "mergesort": "https://www.geeksforgeeks.org/merge-sort/",
+    "slink": "https://www.geeksforgeeks.org/singly-linked-list-tutorial/",
+    "dlink": "https://www.geeksforgeeks.org/doubly-linked-list/",
+    "queue": "https://www.geeksforgeeks.org/queue-data-structure/",
+    "insertionsort": "https://www.geeksforgeeks.org/insertion-sort-algorithm/",
+    "stack": "https://www.geeksforgeeks.org/stack-data-structure/",
+    "pattern": "https://www.geeksforgeeks.org/java-program-to-print-left-triangle-star-pattern/",
+    "heapsort": "https://www.geeksforgeeks.org/heap-sort/",
+    "depthfirstsearch": "https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/"
+};
 
 const CATEGORY_SUPPORTED_LANGUAGES = {
     "bubblesort": ["C", "Python"],
@@ -75,6 +87,7 @@ function main() {
         data_json[CATEGORY] = {};
         data_json[CATEGORY]["difficulty"] = DIFFICULTIES[CATEGORY_EXTRAS[CATEGORY][0]];
         data_json[CATEGORY]["type"] = TYPES[CATEGORY_EXTRAS[CATEGORY][1]];
+        data_json[CATEGORY]["citation"] = CATEGORY_CITATIONS[CATEGORY];
         data_json[CATEGORY]["languages"] = CATEGORY_SUPPORTED_LANGUAGES[CATEGORY];
     }
 
