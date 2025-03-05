@@ -129,7 +129,9 @@
             <strong>Type:</strong>
             <%= level_tags[level].type %></p>
           <p>
-            <strong>Levels:</strong>
+            <strong>Levels</strong>
+          </p>
+          <p>
             <% const LANG_ALIASES = {"C": "c", "Python": "py"}; %>
             <% for (const LANG of level_tags[level].languages) { %>
               <button
