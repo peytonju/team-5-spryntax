@@ -74,14 +74,18 @@
               data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))"
               >Welcome <%= username %>!</a
             >
-            <form action="/logout" method="POST">
-              <button
-                type="submit"
-                data-gradient="linear-gradient(130deg, rgb(81, 0, 255), rgb(0, 247, 255))"
-              >
-                Logout
-              </button>
-            </form>
+            <a
+              href="#"
+              class="logout-link"
+              data-gradient="linear-gradient(130deg, rgb(0, 247, 255), lime)"
+              >Logout</a
+            >
+            <form
+              id="logout-form"
+              action="/logout"
+              method="POST"
+              style="display: none"
+            ></form>
             <% } else { %>
             <a
               href="/signup"
