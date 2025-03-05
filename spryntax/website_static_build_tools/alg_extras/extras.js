@@ -31,6 +31,20 @@ const NONCLEAN_CATEGORIES = {
     "Depth First Search": "depthfirstsearch"
 };
 
+
+const CATEGORY_SUPPORTED_LANGUAGES = {
+    "bubblesort": ["C", "Python"],
+    "mergesort": ["C", "Python"],
+    "slink": ["C", "Python"],
+    "dlink": ["C", "Python"],
+    "queue": ["C", "Python"],
+    "insertionsort": ["C", "Python"],
+    "stack": ["C", "Python"],
+    "pattern": ["C", "Python"],
+    "heapsort": ["C", "Python"],
+    "depthfirstsearch": ["C", "Python"]
+}
+
 /*                      0       1          2 */
 const DIFFICULTIES = ["Easy", "Medium", "Hard"];
 /*                  0       1                      2 */
@@ -61,6 +75,7 @@ function main() {
         data_json[CATEGORY] = {};
         data_json[CATEGORY]["difficulty"] = DIFFICULTIES[CATEGORY_EXTRAS[CATEGORY][0]];
         data_json[CATEGORY]["type"] = TYPES[CATEGORY_EXTRAS[CATEGORY][1]];
+        data_json[CATEGORY]["languages"] = CATEGORY_SUPPORTED_LANGUAGES[CATEGORY];
     }
 
     fs.writeFileSync(PATH_TAGGED_LEVELS_JSON, JSON.stringify(data_json), "utf8");

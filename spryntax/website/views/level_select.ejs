@@ -122,22 +122,23 @@
             </button>
           </div>
           <p>
-            <strong>Difficulty:</strong> <%= level_tags[level].difficulty %>
+            <strong>Difficulty:</strong> 
+            <%= level_tags[level].difficulty %>
           </p>
-          <p><strong>Type:</strong> <%= level_tags[level].type %></p>
           <p>
-            <button
-              type="button" class="lang-btn c-lang"
-              onclick="location.href='level_select/<%- level %>/c';"
-            >
-              C
-            </button>
-            <button
-              type="button" class="lang-btn py-lang"
-              onclick="location.href='level_select/<%- level %>/py';"
-            >
-              Python
-            </button>
+            <strong>Type:</strong>
+            <%= level_tags[level].type %></p>
+          <p>
+            <strong>Levels:</strong>
+            <% const LANG_ALIASES = {"C": "c", "Python": "py"}; %>
+            <% for (const LANG of level_tags[level].languages) { %>
+              <button
+                type="button" class="lang-btn <%- LANG_ALIASES[LANG] %>-lang"
+                onclick="location.href='level_select/<%- level %>/<%- LANG_ALIASES[LANG] %>';"
+              >
+                <%= LANG %>
+              </button>
+            <% } %>
           </p>
         </div>
         <% } %>
