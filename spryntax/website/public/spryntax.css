@@ -589,3 +589,42 @@ br {
   color: rgb(228, 127, 54);
   border: 1px solid rgb(228, 127, 54);
 }
+
+/* css for leaderboard buttons */
+.all-button {
+  width: 100px;
+  height: 50px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgb(54, 228, 176); 
+}
+.all-button:hover {
+  background-color: white;
+  color: rgb(54, 228, 176); 
+  border: 1px solid rgb(54, 228, 176); 
+}
+.python-button {
+  width: 100px;
+  height: 50px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgb(228, 127, 54); 
+}
+.python-button:hover {
+  background-color: white;
+  color: rgb(228, 127, 54);
+  border: 1px solid rgb(228, 127, 54);
+}
+.c-button {
+  width: 100px;
+  height: 50px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgb(65, 111, 180);
+}
+
+.c-button:hover {
+  background-color: white;
+  color: rgb(65, 111, 180);
+  border: 1px solid rgb(65, 111, 180);
+}

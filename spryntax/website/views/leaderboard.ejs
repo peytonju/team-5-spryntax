@@ -22,12 +22,7 @@
       height: 50px;
       text-align: center;
     }
-    button {
-      width: 100px;
-      height: 50px;
-      font-size: 15px;
-      font-weight: bold;
-    }
+    
   </style>
 
   <body>
@@ -123,45 +118,47 @@
     </header>
 
     <h1 class="gradient-text" data-text="Leaderboard">Leaderboard</h1>
-
-    <!-- have buttons for python and c++ -->
-    <div style="margin: 0 auto; width: 656px; text-align: center">
-      <button class="all-button" onclick="filterLeaderboard('all')">All</button>
-      <button
-        class="python-button"
-        id="python-button"
-        onclick="filterLeaderboard('py')"
-      >
-        Python
-      </button>
-      <button class="c-button" onclick="filterLeaderboard('c')">C</button>
-    </div>
-
-    <h3 style="text-align: center">Highest WPM overall</h3>
-    <div class="leaderboard-table">
-      <table id="leaderboard-table" style="width: 50%">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Username</th>
-            <th>Score (WPM)</th>
-            <th class="language">Language</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% leaderboards.forEach((entry, index) => { %>
-          <tr
-            class="leaderboard-row"
-            data-language="<%= entry.program_language %>"
+    <div class="gray-background">
+      <div class="container" style="padding: 40px; text-align: center; font-size: 1rem">
+        <div style="margin: 0 auto; width: 656px; text-align: center">
+          <button class="all-button" onclick="filterLeaderboard('all')">All</button>
+          <button
+            class="python-button"
+            id="python-button"
+            onclick="filterLeaderboard('py')"
           >
-            <td><%= index + 1 %></td>
-            <td><%= entry.username %></td>
-            <td><%= entry.wpm %></td>
-            <td class="language"><%= entry.program_language %></td>
-          </tr>
-          <% }); %>
-        </tbody>
-      </table>
+            Python
+          </button>
+          <button class="c-button" onclick="filterLeaderboard('c')">C</button>
+        </div>
+
+        <h3 style="text-align: center">Highest WPM overall</h3>
+        <div class="leaderboard-table">
+          <table id="leaderboard-table" style="width: 50%">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Score (WPM)</th>
+                <th class="language">Language</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% leaderboards.forEach((entry, index) => { %>
+              <tr
+                class="leaderboard-row"
+                data-language="<%= entry.program_language %>"
+              >
+                <td><%= index + 1 %></td>
+                <td><%= entry.username %></td>
+                <td><%= entry.wpm %></td>
+                <td class="language"><%= entry.program_language %></td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -206,7 +203,10 @@
               //highlight username if logged in
               let usernameCell = entry.row.children[1].textContent.trim();
               if (usernameCell === loginUsername) {
-                entry.row.style.backgroundColor = "lightblue";
+               
+                entry.row.style.backgroundColor = "cyan";
+                entry.row.style.color = "black";
+                entry.row.style.fontWeight = "bold";
               }
             }
           });
@@ -258,7 +258,9 @@
 
                 //highlight username if logged in
                 if (row.children[1].textContent.trim() === loginUsername) {
-                  row.style.backgroundColor = "lightblue";
+                  row.style.backgroundColor = "cyan";
+                  row.style.color = "black";
+                  row.style.fontWeight = "bold";
                 }
               }
             }
