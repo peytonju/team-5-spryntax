@@ -8,12 +8,12 @@ const LANGUAGES = {
     "c": {
         "line": "//",
         "mline": ["/*", "*/"],
-        "aline": "*"
+        "aline": " * "
     },
     "py": {
         "line": "#",
         "mline": ["'''", "'''"],
-        "aline": "#"
+        "aline": null
     }
 };
 
@@ -127,6 +127,46 @@ function line_formatter(line) {
 }
 
 
+function comment_line_formatter(comments, comment_styles) {
+    if (comments.length <= 0) { return ""; }
+
+    let leading_tab_count = 0;
+    while (comments[0][leading_tab_count] == '\t') {
+        leading_tab_count++;
+    }
+
+    let comment_str = "";
+    for (const LINE of comments) {
+        let new_line = LINE;
+
+        /* delete leading tabs */
+        new_line = new_line.slice(leading_tab_count);
+
+        if (new_line.indexOf(comment_styles["line"]) == 0) {
+            new_line = new_line.slice(comment_styles["line"].length);
+        } else if (new_line.indexOf(comment_styles["mline"][0] == 0)) {
+            new_line = new_line.slice(comment_styles["mline"][0].length);
+        } else if (comment_styles["aline"] && new_line.indexOf(comment_styles["aline"]) == 0) {
+            new_line = new_line.slice(comment_styles["aline"].length);
+        }
+        
+        if ((new_line.indexOf(comment_styles["mline"][1]) == (new_line.length - comment_styles["mline"][1].length - 1))) {
+            new_line = new_line.slice(0, new_line.length - comment_styles["mline"][1].length - 2) + new_line[new_line.length - 1];
+        }
+
+        /* line breaks for carriage returns */
+        new_line = new_line.replaceAll("\r", "<br>");
+
+        /* replacement for tabs */
+        new_line = new_line.replaceAll("\t", "&emsp;");
+
+        comment_str = comment_str.concat(new_line);
+    }
+
+    return comment_str;
+}
+
+
 function is_comment_line(line, comment_styles) {
     const CLEAN_LINE = line.replaceAll(" ", "").replaceAll("\t", "").replaceAll("\r", "");
     if (CLEAN_LINE.indexOf(comment_styles["line"]) == 0) {
@@ -161,14 +201,14 @@ function main() {
             const FILE_CONTENT = (fs.readFileSync(DIR_PREFIX + LANGUAGE + "/" + CATEGORY + "." + LANGUAGE)).toString();
             const ALL_LINES = FILE_CONTENT.split("\n");
 
-            let comment_buffer = "";
+            let comment_buffer = [];
             let block_comment_present = false;
             let cur_line = 0;
             for (line of ALL_LINES) {
                 const IS_COMMENT = is_comment_line(line, COMMENT_STYLES);
                 if (block_comment_present || IS_COMMENT != 0) {
                     /* append this comment to the buffer. */
-                    comment_buffer = comment_buffer.concat(line);
+                    comment_buffer.push(line);
 
                     if (IS_COMMENT == 2) {
                         block_comment_present = true;
@@ -181,8 +221,8 @@ function main() {
 
                     /* flush the comment buffer */
                     if (comment_buffer != "") {
-                        all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line] = comment_buffer;
-                        comment_buffer = "";
+                        all_jsons[CATEGORY][LANGUAGE]["comments"][cur_line] = comment_line_formatter(comment_buffer, COMMENT_STYLES);
+                        comment_buffer = [];
                     }
                     cur_line++;
                 }
