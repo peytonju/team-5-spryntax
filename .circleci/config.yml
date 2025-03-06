@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb
+          sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
           cd spryntax
           npm install
           npm run cypress:run
