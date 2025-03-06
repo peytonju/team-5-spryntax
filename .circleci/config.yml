@@ -7,15 +7,10 @@ jobs:
     steps:
       - checkout
       - run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
           cd spryntax
           npm install
-      - run: |
-          # If you need to run your app so /report is available:
-          # cd spryntax
-          # npm start &
-          # sleep 5
-      - run: |
-          cd spryntax
           npm run cypress:run
   test_jsonifier:
     docker:
