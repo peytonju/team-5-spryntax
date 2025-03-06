@@ -19,7 +19,7 @@ jobs:
           npm run cypress:run
   test_jsonifier:
     docker:
-      - image: cimg/node:20
+      - image: cimg/node:20.12.0
     steps:
       - checkout
       - run: |
