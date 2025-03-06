@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test_cypress:
     docker:
-      - image: cimg/node:20
+      - image: cimg/node:20.12.0
     steps:
       - checkout
       - run: |
