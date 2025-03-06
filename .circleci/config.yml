@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build_and_test:
+  test_cypress:
     docker:
       - image: cimg/node:20
     steps:
@@ -17,8 +17,17 @@ jobs:
       - run: |
           cd spryntax
           npm run cypress:run
+  test_jsonifier:
+    docker:
+      - image: cimg/node:20
+    steps:
+      - checkout
+      - run: |
+          cd spryntax/website_static_build_tools/alg_creator
+          node jsonifier.js
 
 workflows:
   main:
     jobs:
-      - build_and_test
+      - test_jsonifier
+      - test_cypress
