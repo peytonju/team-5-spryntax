@@ -538,3 +538,12 @@ We choose CircleCI for our CI hosting service. One of the big reasons was it all
       * Manually ensuring that the “spryntax.js” file receives the exact same JSON file as specified at website-static-build-tools/alg\_creator/levels.json  
     * System Test  
       * Manually ensuring that the received code on the level typing site is identical to the file in question.
+
+# Project Reflections
+## Kali Pulanco  
+## Shrey Bosamia  
+## Seojin Lee  
+## Prathmesh Nitin Gite  
+## Justice Peyton  
+## John Harrison Polasek  
+## Aidan Lusk  
