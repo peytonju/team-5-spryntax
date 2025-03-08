@@ -32,13 +32,15 @@ For example, git clone [git@github.com](mailto:git@github.com):peytonju/team-5-s
 - website\_static\_build\_tools
   - Static build tools for our website. A “static” item is something that does not change. Specifically here, we have build tools that produce static items for us.
   Contains the following directories.
-    - raw\_alg\_builder
-        - Currently, we have our JSONifier for our algorithms placed here– this scans all of our algorithms and creates a big JSON of their data. This JSON is then dumped into “public” since it will be used frequently.
+    - alg\_creator
+        - Contains code for JSONifying every algorithm we have, allowing us to modularly use it elsewhere in the site.
         Contains the following directories.
             - algs-c
                 - Contains all of our C files that we will display on our site.
             - algs-py
                 - Ditto, but for our Python files.
+    - alg\_extras
+        - Contains code for attributes of algorithms (type, description) as well as a translator JSON between readable and nonreadable names ("bubblesort" to "Bubble Sort")
 
 #### Building the software
 
