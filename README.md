@@ -6,13 +6,13 @@ Please note that this is only accessible when on OSU's network (note that it is 
 
 ## Team Information
 ### Team Members
-#### Kali Pulanco
-#### Shrey Bosamia  
-#### Seojin Lee  
-#### Prathmesh Nitin Gite  
-#### Justice Peyton  
-#### John Harrison Polasek  
-#### Aidan Lusk
+Kali Pulanco  
+Shrey Bosamia  
+Seojin Lee  
+Prathmesh Nitin Gite  
+Justice Peyton  
+John Harrison Polasek  
+Aidan Lusk
 
 ### Team Communication 
 #### Trello
