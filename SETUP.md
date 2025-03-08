@@ -10,7 +10,8 @@ Note: our site requires SQL implementation. You have to create a ‘.env” file
 - `DB_USER=<Name of the user that database is associated with>`  
 - `DB_PASSWORD=<Password for the database>`  
 - `DB_NAME=<Name of the database>`  
-- `DB_PORT=<Port of the database>`
+- `DB_PORT=<Port of the database>`    
+
 Note: this data may be already committed, so you don't need to worry about it if it's under "/spryntax"!
 
 1. Change directory to where “package-lock.json” and “package.json” is for spryntax (under "/spryntax")
