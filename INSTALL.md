@@ -9,7 +9,7 @@ Cloning Our Repository
     - SSH
         - git clone git@github.com:peytonju/team-5-spryntax.git
 - Via GitHub CLI
-    - gh repo clone peytonju/team-5-spryntax
+    - gh repo clone peytonju/team-5-spryntax  
 Dependencies
 - At least [Node](https://nodejs.org/en/download) 20.12.0
     - You can verify this when Node is installed with "node -v"
