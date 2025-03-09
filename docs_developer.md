@@ -68,9 +68,16 @@ Full Command List
 
 - Local commands
     - npm start  
-        - Runs "static-levels", installs needed node modules, and locally hosts the Express server locally. Prints the port number
-    - npm run static-levels
-        - Builds static assets and moves them into the public directory
+        - Runs "setup" and locally hosts the Express server locally. Prints the port number
+    - npm run setup
+        - Builds static assets and installs our NPM dependencies. Runs "static-build" and "npm install"
+    - npm run static-build
+        - Builds static assets. Runs "static-build-levels" and "static-tagged-levels".
+    - npm run static-build-levels
+        - Runs "jsonifier.js" under website_static_build_tools/alg_creator. This takes all algorithms and dumps them into a JSON.
+    - npm run static-tagged-levels
+        - Runs "extras.js" under website_static_build_tools/alg_extras. This creates attributes (citation, difficulty, algorithm type) for each algorithm and places it into 1 JSON.
+        - Note that this also creates a translation table for swapping between an algorithm's clean and unclean name (ex: "bubblesort" to "Bubble Sort").
 
 - PM2 commands
 These commands will work for any device, but it is advised to reserve PM2 for a server that will continually host the site. If you never run any of these (none of the local commands run these), they are completely irrelevant.

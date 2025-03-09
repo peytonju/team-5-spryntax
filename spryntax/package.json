@@ -231,7 +231,7 @@
     "pm2-printout": "node ./node_modules/pm2/bin/pm2 logs --out spryntax",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "desc": "\n# start: Starts the Express server without PM2.\n# setup: Runs 'npm run static-build' and 'npm install'.\n# static-build: Runs 'static-build-levels' and 'static-tagged-levels'\n#static-build-levels: Runs 'jsonifier.js'.\n# static-tagged-levels: Runs 'extras.js'\n# pm2-start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# pm2-stop: Stops the Node server for spryntax.js\n# pm2-restart: Restarts the Node server for spryntax.js\n# pm2-kill: Stops PM2 (including the Node server for spryntax.js\n# pm2-status: Gets the status of current PM2 applications\n# pm2-printout: Shows PM2 printouts from spryntax."
+    "desc": "\n# start: Starts the Express server without PM2.\n# setup: Runs 'npm run static-build' and 'npm install'.\n# static-build: Runs 'static-build-levels' and 'static-tagged-levels'\n# static-build-levels: Runs 'jsonifier.js'.\n# static-tagged-levels: Runs 'extras.js'\n# pm2-start: Installs and/or updates all dependencies and starts the Node server for spryntax.js\n# pm2-stop: Stops the Node server for spryntax.js\n# pm2-restart: Restarts the Node server for spryntax.js\n# pm2-kill: Stops PM2 (including the Node server for spryntax.js\n# pm2-status: Gets the status of current PM2 applications\n# pm2-printout: Shows PM2 printouts from spryntax."
   },
   "author": "",
   "license": "ISC",
