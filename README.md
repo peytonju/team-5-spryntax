@@ -541,6 +541,9 @@ We choose CircleCI for our CI hosting service. One of the big reasons was it all
 
 # Project Reflections
 ## Kali Pulanco  
+1. It's difficult to design an interface when you are lacking design requirements but have the functional requirements. (Originally, the typing interface highlighted the characters instead of underlining them.)
+2. It's worth the effort and resources to test on various devices. (I wouldn't have discovered the autocomplete bug otherwise.)
+3. It's okay that some tests may need to be manually implemented, all testing is worth using! (I used .ahk locally to test completions without triggering the "paste" flag.)
 ## Shrey Bosamia  
 ## Seojin Lee  
 ## Prathmesh Nitin Gite  
