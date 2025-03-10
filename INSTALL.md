@@ -17,4 +17,4 @@ Dependencies
 - At least NPM 10.5.0 (this is installed when you install Node)
     - You can verify this when Node is installed with "npm -v"
 
-Follow "SETUP.md" for running our application.
+Refer to [SETUP.md](https://github.com/peytonju/team-5-spryntax/blob/main/SETUP.md) for running our application.

@@ -1,11 +1,10 @@
 ### BETA TESTING User Documentation
 
 #### Installing the software
-There are no things to download for this project since it is publicly hosted and available.
-The website can be accessed at http://flip1.engr.oregonstate.edu:8080/
-- The website will not be accessible on non-OSU networks. If you are off the OSU-network, you can use the organization VPN to access the website.
-- No installation is required, there is nothing that needs to be compiled.
-- Signing up is optional (see Using the software).
+Installation is not required-- you can visit our site at http://flip1.engr.oregonstate.edu:8080/.
+- Please note that this is not accessible when off the OSU network. You are able to use an OSU VPN to alleviate this problem.  
+
+If installation is something you do want to do, refer to [INSTALL.md](https://github.com/peytonju/team-5-spryntax/blob/main/INSTALL.md).
 
 #### Using the software
 Signing up and Logging in are optional to use the core functionality, doing so will unlock the favorites and statistics features.
