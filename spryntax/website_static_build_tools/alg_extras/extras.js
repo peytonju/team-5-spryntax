@@ -16,7 +16,9 @@ const CLEAN_CATEGORIES = {
     "stack": "Stack",
     "pattern": "Star Pattern",
     "heapsort": "Heap Sort",
-    "depthfirstsearch": "Depth First Search"
+    "depthfirstsearch": "Depth First Search",
+    "radixsort":"Radix Sort",
+    "knapsackproblem":"Knapsack Problem"
 };
 const NONCLEAN_CATEGORIES = {
     "Bubble Sort": "bubblesort",
@@ -28,7 +30,9 @@ const NONCLEAN_CATEGORIES = {
     "Stack": "stack",
     "Star Pattern": "pattern",
     "Heap Sort": "heapsort",
-    "Depth First Search": "depthfirstsearch"
+    "Depth First Search": "depthfirstsearch",
+    "radixsort":"Radix Sort",
+    "knapsackproblem":"Knapsack Problem"
 };
 
 const CATEGORY_CITATIONS = {
@@ -54,7 +58,9 @@ const CATEGORY_SUPPORTED_LANGUAGES = {
     "stack": ["C", "Python"],
     "pattern": ["C", "Python"],
     "heapsort": ["C", "Python"],
-    "depthfirstsearch": ["C", "Python"]
+    "depthfirstsearch": ["C", "Python"],
+    "radixsort":["C", "Python"],
+    "knapsackproblem":["C", "Python"]
 }
 
 /*                      0       1          2 */
@@ -77,7 +83,9 @@ const CATEGORY_EXTRAS = {
     "dlink": [1,1],
     "mergesort": [2,1],
     "heapsort":[2,0],
-    "depthfirstsearch": [1,1]
+    "depthfirstsearch": [1,1],
+    "knapsackproblem": [1,0],
+    "radixsort": [1,0]
 };
 
 function main() {
