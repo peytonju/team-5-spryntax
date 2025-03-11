@@ -217,19 +217,28 @@
 
   <script>
     window.addEventListener('DOMContentLoaded', function() {
-      const params = new URLSearchParams(window.location.search);
-      const form = params.get('form'); 
-      if (form === 'signup') {
-        document.getElementById('tab-signup').checked = true;
-      } else {
-        document.getElementById('tab-login').checked = true;
-      }
-      if (params.has('error')) {
-        const errorMsg = document.getElementById('loginError');
-        errorMsg.style.display = 'block';
-        document.querySelector('.card-front').classList.add('error');
-      }
+        const path = window.location.pathname; 
+        if (path === '/signup') {
+            document.getElementById('tab-signup').checked = true;
+        } else {
+            document.getElementById('tab-login').checked = true;
+        }
     });
+    window.addEventListener('DOMContentLoaded', function() {
+        const params = new URLSearchParams(window.location.search);
+        const form = params.get('form'); // "login" or "signup"
+        if (form === 'signup') {
+            document.getElementById('tab-signup').checked = true;
+        } else {
+            document.getElementById('tab-login').checked = true;
+        }
+        if (params.has('error')) {
+            const errorMsg = document.getElementById('loginError');
+            errorMsg.style.display = 'block';
+            document.querySelector('.card-front').classList.add('error');
+        }
+    });
+
   </script>
 </body>
 </html>
