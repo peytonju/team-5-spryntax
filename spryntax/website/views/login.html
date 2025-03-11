@@ -1,68 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet" href="bootstrap.css"> 
-        <link rel="stylesheet" href="/spryntax.css">
-        <link rel="icon" type="image/x-icon" href="/images/spryntax.png">
-        <script src="/spryntax_main.js"></script>
-    </head>
-    <style>
-        html, body {
-            height: 100%;
-        }
+<head>
+  <meta charset="UTF-8">
+  <title>Log In/Sign up</title>
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="spryntax.css">
+  <link rel="stylesheet" href="auth.css">
+  <link rel="icon" type="image/x-icon" href="/images/spryntax.png">
+  <style>
+    
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-color: #000; 
+    }
+  </style>
+</head>
+<body>
+  <!-- tsParticles Background Container -->
+  <div id="tsparticles"></div>
 
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-    </style>
-    <body class="d-flex h-100 text-center align-items-center justify-content-center"> 
-        <div class="container"> 
-            <div class="card mx-auto bg-info" style="max-width: 600px;">
-                <div class="card-body">
-                    <form action="login.php" method="post">
-                    
-                        <div class="row justify-content-md-center">
-                            <div class="col">
-                                <p>Sign in </p>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                        <label for="inputEmail">Email address</label>
-                                        <input type="Email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="Email" placeholder="Enter email" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row justify-content-md-center">
-                            <div class="col">
-                                <a href="/">
-                                    <img src="/images/spryntax.png" class="img-fluid" alt="logo" style="max-width:20%;">
-                                </a>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="inputPassword">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password" required>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <input type="submit" class="btn btn-dark mt-2" value="Login" name="">
-                        
-                    </form>
+  <!-- Main Content -->
+  <div class="section">
+    <div class="container">
+      <div class="row full-height justify-content-center">
+        <div class="col-12 text-center align-self-center py-5">
+          <div class="section pb-5 pt-5 pt-sm-2 text-center">
+            <div class="auth-container">
+              <!-- Two radio inputs for the tab toggle -->
+              <input type="radio" name="authTab" id="tab-login">
+              <input type="radio" name="authTab" id="tab-signup">
+              
+              <!-- The "segmented tabs" control -->
+              <div class="tabs-container">
+                <div class="tabs">
+                  <label for="tab-login" class="tab login-tab">Log In</label>
+                  <label for="tab-signup" class="tab signup-tab">Sign Up</label>
+                  <span class="glider"></span>
                 </div>
-            </div>
+              </div>
+
+              <!-- 3D Card Container -->
+              <div class="card-3d-wrap mx-auto">
+                <div class="card-3d-wrapper">
+                  <!-- Front: Login Form -->
+                  <div class="card-front">
+                    <div class="center-wrap">
+                      <div class="section text-center">
+                        <h4 class="gradient-text" data-text="Log In">Log In</h4>
+                        <!-- Error Message Container -->
+                        <div id="loginError" class="error-message" style="display: none;">
+                          Incorrect login. Please try again!
+                        </div>
+                        <form action="login.php" method="post">
+                          <div class="form-group">
+                            <input type="text" name="inputEmail" class="form-style" 
+                                   placeholder="Your Email or Username" id="loginEmail" autocomplete="off" required>
+                            <i class="input-icon uil uil-at"></i>
+                          </div>  
+                          <div class="form-group mt-2">
+                            <input type="password" name="inputPassword" class="form-style" 
+                                   placeholder="Your Password" id="loginPassword" autocomplete="off" required>
+                            <i class="input-icon uil uil-lock-alt"></i>
+                          </div>
+                          <button type="submit" class="btn mt-4">Log In</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Back: Sign Up Form -->
+                  <div class="card-back">
+                    <div class="center-wrap">
+                      <div class="section text-center">
+                        <h4 class="gradient-text" data-text="Sign Up">Sign Up</h4>
+                        <form action="signup.php" method="post">
+                          <div class="form-group">
+                            <input type="text" name="inputUsername" class="form-style" 
+                                   placeholder="Your Username" id="signupUsername" autocomplete="username" required>
+                            <i class="input-icon uil uil-user"></i>
+                          </div>  
+                          <div class="form-group mt-2">
+                            <input type="email" name="inputEmail" class="form-style" 
+                                   placeholder="Your Email" id="signupEmail" autocomplete="email" required>
+                            <i class="input-icon uil uil-at"></i>
+                          </div>  
+                          <div class="form-group mt-2">
+                            <input type="password" name="inputPassword" class="form-style" 
+                                   placeholder="Your Password" id="signupPassword" autocomplete="new-password" required>
+                            <i class="input-icon uil uil-lock-alt"></i>
+                          </div>
+                          <button type="submit" class="btn mt-4">Sign Up</button>
+                        </form>
+                      </div>
+                    </div>
+                    </div>
+                  <!-- End card-back -->
+                </div><!-- .card-3d-wrapper -->
+              </div><!-- .card-3d-wrap -->
+            </div><!-- .auth-container -->
+          </div>
         </div>
-        <script>
-            // Function to display error message if present in URL parameters
-            (function() {
-                const params = new URLSearchParams(window.location.search);
-                if (params.has('error')) {
-                    alert(params.get('error'));  // Pop-up message with the error
-                }
-            })();
-        </script>
-    </body>
+      </div>
+    </div>
+  </div>
+
+  <!-- tsParticles Library -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script>
+    tsParticles.load("tsparticles", {
+      "fpsLimit": 60,
+      "particles": {
+        "number": {
+          "value": 300,
+          "density": {
+            "enable": true,
+            "area": 800
+          }
+        },
+        "color": {
+          "value": ["#00ffff", "#007777"],
+          "animation": {
+            "enable": true,
+            "speed": 100,
+            "sync": true
+            
+          }
+        },
+        "shape": {
+          "type": "circle"
+        },
+        "opacity": {
+          "value": 0.8,
+          "random": false
+        },
+        "size": {
+          "value": 6,
+          "random": true
+        },
+        "links": {
+          "enable": true,
+          "distance": 100,
+          "width": 2,
+          "opacity": 0.5,
+          "color": {
+            "value": ["#00ffff", "#4944ff"]
+          }
+        },
+        "move": {
+          "enable": true,
+          "speed": 2,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "outModes": {
+            "default": "bounce"
+          }
+        }
+      },
+      "polygon": {
+        "enable": true,
+        "scale": 1,
+        "url": "/images/Spryntax.svg",
+        "type": "inline",
+        "inline": {
+          "arrangement": "one-per-point"
+        },
+        "draw": {
+          "enable": true,
+          "stroke": {
+            "color": "#ffffff",
+            "width": 1
+          }
+        }
+      },
+      "interactivity": {
+        "detectsOn": "window",  
+        "events": {
+          "onHover": {
+            "enable": true,
+            "mode": "grab",
+            "parallax": {
+                "enable": "true",
+                "force": 100,
+                "smooth": 30
+            }
+          },
+          "onClick": {
+            "enable": false,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 200
+
+          },
+          "repulse": {
+            "distance": 60,
+            "duration": 0.2
+          },
+          "push": {
+            "quantity": 15
+          }
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const form = params.get('form'); 
+      if (form === 'signup') {
+        document.getElementById('tab-signup').checked = true;
+      } else {
+        document.getElementById('tab-login').checked = true;
+      }
+      if (params.has('error')) {
+        const errorMsg = document.getElementById('loginError');
+        errorMsg.style.display = 'block';
+        document.querySelector('.card-front').classList.add('error');
+      }
+    });
+  </script>
+</body>
 </html>

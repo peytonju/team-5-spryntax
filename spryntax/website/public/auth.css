@@ -1,0 +1,341 @@
+/* --- Base Spryntax-Like Styles --- */
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inconsolata', sans-serif;
+  color: #fff;
+  /* More detailed, tech-inspired pattern */
+  background-image: url('https://www.transparenttextures.com/patterns/circuit-board.png');
+  background-repeat: repeat;
+  background-size: 200px 200px; /* adjust scale as needed */
+}
+
+/* --- Card Container with a Gradient Border --- */
+.card-3d-wrap {
+  position: relative;
+  width: 440px;
+  max-width: 100%;
+  height: 400px;
+  perspective: 600px;
+  transform-style: preserve-3d;
+  margin: 0 auto;
+}
+
+
+/* --- Card Sides --- */
+.card-front, .card-back {
+  width: 100%;
+  height: 100%;
+  background-color: #111;  /* Dark grey/black */
+  position: absolute;
+  border-radius: 6px;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* --- Floating Content --- */
+.center-wrap {
+  position: absolute;
+  width: 100%;
+  padding: 0 35px;
+  top: 50%;
+  left: 0;
+  /* Moderate Z offset for a subtle floating effect */
+  transform: translate3d(0, -50%, 40px);
+  z-index: 20;
+}
+
+/* --- Form Inputs --- */
+.form-style {
+  padding: 13px 20px;
+  padding-left: 55px;  /* leave space for the icon */
+  height: 48px;
+  width: 100%;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #222;  /* slightly lighter than card */
+  border: none;
+  transition: all 200ms linear;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.input-icon {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 48px;
+  font-size: 24px;
+  line-height: 48px;
+  text-align: left;
+  color: #00ffff; /* cyan for the icons */
+}
+
+/* --- Buttons --- */
+.btn {
+  border-radius: 4px;
+  height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0 30px;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #00ffff;  /* cyan */
+  color: #111;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  transition: all 200ms linear;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active {
+  background-color: #007777; /* darker cyan */
+  color: #fff;
+}
+
+/* --- Tabs (unchanged from before) --- */
+.auth-container input[type="radio"] {
+  display: none;
+}
+
+.tabs-container {
+  width: 220px;
+  margin: 0 auto 20px;
+}
+
+.tabs {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  background-color: #222;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tab {
+  flex: 1 0 50%;
+  text-align: center;
+  z-index: 2;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 40px;
+  color: #fff;
+  user-select: none;
+}
+
+.glider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #00ffff;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+#tab-signup:checked ~ .tabs-container .tabs .glider {
+  left: 50%;
+}
+
+#tab-login:checked ~ .tabs-container .tabs label[for="tab-login"] {
+  color: #111;
+}
+#tab-login:checked ~ .tabs-container .tabs label[for="tab-signup"] {
+  color: #fff;
+}
+#tab-signup:checked ~ .tabs-container .tabs label[for="tab-signup"] {
+  color: #111;
+}
+#tab-signup:checked ~ .tabs-container .tabs label[for="tab-login"] {
+  color: #fff;
+}
+
+/* --- 3D Card Styles --- */
+.card-3d-wrap {
+  position: relative;
+  width: 440px;
+  max-width: 100%;
+  height: 400px;
+  perspective: 800px;        /* perspective for child 3D transforms */
+  transform-style: preserve-3d;
+  margin: 0 auto;
+  
+}
+
+.card-3d-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-style: preserve-3d;
+  transition: all 600ms ease-out;
+}
+
+
+.card-3d-wrapper::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 6px;
+  background: cyan;
+  z-index: -1;
+}
+
+/* Both sides are absolutely positioned and hide their backface */
+.card-front,
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; /* for Safari */
+}
+
+/* Front side remains in place */
+.card-front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+/* Back side is rotated 180° */
+.card-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* When the "signup" radio is checked, rotate the wrapper */
+#tab-signup:checked ~ .card-3d-wrap .card-3d-wrapper {
+  transform: rotateY(180deg);
+}
+
+/* When the "login" radio is checked, show the front side */
+#tab-login:checked ~ .card-3d-wrap .card-3d-wrapper {
+  transform: rotateY(0deg);
+}
+
+/* --- Centering the forms inside the card --- */
+.center-wrap {
+  position: absolute;
+  width: 100%;
+  padding: 0 35px;
+  top: 50%;
+  left: 0;
+  /* This transform is what makes the text appear in front (the 3D effect) */
+  transform: translate3d(0, -50%, 120px) perspective(100px);
+  z-index: 20;       /* ensures text is above the card surface */
+  display: block;
+}
+
+
+/* --- Form Styles --- */
+.form-group {
+  position: relative;
+  margin: 20px 0;
+}
+.form-style {
+  padding: 13px 20px;
+  padding-left: 55px;
+  height: 48px;
+  width: 100%;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #444;
+  border: none;
+  transition: all 200ms linear;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.form-style:focus {
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.input-icon {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 48px;
+  font-size: 24px;
+  line-height: 48px;
+  text-align: left;
+  color: cyan;
+  transition: all 200ms linear;
+}
+
+/* --- Button Styling --- */
+.btn {
+  border-radius: 4px;
+  height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 200ms linear;
+  padding: 0 30px;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: cyan;
+  color: black;
+  box-shadow: 0 8px 24px 0 rgba(0,0,0,0.2);
+}
+
+
+
+/* Error message styling */
+.error-message {
+  background-color: #ffe5e5;
+  border: 1px solid #ff0000;
+  color: #ff0000;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Highlight the card with a red border when an error occurs */
+.card-front.error {
+  border: 2px solid red;
+  animation: shake 0.5s;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}

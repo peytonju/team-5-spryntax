@@ -118,6 +118,11 @@ addFavorite: (req, res) => {
 
   app.post('/favorites/remove', favoritesController.removeFavorite);
 
+/***IMAGES***/
+app.get("/images/Spryntax.svg", (request, response) => {
+    
+    response.status(200).sendFile(PATH.join(PATH_VIEWS, "login.html"));
+  });
 
 /*****************************************LEVELS******************************************************/
 app.get('/level_select', (req, res) => {
@@ -207,7 +212,6 @@ app.post('/signup.php', async (req, res) => {
     const email = req.body.inputEmail; // Extract the email from the form data
     const password = req.body.inputPassword; // Extract the password from the form data
     const salt = await bcrypt.genSalt(10);
-    // Hash the password using the generated salt
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Query to check if username already exists
@@ -226,8 +230,12 @@ app.post('/signup.php', async (req, res) => {
                     console.log(err);
                     res.status(500).send('Server error');
                 } else {
-                    //console.log("POSTED");
-                    //res.send(`Username: ${username}, Email: ${email}, Password: ${hashedPassword}`);
+                    // Automatically sign the user in by setting session variables.
+                    // Assume that `result.insertId` holds the new user's ID.
+                    req.session.username = username;
+                    req.session.user_id = result.insertId;
+                    
+                    // Redirect the user to the home/dashboard page.
                     res.redirect('/');
                 }
             });
@@ -236,13 +244,14 @@ app.post('/signup.php', async (req, res) => {
 });
 
 app.post('/login.php', (req, res) => {
-    const email = req.body.inputEmail; // Extract the email from the form data
-    const password = req.body.inputPassword; // Extract the password from the form data
+    // Now the input field holds either the email or the username.
+    const userInput = req.body.inputEmail;  
+    const password = req.body.inputPassword;
 
-    const query = 'SELECT username, user_id, password FROM user WHERE email = ?';  //queries the database
+    // Modify the query to check if the provided value matches either the email or username column.
+    const query = 'SELECT username, user_id, password FROM user WHERE email = ? OR username = ?';
 
-    // Ensure you are using a properly configured MySQL connection
-    db.query(query, [email], async (err, results) => {
+    db.query(query, [userInput, userInput], async (err, results) => {
         if (err) {
             console.log(err);
             res.status(500).send('Error fetching user from database');
@@ -256,10 +265,9 @@ app.post('/login.php', (req, res) => {
                 const isMatch = await bcrypt.compare(password, hashedPassword);
 
                 if (isMatch) {
-                    req.session.username = username; // Store the username in the session
-                    req.session.user_id = user_id; // Store the username in the session
-                    //res.send(`Username: ${username}, Email: ${email}, user_id: ${user_id}`);
-                    res.redirect('/');              // Redirect to home
+                    req.session.username = username;
+                    req.session.user_id = user_id;
+                    res.redirect('/');
                 } else {
                     res.redirect('/login?error=Invalid%20email%20or%20password');
                 }
